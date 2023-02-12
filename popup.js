@@ -1,6 +1,7 @@
+//varun test1
 var DataSet = null;
 chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
+    function(request, sender, sendResponse) {
         console.log(request, sender, sendResponse) // not listened 
         switch (request.message) {
             case 'SendingDataSet':
@@ -15,10 +16,11 @@ var DataSet = null;
 document.addEventListener('DOMContentLoaded', () => {
     startTime();
     setInterval(() => { startTime(); }, 1000);
-    chrome.runtime.sendMessage({ 'message': 'IAmReady' }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'IAmReady' }, function(response) {
         console.log('response', response);
     });
 });
+
 function InitCall(data) {
     console.log("Dataset:", data);
     var wrks1 = document.getElementById("WS1TG");
@@ -61,7 +63,7 @@ function startTime() {
     var curYear = today.getFullYear();
     var date = curWeekDay + ", " + curDay + " " + curMonth + " " + curYear;
     document.getElementById("date").innerHTML = date;
-    var time = setTimeout(function () { startTime() }, 500);
+    var time = setTimeout(function() { startTime() }, 500);
 }
 
 function checkTime(i) {
@@ -84,7 +86,7 @@ wrks4.addEventListener("click", () => { worksclick(3); }, false);
 
 function worksclick(type) {
     console.log('Asking Workclick', type);
-    chrome.runtime.sendMessage({ 'message': 'openWorkspace', 'type': type }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'openWorkspace', 'type': type }, function(response) {
         console.log('response', response);
     });
 }
