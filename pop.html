@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Env</title>
+    <script src="popup.js" defer></script>
+
+    <style>
+        body {
+            background-clip: border-box;
+            background-image: url("3.jpg");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: auto;
+        }
+
+        :root {
+            --c1: #7A87F8;
+            --c2: #E8F4FE;
+            --c3: #FBF4C9;
+            --c4: #F5E2FF;
+            --cw: #fffffd;
+            --cw2: #f8f9fd;
+            --cd: #000000;
+            --cd2: #474747;
+        }
+
+        * {
+            -webkit-user-select: none;
+            /* Safari */
+            -ms-user-select: none;
+            /* IE 10 and IE 11 */
+            user-select: none;
+            /* Standard syntax */
+            box-sizing: border-box;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        html,
+        body {
+            height: max-content;
+            margin: 10px;
+        }
+
+        .container {
+            top: 10px;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            position: fixed;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+            gap: 10px 10px;
+            grid-auto-flow: row;
+            grid-template-areas: "VCG VCG VCG Notifi Notifi Notifi Notifi T1Icon CouDG CouDG" "NewsG NewsG NewsG WS1TG WS2TG WS3TG WS4TG T2Icon SouScG SouScG" "NewsG NewsG NewsG TimG TimG TimG TimG T3Icon AuFoG AuFoG" "NewsG NewsG NewsG TimG TimG TimG TimG T4Icon TODO TODO" "Con2 Con1 SBarG SBarG SBarG SBarG SBarG SBarG TODO TODO" "SetGrid WeaG QTG QTG QTG QTG QTG QTG TODO TODO";
+        }
+
+        .TODO {
+            grid-area: TODO;
+        }
+
+        .QTG {
+            grid-area: QTG;
+        }
+
+        .SetGrid {
+            grid-area: SetGrid;
+        }
+
+        .WeaG {
+            grid-area: WeaG;
+        }
+
+        .SBarG {
+            grid-area: SBarG;
+        }
+
+        .TimG {
+            grid-area: TimG;
+        }
+
+        .CouDG {
+            grid-area: CouDG;
+        }
+
+        .Notifi {
+            grid-area: Notifi;
+        }
+
+        .SouScG {
+            grid-area: SouScG;
+        }
+
+        .AuFoG {
+            grid-area: AuFoG;
+        }
+
+        .VCG {
+            grid-area: VCG;
+        }
+
+        .NewsG {
+            grid-area: NewsG;
+        }
+
+        .Con1 {
+            grid-area: Con1;
+        }
+
+        .Con2 {
+            grid-area: Con2;
+        }
+
+        .T1Icon {
+            grid-area: T1Icon;
+        }
+
+        .T2Icon {
+            grid-area: T2Icon;
+        }
+
+        .T3Icon {
+            grid-area: T3Icon;
+        }
+
+        .T4Icon {
+            grid-area: T4Icon;
+        }
+
+        #WS1TG {
+            grid-area: WS1TG;
+            cursor: pointer;
+        }
+
+        #WS2TG {
+            grid-area: WS2TG;
+            cursor: pointer;
+        }
+
+        #WS3TG {
+            grid-area: WS3TG;
+            cursor: pointer;
+        }
+
+        #WS4TG {
+            grid-area: WS4TG;
+            cursor: pointer;
+        }
+
+        /* For presentation only, no need to copy the code below */
+
+        .container .comp-grid {
+            background-color: white;
+            border-radius: 20px;
+            transition: all ease-in-out 2s;
+            width: 100%;
+            height: 100%;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            transition: all ease-in-out 1s;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            position: absolute;
+        }
+
+        /*Time settings*/
+
+        .Time-View {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+        }
+
+        #clock {
+            font-family: sans-serif;
+            font-size: 8vw;
+            color: #000;
+        }
+
+        #clock span {
+            color: #000;
+            font-size: 3vw;
+            line-height: 3vw;
+            position: relative;
+            top: -4vw;
+            left: 10px;
+        }
+
+        #date {
+            margin-top: 15px;
+            letter-spacing: 3px;
+            font-size: 2vw;
+            font-family: arial, sans-serif;
+            color: #000;
+        }
+
+        /*Quotation*/
+
+        #QTG {
+            cursor: pointer;
+        }
+
+        .QTG {
+            font-size: 1.5vh;
+            font-family: 'Courier New', Courier, monospace;
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+        }
+
+        .QTG div {
+            position: relative;
+        }
+
+        .QTG #Author {
+            font-size: 1.5vh;
+            text-align: right;
+            bottom: -1vh;
+            right: 0px;
+            position: absolute;
+        }
+
+        /*Search bar*/
+
+        .SBarG {
+            overflow: hidden;
+        }
+
+        .SBarG form {
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+        }
+
+        .SBarG form input,
+        button {
+            border: solid 4px #000;
+            height: 100%;
+            border: 0;
+            font-size: 4vh;
+        }
+
+        .SBarG form input[type="text"] {
+            outline: 0;
+            width: 100%;
+            padding: 0 1.6rem;
+            appearance: none;
+            transition: all 0.3s ease-in-out;
+            transition-property: width, border-radius;
+            z-index: 1;
+            position: relative;
+        }
+
+        .SBarG form button {
+            transition: all 0.3s ease-in-out;
+            display: block;
+            position: absolute;
+            top: 0;
+            right: -10vw;
+            width: 10vw;
+            font-weight: bold;
+            background: #57bd84;
+        }
+
+        .SBarG form input:not(:placeholder-shown) {
+            width: calc(100% - 10vw);
+        }
+
+        .SBarG form input:not(:placeholder-shown)+button {
+            right: 0vw;
+        }
+
+        .SBarG form label {
+            position: fixed;
+            clip: rect(1px, 1px, 1px, 1px);
+            padding: 0;
+            border: 0;
+            height: 1px;
+            width: 1px;
+            overflow: hidden;
+        }
+
+        .SBarG form button img {
+            width: 4vw;
+            height: 4vw;
+            fill: white;
+            filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(220deg) brightness(108%) contrast(104%);
+        }
+
+        /* .container .comp-grid:hover {
+            width: 102%;
+            height: 102%;
+            left: -1%;
+            right: -1%;
+            bottom: -1%;
+            top: -1%;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+        } */
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="comp-grid TODO">TODO</div>
+        <div class="comp-grid QTG" id="QTG">
+            <div>
+                <h1 id="TGQuoation">"Do what ever you want,<br>Be Ready the consequences"</h1>
+                <div id="Author">-RPKR Inc</div>
+            </div>
+        </div>
+        <div class="comp-grid SetGrid">SetGrid</div>
+        <div class="comp-grid WeaG">WeaG</div>
+        <div class="comp-grid SBarG">
+            <!-- <form action="http://www.google.com/search" method="get">
+                <input type="text" name="q"/>
+                <input type="submit" value="search" />
+            </form> -->
+            <form action="http://www.google.com/search" method="get" role="search" autocomplete="off">
+                <label for="search">Search for stuff</label>
+                <input id="search" type="text" name="q" placeholder="Search..." autofocus required />
+                <button type="submit"><img src="icon/logo-google.svg" alt=""></button>
+            </form>
+        </div>
+        <div class="comp-grid TimG">
+            <div class="Time-View">
+                <div id="clock"></div>
+                <div id="date"></div>
+            </div>
+        </div>
+        <div class="comp-grid CouDG">CouDG</div>
+        <div class="comp-grid Notifi">Notifi</div>
+        <div class="comp-grid SouScG">SouScG</div>
+        <div class="comp-grid AuFoG">AuFoG</div>
+        <div class="comp-grid VCG">VCG</div>
+        <div class="comp-grid NewsG">NewsG</div>
+        <div class="comp-grid Con1">Contact--1</div>
+        <div class="comp-grid Con2">Contact-2</div>
+        <div class="comp-grid T1Icon">T1Icon</div>
+        <div class="comp-grid T2Icon">T2Icon</div>
+        <div class="comp-grid T3Icon">T3Icon</div>
+        <div class="comp-grid T4Icon">T4Icon</div>
+        <div class="comp-grid" id="WS1TG">workSpace 1</div>
+        <div class="comp-grid" id="WS2TG">workSpace 2</div>
+        <div class="comp-grid" id="WS3TG">workSpace 3</div>
+        <div class="comp-grid" id="WS4TG">workSpace 4</div>
+    </div>
+</body>
+
+</html>
