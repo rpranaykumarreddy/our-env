@@ -37,6 +37,8 @@
     "permissions": [
         "storage",
         "notifications",
-        "contextMenus"
+        "contextMenus",
+        "offscreen",
+        "tabs"
     ]
 }

@@ -28,6 +28,52 @@ chrome.runtime.onMessage.addListener(
     }
 );
 
+/*Tab details
+let url = new URL('https://developer.mozilla.org/en-US/docs/Web/API/URL/host');
+console.log(url.host); // "developer.mozilla.org"
+*/
+function removeTab(id) {
+    chrome.tabs.remove(id);
+}
+setInterval(() => {
+    getCurrentTab().then((tab) => {
+        if (tab != undefined) {
+            //console.log("Tab details", tab);
+            let testUrl = new URL(tab.url);
+            console.log(testUrl.host);
+            if (testUrl.host == "www.youtube.com") {
+                removeTab(tab.id);
+            }
+        }
+    });
+}, 1000);
+async function getCurrentTab() {
+    let queryOptions = { active: true, lastFocusedWindow: true };
+    // `tab` will either be a `tabs.Tab` instance or `undefined`.
+    let [tab] = await chrome.tabs.query(queryOptions);
+
+    return tab;
+}
+
+/*Audio playing*/
+//playSound();
+async function playSound(source = chrome.runtime.getURL("Samajavaragamana.mp3"), volume = 1) {
+    console.log("start audio process");
+    await createOffscreen();
+    await chrome.runtime.sendMessage({ play: { source, volume } });
+}
+
+
+async function createOffscreen() {
+    if (await chrome.offscreen.hasDocument()) return;
+    await chrome.offscreen.createDocument({
+        url: 'offscreen.html',
+        reasons: ['AUDIO_PLAYBACK'],
+        justification: 'testing' // details for using the API
+    });
+    notify("offscreen started", "check it.")
+}
+
 /*Dummy data for the first time request*/
 var Dummy = {
     name: "Ravula Pranay Kumar Reddy",
