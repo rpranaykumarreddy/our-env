@@ -1,6 +1,6 @@
 var DataSet = null;
 chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
+    function (request, sender, sendResponse) {
         console.log(request, sender, sendResponse) // not listened 
         switch (request.message) {
             case 'SendingDataSet':
@@ -14,7 +14,7 @@ chrome.runtime.onMessage.addListener(
 document.addEventListener('DOMContentLoaded', () => {
     startTime();
     setInterval(() => { startTime(); }, 1000);
-    chrome.runtime.sendMessage({ 'message': 'IAmReady' }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'IAmReady' }, function (response) {
         console.log('response', response);
     });
 });
@@ -53,6 +53,7 @@ function InitCall(data) {
     } else {
         playSoundScape.src = "icon\\play-circle-outline.svg";
     }
+
     wrks1.innerHTML += data.workspaces[0].name;
     wrks2.innerHTML += data.workspaces[1].name;
     wrks3.innerHTML += data.workspaces[2].name;
@@ -76,6 +77,7 @@ function addSvgFilterToImages() {
         img.style.filter = 'url(#colorFilter' + ind + ')';
         img.insertAdjacentHTML('afterend', svgFilter);
         ind++;
+
     });
 
     function hexToRgb(hex) {
@@ -109,7 +111,7 @@ function startTime() {
     var curYear = today.getFullYear();
     var date = curWeekDay + ", " + curDay + " " + curMonth + " " + curYear;
     document.getElementById("date").innerHTML = date;
-    var time = setTimeout(function() { startTime() }, 500);
+    var time = setTimeout(function () { startTime() }, 500);
 }
 
 function checkTime(i) {
@@ -167,7 +169,7 @@ wrks4.addEventListener("click", () => { worksclick(3); }, false);
 
 function worksclick(type) {
     console.log('Asking Workclick', type);
-    chrome.runtime.sendMessage({ 'message': 'openWorkspace', 'type': type }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'openWorkspace', 'type': type }, function (response) {
         console.log('response', response);
     });
 }

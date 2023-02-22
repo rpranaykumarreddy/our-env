@@ -17,20 +17,21 @@ chrome.runtime.onMessage.addListener(
             case 'notify':
                 notify(request.tit, request.msg);
                 break;
-            case 'StartPlay': 
+            case 'StartPlay':
                 playSound(DataSet.sound.music, request.volume);
                 DataSet.sound.play = true;
                 sendResponse({ data: 'Success' });
                 break;
-            case 'StopPlay': 
+            case 'StopPlay':
                 StopSound();
                 DataSet.sound.play = false;
                 sendResponse({ data: 'Success' });
                 break;
-            case 'ChangeVolume': 
+            case 'ChangeVolume':
                 DataSet.sound.volume = request.volume;
                 VolumeSound(request.volume);
                 sendResponse({ data: 'Success' });
+
                 break;
             case 'getQuotation':
                 var str = request.topic;
@@ -182,6 +183,7 @@ var Dummy = {
     sound: {
         music: "soundScapes/Adventure.mp3",
         play: false,
+
         volume: 1
     },
     topApps: ["https://wethinc.in",
@@ -235,12 +237,12 @@ function SetDateset() {
 
 /*Context Menu settings*/
 chrome.runtime.onInstalled.addListener(() => {
-var parent1 = chrome.contextMenus.create({ id: "contextmain", "title": "Add this  page to", "contexts": ["all"] });
-var child1 = chrome.contextMenus.create({ id: "contextside", "title": "Side bar", "parentId": parent1, });
-var child2 = chrome.contextMenus.create({ id: "contextwrk1", "title": "Workspace 1", "parentId": parent1, });
-var child3 = chrome.contextMenus.create({ id: "contextwrk2", "title": "Workspace 2", "parentId": parent1 });
-var child4 = chrome.contextMenus.create({ id: "contextwrk3", "title": "Workspace 3", "parentId": parent1 });
-var child5 = chrome.contextMenus.create({ id: "contextwrk4", "title": "Workspace 4", "parentId": parent1 });
+    var parent1 = chrome.contextMenus.create({ id: "contextmain", "title": "Add this  page to", "contexts": ["all"] });
+    var child1 = chrome.contextMenus.create({ id: "contextside", "title": "Side bar", "parentId": parent1, });
+    var child2 = chrome.contextMenus.create({ id: "contextwrk1", "title": "Workspace 1", "parentId": parent1, });
+    var child3 = chrome.contextMenus.create({ id: "contextwrk2", "title": "Workspace 2", "parentId": parent1 });
+    var child4 = chrome.contextMenus.create({ id: "contextwrk3", "title": "Workspace 3", "parentId": parent1 });
+    var child5 = chrome.contextMenus.create({ id: "contextwrk4", "title": "Workspace 4", "parentId": parent1 });
 });
 function contextClick(info, tab) {
     console.log(info, tab);
