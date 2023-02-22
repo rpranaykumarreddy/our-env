@@ -17,6 +17,15 @@ chrome.runtime.onMessage.addListener(
             case 'notify':
                 notify(request.tit, request.msg);
                 break;
+            case 'StartPlay':
+                notify(request.tit, request.msg);
+                break;
+            case 'StopPlay':
+                notify(request.tit, request.msg);
+                break;
+            case 'ChangeVolume':
+                notify(request.tit, request.msg);
+                break;
             case 'getQuotation':
                 var str = request.topic;
                 var len = Quotdata[str].length;
@@ -57,6 +66,16 @@ async function getCurrentTab() {
 
 /*Audio playing*/
 //playSound();
+async function playSound(source = chrome.runtime.getURL("Samajavaragamana.mp3"), volume = 1) {
+    console.log("start audio process");
+    await createOffscreen();
+    await chrome.runtime.sendMessage({ play: { source, volume } });
+}
+async function playSound(source = chrome.runtime.getURL("Samajavaragamana.mp3"), volume = 1) {
+    console.log("start audio process");
+    await createOffscreen();
+    await chrome.runtime.sendMessage({ play: { source, volume } });
+}
 async function playSound(source = chrome.runtime.getURL("Samajavaragamana.mp3"), volume = 1) {
     console.log("start audio process");
     await createOffscreen();
@@ -155,6 +174,10 @@ var Dummy = {
             "http://telugu.surli.in/aaradugula-bullettu-lyrics-atthaarintiki-daaredi/"
         ]
     }],
+    sound: {
+        music: "Samajavaragamana.mp3",
+        volume: 1
+    },
     topApps: ["https://wethinc.in",
         "https://youtube.com",
         "https://www.instagram.com",

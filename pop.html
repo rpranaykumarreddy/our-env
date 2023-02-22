@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Env</title>
     <script src="popup.js" defer></script>
-
     <style>
         body {
             background-clip: border-box;
@@ -315,7 +314,7 @@
             width: 4vw;
             height: 4vw;
             fill: white;
-            filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(220deg) brightness(108%) contrast(104%);
+            /* filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(220deg) brightness(108%) contrast(104%); */
         }
 
         /* .container .comp-grid:hover {
@@ -351,7 +350,7 @@
             <form action="http://www.google.com/search" method="get" role="search" autocomplete="off">
                 <label for="search">Search for stuff</label>
                 <input id="search" type="text" name="q" placeholder="Search..." autofocus required />
-                <button type="submit"><img src="icon/logo-google.svg" alt=""></button>
+                <button type="submit"><img class="ionIcon" data-color="#ffffff" src="icon/logo-google.svg" alt=""></button>
             </form>
         </div>
         <div class="comp-grid TimG">
@@ -372,7 +371,7 @@
         <div class="comp-grid T2Icon">T2Icon</div>
         <div class="comp-grid T3Icon">T3Icon</div>
         <div class="comp-grid T4Icon">T4Icon</div>
-        <div class="comp-grid" id="WS1TG">workSpace 1</div>
+        <div class="comp-grid" id="WS1TG"><ion-icon name="heart"></ion-icon></div>
         <div class="comp-grid" id="WS2TG">workSpace 2</div>
         <div class="comp-grid" id="WS3TG">workSpace 3</div>
         <div class="comp-grid" id="WS4TG">workSpace 4</div>

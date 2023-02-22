@@ -1,4 +1,3 @@
-//varun test
 var DataSet = null;
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
@@ -12,7 +11,6 @@ chrome.runtime.onMessage.addListener(
         }
     }
 );
-var DataSet = null;
 document.addEventListener('DOMContentLoaded', () => {
     startTime();
     setInterval(() => { startTime(); }, 1000);
@@ -21,16 +19,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+/*Audio settings*/
+function startPlay() {
+    chrome.runtime.sendMessage({ 'message': 'StartPlay' }, function (response) {
+        console.log('response', response);
+    });
+}
+function stopPlay() {
+    chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function (response) {
+        console.log('response', response);
+    });
+}
+
+function changeVolume() {
+    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': 100 }, function (response) {
+        console.log('response', response);
+    });
+}
+
 function InitCall(data) {
     console.log("Dataset:", data);
     var wrks1 = document.getElementById("WS1TG");
     var wrks2 = document.getElementById("WS2TG");
     var wrks3 = document.getElementById("WS3TG");
     var wrks4 = document.getElementById("WS4TG");
-    wrks1.innerHTML = data.workspaces[0].name;
-    wrks2.innerHTML = data.workspaces[1].name;
-    wrks3.innerHTML = data.workspaces[2].name;
-    wrks4.innerHTML = data.workspaces[3].name;
+    wrks1.innerHTML += data.workspaces[0].name;
+    wrks2.innerHTML += data.workspaces[1].name;
+    wrks3.innerHTML += data.workspaces[2].name;
+    wrks4.innerHTML += data.workspaces[3].name;
     var qtcl = document.getElementById("QTG");
     var qu = document.getElementById("TGQuoation");
     var au = document.getElementById("Author");
@@ -38,6 +54,25 @@ function InitCall(data) {
     qtcl.addEventListener("click", () => { window.open(str, "_self") })
     qu.innerHTML = data.quote;
     au.innerHTML = data.quoteAuthor;
+}
+/*SVG Filter*/
+addSvgFilterToImages();
+function addSvgFilterToImages() {
+    const imagesWithDataColor = document.querySelectorAll('img[data-color]');
+
+    imagesWithDataColor.forEach(img => {
+        const color = img.getAttribute('data-color');
+        const svgFilter = `<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="colorFilter"><feColorMatrix type="matrix" values="0 0 0 0 ${hexToRgb(color).r / 255} 0 0 0 0 ${hexToRgb(color).g / 255} 0 0 0 0 ${hexToRgb(color).b / 255} 0 0 0 1 0"/></filter></svg>`;
+        img.style.filter = 'url(#colorFilter)';
+        img.insertAdjacentHTML('afterend', svgFilter);
+    });
+
+    function hexToRgb(hex) {
+        const r = parseInt(hex.substring(1, 3), 16);
+        const g = parseInt(hex.substring(3, 5), 16);
+        const b = parseInt(hex.substring(5, 7), 16);
+        return { r, g, b };
+    }
 }
 
 /*Time setting*/
