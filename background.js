@@ -12,19 +12,25 @@ chrome.runtime.onMessage.addListener(
                 break;
             case 'openWorkspace':
                 workSpacesOpen(request.type);
-                sendResponse({ data: 'Success' })
+                sendResponse({ data: 'Success' });
                 break;
             case 'notify':
                 notify(request.tit, request.msg);
                 break;
-            case 'StartPlay':
-                notify(request.tit, request.msg);
+            case 'StartPlay': 
+                playSound(DataSet.sound.music, request.volume);
+                DataSet.sound.play = true;
+                sendResponse({ data: 'Success' });
                 break;
-            case 'StopPlay':
-                notify(request.tit, request.msg);
+            case 'StopPlay': 
+                StopSound();
+                DataSet.sound.play = false;
+                sendResponse({ data: 'Success' });
                 break;
-            case 'ChangeVolume':
-                notify(request.tit, request.msg);
+            case 'ChangeVolume': 
+                DataSet.sound.volume = request.volume;
+                VolumeSound(request.volume);
+                sendResponse({ data: 'Success' });
                 break;
             case 'getQuotation':
                 var str = request.topic;
@@ -63,23 +69,22 @@ async function getCurrentTab() {
 
     return tab;
 }
-
 /*Audio playing*/
-//playSound();
-async function playSound(source = chrome.runtime.getURL("Samajavaragamana.mp3"), volume = 1) {
+//console.log(chrome.runtime.getURL("soundScapes/Adventure.mp3"));
+async function playSound(source = chrome.runtime.getURL("soundScapes/Adventure.mp3"), volume = 1) {
     console.log("start audio process");
     await createOffscreen();
-    await chrome.runtime.sendMessage({ play: { source, volume } });
+    await chrome.runtime.sendMessage({ 'message': 'offScrPlay', play: { source, volume } });
 }
-async function playSound(source = chrome.runtime.getURL("Samajavaragamana.mp3"), volume = 1) {
-    console.log("start audio process");
+async function StopSound() {
+    console.log("stop audio process");
     await createOffscreen();
-    await chrome.runtime.sendMessage({ play: { source, volume } });
+    await chrome.runtime.sendMessage({ 'message': 'offScrStop' });
 }
-async function playSound(source = chrome.runtime.getURL("Samajavaragamana.mp3"), volume = 1) {
-    console.log("start audio process");
+async function VolumeSound(volume = 1) {
+    console.log("change vol audio process");
     await createOffscreen();
-    await chrome.runtime.sendMessage({ play: { source, volume } });
+    await chrome.runtime.sendMessage({ 'message': 'offScrVol', 'volume': volume });
 }
 
 
@@ -175,7 +180,8 @@ var Dummy = {
         ]
     }],
     sound: {
-        music: "Samajavaragamana.mp3",
+        music: "soundScapes/Adventure.mp3",
+        play: false,
         volume: 1
     },
     topApps: ["https://wethinc.in",
@@ -228,13 +234,14 @@ function SetDateset() {
 }
 
 /*Context Menu settings*/
+chrome.runtime.onInstalled.addListener(() => {
 var parent1 = chrome.contextMenus.create({ id: "contextmain", "title": "Add this  page to", "contexts": ["all"] });
 var child1 = chrome.contextMenus.create({ id: "contextside", "title": "Side bar", "parentId": parent1, });
 var child2 = chrome.contextMenus.create({ id: "contextwrk1", "title": "Workspace 1", "parentId": parent1, });
 var child3 = chrome.contextMenus.create({ id: "contextwrk2", "title": "Workspace 2", "parentId": parent1 });
 var child4 = chrome.contextMenus.create({ id: "contextwrk3", "title": "Workspace 3", "parentId": parent1 });
 var child5 = chrome.contextMenus.create({ id: "contextwrk4", "title": "Workspace 4", "parentId": parent1 });
-
+});
 function contextClick(info, tab) {
     console.log(info, tab);
     const { menuItemId } = info;

@@ -43,6 +43,16 @@ function InitCall(data) {
     var wrks2 = document.getElementById("WS2TG");
     var wrks3 = document.getElementById("WS3TG");
     var wrks4 = document.getElementById("WS4TG");
+    var volumeMeter = document.getElementById("volumeMeter");
+    var volumeRanger = document.getElementById("volumeRanger");
+    volumeMeter.innerHTML = (data.sound.volume * 100);
+    volumeRanger.value = (data.sound.volume * 100);
+    bolSound = data.sound.play;
+    if (data.sound.play) {
+        playSoundScape.src = "icon\\pause-circle-outline.svg";
+    } else {
+        playSoundScape.src = "icon\\play-circle-outline.svg";
+    }
     wrks1.innerHTML += data.workspaces[0].name;
     wrks2.innerHTML += data.workspaces[1].name;
     wrks3.innerHTML += data.workspaces[2].name;
@@ -59,12 +69,13 @@ function InitCall(data) {
 addSvgFilterToImages();
 function addSvgFilterToImages() {
     const imagesWithDataColor = document.querySelectorAll('img[data-color]');
-
+    var ind = 0;
     imagesWithDataColor.forEach(img => {
         const color = img.getAttribute('data-color');
-        const svgFilter = `<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="colorFilter"><feColorMatrix type="matrix" values="0 0 0 0 ${hexToRgb(color).r / 255} 0 0 0 0 ${hexToRgb(color).g / 255} 0 0 0 0 ${hexToRgb(color).b / 255} 0 0 0 1 0"/></filter></svg>`;
-        img.style.filter = 'url(#colorFilter)';
+        const svgFilter = `<svg xmlns="http://www.w3.org/2000/svg" width="0" height="0"><filter id="colorFilter${ind}"><feColorMatrix type="matrix" values="0 0 0 0 ${hexToRgb(color).r / 255} 0 0 0 0 ${hexToRgb(color).g / 255} 0 0 0 0 ${hexToRgb(color).b / 255} 0 0 0 1 0"/></filter></svg>`;
+        img.style.filter = 'url(#colorFilter' + ind + ')';
         img.insertAdjacentHTML('afterend', svgFilter);
+        ind++;
     });
 
     function hexToRgb(hex) {
@@ -107,6 +118,41 @@ function checkTime(i) {
     }
     return i;
 }
+
+/*SoundScape Play*/
+var playSoundScape = document.getElementById("playSoundScape");
+var volumeMeter = document.getElementById("volumeMeter");
+var volumeRanger = document.getElementById("volumeRanger");
+var bolSound = false;
+volumeRanger.addEventListener("change", () => {
+    volumeMeter.innerHTML = volumeRanger.value;
+    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': (volumeRanger.value / 100) }, function (response) {
+        //console.log('response', response);
+    });
+}, false);
+playSoundScape.addEventListener("click", () => {
+    console.log("clicked on play button");
+    if (bolSound) {
+        console.log("clicked on stop button");
+        chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function (response) {
+            console.log('audio stop response', response);
+            if (response.data == "Success") {
+                bolSound = false;
+                playSoundScape.src = "icon\\play-circle-outline.svg";
+            }
+        });
+    } else {
+        console.log("clicked on play button");
+        chrome.runtime.sendMessage({ 'message': 'StartPlay', 'volume': (volumeRanger.value / 100) }, function (response) {
+            console.log('audio play response', response);
+            if (response.data == "Success") {
+                bolSound = true;
+                playSoundScape.src = "icon\\pause-circle-outline.svg";
+            }
+        });
+    }
+}, false);
+
 
 /*Workspace opening & clicks */
 var wrks1 = document.getElementById("WS1TG");
