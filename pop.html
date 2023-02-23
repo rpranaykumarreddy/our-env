@@ -145,7 +145,28 @@ border: 1px solid rgba(255, 255, 255, 0.3);
         .AuFoG {
             grid-area: AuFoG;
         }
-
+        .AuFoG .parFlex{
+            height: calc(90vh / 6);
+            width: calc(90vw / 5);
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+        .AuFoG  .parFlex div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: calc(90vh / 6);
+            display: flex;
+        } 
+        .AuFoG  img {
+            height: 80%;
+        } 
+        .AuFoG input {
+            margin-top: 10px;
+        }
         .VCG {
             grid-area: VCG;
         }
@@ -394,15 +415,26 @@ border: 1px solid rgba(255, 255, 255, 0.3);
         <div class="comp-grid Notifi">Notifi</div>
         <div class="comp-grid SouScG">
             <div class="parFlex">
-                <div class="right"><img id="playSoundScape" class="ionIcon" data-color="#000000"
-                        src="icon\\play-circle-outline.svg" alt=""></div>
+                <div class="right">
+                    <img id="playSoundScape" class="ionIcon" data-color="#000000" src="icon\\play-circle.svg" alt="">
+                </div>
                 <div class="left">
                     <h3>Volume: <span id="volumeMeter">100</span></h3>
                     <input id="volumeRanger" type="range" min="0" max="100" value="100" step="1" />
                 </div>
             </div>
         </div>
-        <div class="comp-grid AuFoG">AuFoG</div>
+
+        <div class="comp-grid AuFoG">
+            <div class="parFlex">
+                <div class="right">
+                    <input id="AutoFocusRanger" type="number" min="0" max="10" value="2" step="1" />
+                </div>
+                <div class="left">
+                    <img id="playSoundScape" class="ionIcon" data-color="#000000" src="icon\\play-circle.svg" alt="">                   
+                </div>
+            </div>
+        </div>
         <div class="comp-grid VCG">VCG</div>
         <div class="comp-grid NewsG">NewsG</div>
         <div class="comp-grid Con1">Contact--1</div>

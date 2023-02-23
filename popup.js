@@ -49,9 +49,9 @@ function InitCall(data) {
     volumeRanger.value = (data.sound.volume * 100);
     bolSound = data.sound.play;
     if (data.sound.play) {
-        playSoundScape.src = "icon\\pause-circle-outline.svg";
+        playSoundScape.src = "icon\\pause-circle.svg";
     } else {
-        playSoundScape.src = "icon\\play-circle-outline.svg";
+        playSoundScape.src = "icon\\play-circle.svg";
     }
 
     wrks1.innerHTML += data.workspaces[0].name;
@@ -140,7 +140,7 @@ playSoundScape.addEventListener("click", () => {
             console.log('audio stop response', response);
             if (response.data == "Success") {
                 bolSound = false;
-                playSoundScape.src = "icon\\play-circle-outline.svg";
+                playSoundScape.src = "icon\\play-circle.svg";
             }
         });
     } else {
@@ -149,7 +149,7 @@ playSoundScape.addEventListener("click", () => {
             console.log('audio play response', response);
             if (response.data == "Success") {
                 bolSound = true;
-                playSoundScape.src = "icon\\pause-circle-outline.svg";
+                playSoundScape.src = "icon\\pause-circle.svg";
             }
         });
     }
