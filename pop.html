@@ -48,7 +48,6 @@
         /* For presentation only, no need to copy the code below */
 
         .container .comp-grid {
-            background-color: white;
             border-radius: 20px;
             transition: all ease-in-out 2s;
             width: 100%;
@@ -61,6 +60,13 @@
             right: 0px;
             bottom: 0px;
             position: absolute;
+            /* From https://css.glass */
+background: rgba(255, 255, 255, 0.8);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(11.3px);
+-webkit-backdrop-filter: blur(11.3px);
+border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .container {
@@ -289,7 +295,7 @@
 
         .SBarG form input,
         button {
-            border: solid 4px #000;
+            background: transparent;
             height: 100%;
             border: 0;
             font-size: 4vh;
@@ -314,7 +320,7 @@
             right: -10vw;
             width: 10vw;
             font-weight: bold;
-            background: #57bd84;
+            background: #57bd84 !important;
         }
 
         .SBarG form input:not(:placeholder-shown) {
