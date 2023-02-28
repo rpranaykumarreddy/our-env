@@ -14,6 +14,14 @@ chrome.runtime.onMessage.addListener(
                 workSpacesOpen(request.type);
                 sendResponse({ data: 'Success' });
                 break;
+            case 'openContact':
+                contactOpen(request.type);
+                sendResponse({ data: 'Success' });
+                break;
+            case 'openTopIcon':
+                TopIconOpen(request.type);
+                sendResponse({ data: 'Success' });
+                break;
             case 'notify':
                 notify(request.tit, request.msg);
                 break;
@@ -25,6 +33,14 @@ chrome.runtime.onMessage.addListener(
             case 'StopPlay':
                 StopSound();
                 DataSet.sound.play = false;
+                sendResponse({ data: 'Success' });
+                break;
+            case 'StartFocus':
+                StartFocus(request.time);
+                sendResponse({ data: 'Success' });
+                break;
+            case 'StopFocus':
+                StopFocus();
                 sendResponse({ data: 'Success' });
                 break;
             case 'ChangeVolume':
@@ -51,23 +67,36 @@ console.log(url.host); // "developer.mozilla.org"
 function removeTab(id) {
     chrome.tabs.remove(id);
 }
-setInterval(() => {
-    getCurrentTab().then((tab) => {
-        if (tab != undefined) {
-            //console.log("Tab details", tab);
-            let testUrl = new URL(tab.url);
-            console.log(testUrl.host);
-            if (testUrl.host == "www.youtube.com") {
-                removeTab(tab.id);
+var focusSet = null;
+function StartFocus(time) {
+    DataSet.autoFocus.timeTill = time;
+    DataSet.autoFocus.active = true;
+    SetDateset();
+    focusSet = setInterval(() => {
+        getCurrentTab().then((tab) => {
+            if (tab != undefined) {
+                //console.log("Tab details", tab);
+                let testUrl = new URL(tab.url);
+                //console.log(testUrl.host);
+                for (var hosti = 0; hosti < DataSet.autoFocus.block.length; hosti++) {
+                    //console.log("Enter tab:", DataSet.autoFocus.block[hosti], testUrl.host);
+                    if (testUrl.host == DataSet.autoFocus.block[hosti]) {
+                        console.log("Removed tab:", testUrl.host);
+                        removeTab(tab.id);
+                    }
+                }
             }
-        }
-    });
-}, 1000);
+        });
+    }, 1000);
+}
+function StopFocus() {
+    clearInterval(focusSet);
+    DataSet.autoFocus.timeTill = 100;
+    DataSet.autoFocus.active = false;
+}
 async function getCurrentTab() {
     let queryOptions = { active: true, lastFocusedWindow: true };
-    // `tab` will either be a `tabs.Tab` instance or `undefined`.
     let [tab] = await chrome.tabs.query(queryOptions);
-
     return tab;
 }
 /*Audio playing*/
@@ -96,7 +125,7 @@ async function createOffscreen() {
         reasons: ['AUDIO_PLAYBACK'],
         justification: 'testing' // details for using the API
     });
-    notify("offscreen started", "check it.")
+    //notify("offscreen started", "check it.");
 }
 
 /*Dummy data for the first time request*/
@@ -124,6 +153,7 @@ var Dummy = {
     ],
     workspaces: [{
         name: "Mails",
+        icon: "icon/mail.svg",
         urls: [
             "https://mail.google.com/mail/u/0/#inbox",
             "https://mail.google.com/mail/u/1/#inbox",
@@ -139,6 +169,7 @@ var Dummy = {
     },
     {
         name: "Dev",
+        icon: "icon/logo-docker.svg",
         urls: [
             "https://www.theodinproject.com/paths/foundations/courses/foundations",
             "https://fireship.io/courses/",
@@ -153,6 +184,7 @@ var Dummy = {
     },
     {
         name: "Design",
+        icon: "icon/logo-figma.svg",
         urls: [
             "https://usepanda.com/?ref=producthunt",
             "https://fontflipper.com/upload",
@@ -164,6 +196,7 @@ var Dummy = {
     },
     {
         name: "Filmmaking",
+        icon: "icon/videocam.svg",
         urls: ["https://www.indieshortsmag.com/",
             "https://en.wikipedia.org/wiki/Hero%27s_journey",
             "http://www.movieoutline.com/",
@@ -183,13 +216,12 @@ var Dummy = {
     sound: {
         music: "soundScapes/Adventure.mp3",
         play: false,
-
         volume: 1
     },
-    topApps: ["https://wethinc.in",
-        "https://youtube.com",
-        "https://www.instagram.com",
-        "https://wethinc.in"
+    topApps: [{ link: "https://github.com/rpranaykumarreddy", name: "Github", icon: "icon/logo-github.svg" },
+        { link: "https://practice.geeksforgeeks.org/batch/cip-1", name: "GFG", icon: "icon/logo-codepen.svg" },
+        { link: "https://discord.com/channels/783758394166345779/790483500264456192", name: "Discord", icon: "icon/logo-discord.svg" },
+        { link: "https://www.linkedin.com/in/rpranaykumarreddy/", name: "Linkedin", icon: "icon/logo-linkedin.svg" }
     ],
     countDown: {
         date: 30,
@@ -199,20 +231,26 @@ var Dummy = {
         minute: 50
     },
     autoFocus: {
-        block: ["https://youtube.com", "https://www.instagram.com"],
-        time: 3600,
-        startTime: null
+        active: false,
+        block: ["www.youtube.com", "www.instagram.com"],
+        timeTill: 100,
     },
     contact: [{
         name: "Pranay",
-        type: "Whatsapp",
+        type: "icon/logo-whatsapp.svg",
         link: "https://wa.me/917680904589"
-    }, {
+    },
+        {
         name: "Varun",
-        type: "Whatsapp",
+            type: "icon/logo-whatsapp.svg",
         link: "https://wa.me/917806026905"
-    }],
-    weather: "Delhi"
+        },
+        {
+            name: "GDSC",
+            type: "icon/mail.svg",
+            link: "https://mailto:dsciiitbhopal@gmail.com"
+        }
+    ]
 }
 var DataSet = null;
 /*Set Dummy data*/
@@ -292,7 +330,12 @@ function workSpacesOpen(type) {
         chrome.tabs.create({ url: DataSet.workspaces[type].urls[i], active: false, index: 50 });
     }
 }
-
+function contactOpen(type) {
+    chrome.tabs.create({ url: DataSet.contact[type].link, active: false, index: 50 });
+}
+function TopIconOpen(type) {
+    chrome.tabs.create({ url: DataSet.topApps[type].link, active: false, index: 1 });
+}
 /*Quotations data to load*/
 var Quotdata = null;
 StoreQuotation();
@@ -318,7 +361,7 @@ function SendDataToNew() {
             var str = DataSet.quoteCat[Tran];
             var Qlen = Quotdata[str].length;
             var Qran = Math.floor(Math.random() * Qlen);
-            console.log(Quotdata[str][Qran]);
+            //console.log(Quotdata[str][Qran]);
             var q = Quotdata[str][Qran];
             DataSet.quote = q.Quote;
             DataSet.quoteAuthor = q.Author;
@@ -326,7 +369,7 @@ function SendDataToNew() {
             SetDateset();
         } else {
             chrome.runtime.sendMessage({ 'message': 'SendingDataSet', 'Dataset': DataSet }, function (response) {
-                console.log('response', response);
+                //console.log('response', response);
             });
         }
     }
