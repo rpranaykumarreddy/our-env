@@ -1,6 +1,6 @@
 var DataSet = null;
 chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
+    function(request, sender, sendResponse) {
         console.log(request, sender, sendResponse) // not listened 
         switch (request.message) {
             case 'SendingDataSet':
@@ -14,25 +14,26 @@ chrome.runtime.onMessage.addListener(
 document.addEventListener('DOMContentLoaded', () => {
     startTime();
     setInterval(() => { startTime(); }, 1000);
-    chrome.runtime.sendMessage({ 'message': 'IAmReady' }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'IAmReady' }, function(response) {
         console.log('response', response);
     });
 });
 
 /*Audio settings*/
 function startPlay() {
-    chrome.runtime.sendMessage({ 'message': 'StartPlay' }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'StartPlay' }, function(response) {
         console.log('response', response);
     });
 }
+
 function stopPlay() {
-    chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function(response) {
         console.log('response', response);
     });
 }
 
 function changeVolume() {
-    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': 100 }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': 100 }, function(response) {
         console.log('response', response);
     });
 }
@@ -68,6 +69,7 @@ function InitCall(data) {
 }
 /*SVG Filter*/
 addSvgFilterToImages();
+
 function addSvgFilterToImages() {
     const imagesWithDataColor = document.querySelectorAll('img[data-color]');
     var ind = 0;
@@ -111,7 +113,7 @@ function startTime() {
     var curYear = today.getFullYear();
     var date = curWeekDay + ", " + curDay + " " + curMonth + " " + curYear;
     document.getElementById("date").innerHTML = date;
-    var time = setTimeout(function () { startTime() }, 500);
+    var time = setTimeout(function() { startTime() }, 500);
 }
 
 function checkTime(i) {
@@ -128,7 +130,7 @@ var volumeRanger = document.getElementById("volumeRanger");
 var bolSound = false;
 volumeRanger.addEventListener("change", () => {
     volumeMeter.innerHTML = volumeRanger.value;
-    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': (volumeRanger.value / 100) }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': (volumeRanger.value / 100) }, function(response) {
         //console.log('response', response);
     });
 }, false);
@@ -136,7 +138,7 @@ playSoundScape.addEventListener("click", () => {
     console.log("clicked on play button");
     if (bolSound) {
         console.log("clicked on stop button");
-        chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function (response) {
+        chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function(response) {
             console.log('audio stop response', response);
             if (response.data == "Success") {
                 bolSound = false;
@@ -145,7 +147,7 @@ playSoundScape.addEventListener("click", () => {
         });
     } else {
         console.log("clicked on play button");
-        chrome.runtime.sendMessage({ 'message': 'StartPlay', 'volume': (volumeRanger.value / 100) }, function (response) {
+        chrome.runtime.sendMessage({ 'message': 'StartPlay', 'volume': (volumeRanger.value / 100) }, function(response) {
             console.log('audio play response', response);
             if (response.data == "Success") {
                 bolSound = true;
@@ -169,7 +171,17 @@ wrks4.addEventListener("click", () => { worksclick(3); }, false);
 
 function worksclick(type) {
     console.log('Asking Workclick', type);
-    chrome.runtime.sendMessage({ 'message': 'openWorkspace', 'type': type }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'openWorkspace', 'type': type }, function(response) {
         console.log('response', response);
     });
+}
+
+
+var setng = document.getElementById("sett");
+var setmain = document.getElementById("setmain");
+setng.addEventListener("click", settingsbut, false);
+
+function settingsbut() {
+    setng.setAttribute("style", "height:629px;width:1346px;z-index:20;");
+    setmain.setAttribute("style", "display:flex;");
 }

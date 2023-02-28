@@ -15,8 +15,8 @@
             background-repeat: no-repeat;
             background-size: auto;
         }
-
-        :root {
+        
+         :root {
             --c1: #7A87F8;
             --c2: #E8F4FE;
             --c3: #FBF4C9;
@@ -26,7 +26,7 @@
             --cd: #000000;
             --cd2: #474747;
         }
-
+        
         * {
             -webkit-user-select: none;
             /* Safari */
@@ -38,15 +38,14 @@
             margin: 0px;
             padding: 0px;
         }
-
+        
         html,
         body {
             height: max-content;
             margin: 10px;
         }
-
         /* For presentation only, no need to copy the code below */
-
+        
         .container .comp-grid {
             border-radius: 20px;
             transition: all ease-in-out 2s;
@@ -61,14 +60,14 @@
             bottom: 0px;
             position: absolute;
             /* From https://css.glass */
-background: rgba(255, 255, 255, 0.8);
-border-radius: 16px;
-box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-backdrop-filter: blur(11.3px);
--webkit-backdrop-filter: blur(11.3px);
-border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(11.3px);
+            -webkit-backdrop-filter: blur(11.3px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-
+        
         .container {
             top: 10px;
             bottom: 10px;
@@ -82,44 +81,44 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             grid-auto-flow: row;
             grid-template-areas: "VCG VCG VCG Notifi Notifi Notifi Notifi T1Icon CouDG CouDG" "NewsG NewsG NewsG WS1TG WS2TG WS3TG WS4TG T2Icon SouScG SouScG" "NewsG NewsG NewsG TimG TimG TimG TimG T3Icon AuFoG AuFoG" "NewsG NewsG NewsG TimG TimG TimG TimG T4Icon TODO TODO" "Con2 Con1 SBarG SBarG SBarG SBarG SBarG SBarG TODO TODO" "SetGrid WeaG QTG QTG QTG QTG QTG QTG TODO TODO";
         }
-
+        
         .TODO {
             grid-area: TODO;
         }
-
+        
         .QTG {
             grid-area: QTG;
         }
-
-        .SetGrid {
+        
+        #sett {
             grid-area: SetGrid;
         }
-
-        .WeaG {
+        
+        #WeaG {
             grid-area: WeaG;
         }
-
+        
         .SBarG {
             grid-area: SBarG;
         }
-
+        
         .TimG {
             grid-area: TimG;
         }
-
+        
         .CouDG {
             grid-area: CouDG;
         }
-
+        
         .Notifi {
             grid-area: Notifi;
         }
-
+        
         .SouScG {
             grid-area: SouScG;
         }
-
-        .SouScG .parFlex{
+        
+        .SouScG .parFlex {
             height: calc(90vh / 6);
             width: calc(90vw / 5);
             display: flex;
@@ -127,6 +126,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             justify-content: space-evenly;
             align-items: center;
         }
+        
         .SouScG .parFlex div {
             display: flex;
             flex-direction: column;
@@ -134,18 +134,21 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             align-items: center;
             height: calc(90vh / 6);
             display: flex;
-        } 
+        }
+        
         .SouScG img {
             height: 80%;
-        } 
+        }
+        
         .SouScG input {
             margin-top: 10px;
         }
-
+        
         .AuFoG {
             grid-area: AuFoG;
         }
-        .AuFoG .parFlex{
+        
+        .AuFoG .parFlex {
             height: calc(90vh / 6);
             width: calc(90vw / 5);
             display: flex;
@@ -153,76 +156,77 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             justify-content: space-evenly;
             align-items: center;
         }
-        .AuFoG  .parFlex div {
+        
+        .AuFoG .parFlex div {
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: calc(90vh / 6);
             display: flex;
-        } 
-        .AuFoG  img {
+        }
+        
+        .AuFoG img {
             height: 80%;
-        } 
+        }
+        
         .AuFoG input {
             margin-top: 10px;
         }
+        
         .VCG {
             grid-area: VCG;
         }
-
+        
         .NewsG {
             grid-area: NewsG;
         }
-
+        
         .Con1 {
             grid-area: Con1;
         }
-
+        
         .Con2 {
             grid-area: Con2;
         }
-
+        
         .T1Icon {
             grid-area: T1Icon;
         }
-
+        
         .T2Icon {
             grid-area: T2Icon;
         }
-
+        
         .T3Icon {
             grid-area: T3Icon;
         }
-
+        
         .T4Icon {
             grid-area: T4Icon;
         }
-
+        
         #WS1TG {
             grid-area: WS1TG;
             cursor: pointer;
         }
-
+        
         #WS2TG {
             grid-area: WS2TG;
             cursor: pointer;
         }
-
+        
         #WS3TG {
             grid-area: WS3TG;
             cursor: pointer;
         }
-
+        
         #WS4TG {
             grid-area: WS4TG;
             cursor: pointer;
         }
-
-
-
         /*Time settings*/
-
+        
         .Time-View {
             width: 100%;
             height: 100%;
@@ -237,13 +241,13 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             left: 0;
             bottom: 0;
         }
-
+        
         #clock {
             font-family: sans-serif;
             font-size: 8vw;
             color: #000;
         }
-
+        
         #clock span {
             color: #000;
             font-size: 3vw;
@@ -252,7 +256,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             top: -4vw;
             left: 10px;
         }
-
+        
         #date {
             margin-top: 15px;
             letter-spacing: 3px;
@@ -260,13 +264,12 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             font-family: arial, sans-serif;
             color: #000;
         }
-
         /*Quotation*/
-
+        
         #QTG {
             cursor: pointer;
         }
-
+        
         .QTG {
             font-size: 1.5vh;
             font-family: 'Courier New', Courier, monospace;
@@ -284,11 +287,11 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             left: 0;
             bottom: 0;
         }
-
+        
         .QTG div {
             position: relative;
         }
-
+        
         .QTG #Author {
             font-size: 1.5vh;
             text-align: right;
@@ -296,13 +299,12 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             right: 0px;
             position: absolute;
         }
-
         /*Search bar*/
-
+        
         .SBarG {
             overflow: hidden;
         }
-
+        
         .SBarG form {
             width: 100%;
             height: 100%;
@@ -313,7 +315,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             left: 0;
             bottom: 0;
         }
-
+        
         .SBarG form input,
         button {
             background: transparent;
@@ -321,7 +323,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             border: 0;
             font-size: 4vh;
         }
-
+        
         .SBarG form input[type="text"] {
             outline: 0;
             width: 100%;
@@ -332,7 +334,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             z-index: 1;
             position: relative;
         }
-
+        
         .SBarG form button {
             transition: all 0.3s ease-in-out;
             display: block;
@@ -343,15 +345,15 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             font-weight: bold;
             background: #57bd84 !important;
         }
-
+        
         .SBarG form input:not(:placeholder-shown) {
             width: calc(100% - 10vw);
         }
-
+        
         .SBarG form input:not(:placeholder-shown)+button {
             right: 0vw;
         }
-
+        
         .SBarG form label {
             position: fixed;
             clip: rect(1px, 1px, 1px, 1px);
@@ -361,14 +363,13 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             width: 1px;
             overflow: hidden;
         }
-
+        
         .SBarG form button img {
             width: 4vw;
             height: 4vw;
             fill: white;
             /* filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(220deg) brightness(108%) contrast(104%); */
         }
-
         /* .container .comp-grid:hover {
             width: 102%;
             height: 102%;
@@ -380,6 +381,83 @@ border: 1px solid rgba(255, 255, 255, 0.3);
             align-items: center;
             justify-content: center;
         } */
+        
+        .flex-con-set {
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-evenly;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        
+        .flex-con-scrll {
+            background: rgb(46, 44, 44);
+            padding: 10px;
+            margin: 5px;
+            width: 270px;
+            height: 600px;
+            margin-top: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 3em;
+            text-align: center;
+        }
+        
+        .flex-con-setset {
+            background: rgb(29, 28, 27);
+            padding: 10px;
+            margin: 5px;
+            width: 1000px;
+            height: 600px;
+            margin-top: 10px;
+            color: white;
+            font-weight: bold;
+            font-size: 3em;
+        }
+        
+        #setmain {
+            display: none;
+        }
+        
+        .scrll-item {
+            height: 40px;
+            padding: 5px;
+            width: 250px;
+            font-size: 20px;
+            text-align: center;
+        }
+        
+        .formleb {
+            font-size: 20px;
+        }
+        
+        input[type=text],
+        select {
+            width: 600px;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            height: 20px;
+        }
+        
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        input[type=submit]:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 
@@ -392,8 +470,38 @@ border: 1px solid rgba(255, 255, 255, 0.3);
                 <div id="Author">-RPKR Inc</div>
             </div>
         </div>
-        <div class="comp-grid SetGrid">SetGrid</div>
-        <div class="comp-grid WeaG">WeaG</div>
+        <div class="comp-grid" id="sett">settings
+            <div class="flex-con-set" id="setmain">
+                <div class="flex-con-scrll">
+                    <div class="scrll-item">
+                        Side bar
+                    </div>
+
+                </div>
+                <div class="flex-con-setset">
+                    <form action="/action_page.php" id="myform">
+                        <label for="fname" class="formleb">First Name</label>
+                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                        <label for="fname" class="formleb">First Name</label>
+                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                        <label for="fname" class="formleb">First Name</label>
+                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                        <label for="fname" class="formleb">First Name</label>
+                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+
+
+
+                        <input type="submit" value="Submit" id="btn">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <div class="comp-grid" id="WeaG">WeaG</div>
         <div class="comp-grid SBarG">
             <!-- <form action="http://www.google.com/search" method="get">
                 <input type="text" name="q"/>
@@ -431,7 +539,7 @@ border: 1px solid rgba(255, 255, 255, 0.3);
                     <input id="AutoFocusRanger" type="number" min="0" max="10" value="2" step="1" />
                 </div>
                 <div class="left">
-                    <img id="playSoundScape" class="ionIcon" data-color="#000000" src="icon\\play-circle.svg" alt="">                   
+                    <img id="playSoundScape" class="ionIcon" data-color="#000000" src="icon\\play-circle.svg" alt="">
                 </div>
             </div>
         </div>
@@ -443,7 +551,9 @@ border: 1px solid rgba(255, 255, 255, 0.3);
         <div class="comp-grid T2Icon">T2Icon</div>
         <div class="comp-grid T3Icon">T3Icon</div>
         <div class="comp-grid T4Icon">T4Icon</div>
-        <div class="comp-grid" id="WS1TG"><ion-icon name="heart"></ion-icon></div>
+        <div class="comp-grid" id="WS1TG">
+            <ion-icon name="heart"></ion-icon>
+        </div>
         <div class="comp-grid" id="WS2TG">workSpace 2</div>
         <div class="comp-grid" id="WS3TG">workSpace 3</div>
         <div class="comp-grid" id="WS4TG">workSpace 4</div>
