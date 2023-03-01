@@ -25,6 +25,7 @@ function startPlay() {
         console.log('response', response);
     });
 }
+
 function stopPlay() {
     chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function (response) {
         console.log('response', response);
@@ -110,6 +111,7 @@ function contactClick(type) {
 
 /*SVG Filter*/
 addSvgFilterToImages();
+
 function addSvgFilterToImages() {
     const imagesWithDataColor = document.querySelectorAll('img[data-color]');
     var ind = 0;
@@ -241,4 +243,14 @@ function worksclick(type) {
     chrome.runtime.sendMessage({ 'message': 'openWorkspace', 'type': type }, function (response) {
         console.log('response', response);
     });
+}
+
+
+var setng = document.getElementById("sett");
+var setmain = document.getElementById("setmain");
+setng.addEventListener("click", settingsbut, false);
+
+function settingsbut() {
+    setng.setAttribute("style", "height:629px;width:1346px;z-index:20;");
+    setmain.setAttribute("style", "display:flex;");
 }
