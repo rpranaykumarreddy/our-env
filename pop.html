@@ -395,7 +395,7 @@
             background: rgb(46, 44, 44);
             padding: 10px;
             margin: 5px;
-            width: 270px;
+            width: 200px;
             height: 600px;
             margin-top: 10px;
             color: white;
@@ -405,7 +405,7 @@
         }
         
         .flex-con-setset {
-            background: rgb(29, 28, 27);
+            background: rgb(46, 44, 44);
             padding: 10px;
             margin: 5px;
             width: 1000px;
@@ -414,6 +414,19 @@
             color: white;
             font-weight: bold;
             font-size: 3em;
+            overflow: scroll;
+        }
+        
+        #sidebarset {
+            display: block;
+        }
+        
+        #workspaceset {
+            display: none;
+        }
+        
+        #contactset {
+            display: none;
         }
         
         #setmain {
@@ -423,9 +436,10 @@
         .scrll-item {
             height: 40px;
             padding: 5px;
-            width: 250px;
+            width: 180px;
             font-size: 20px;
-            text-align: center;
+            text-align: left;
+            font-family: 'Times New Roman', Times, serif;
         }
         
         .formleb {
@@ -434,19 +448,21 @@
         
         input[type=text],
         select {
-            width: 600px;
+            width: 100%;
             padding: 12px 20px;
             margin: 8px 0;
             display: block;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            height: 20px;
+            height: 30px;
+            color: #f3f3f3;
+            background-color: #313131;
+            padding: 12px;
+            border: 0px solid #ccc;
+            font-size: 20px;
         }
         
         input[type=submit] {
             width: 100%;
-            background-color: #4CAF50;
+            background-color: #414941;
             color: white;
             padding: 14px 20px;
             margin: 8px 0;
@@ -456,7 +472,22 @@
         }
         
         input[type=submit]:hover {
-            background-color: #45a049;
+            background-color: #262b27;
+        }
+        
+        .dispset {
+            height: 100%;
+            width: 100%;
+        }
+        
+        .disphead {
+            height: 100%;
+            width: 100%;
+        }
+        
+        #displist {
+            height: 100%;
+            width: 100%;
         }
     </style>
 </head>
@@ -470,15 +501,84 @@
                 <div id="Author">-RPKR Inc</div>
             </div>
         </div>
-        <div class="comp-grid" id="sett">settings
+        <div class="comp-grid" id="sett">
+            <div id="setview">settings</div>
             <div class="flex-con-set" id="setmain">
                 <div class="flex-con-scrll">
-                    <div class="scrll-item">
+                    <div class="scrll-item" id="sidebarclick">
                         Side bar
+                    </div>
+                    <div class="scrll-item" id="workspaceclick">
+                        Work Spaces
+                    </div>
+                    <div class="scrll-item" id="contactclick">
+                        Contact
+                    </div>
+                    <div class="scrll-item">
+                        Sound Scape
+                    </div>
+                    <div class="scrll-item">
+                        Quote settings
+                    </div>
+                    <div class="scrll-item">
+                        V card
                     </div>
 
                 </div>
-                <div class="flex-con-setset">
+                <div class="flex-con-setset" id="sidebarset">
+                    <form id="myform">
+                        <label for="fname" class="formleb">Add a Website to Side Bar</label>
+                        <input type="text" id="websitelink" name="website" placeholder="Website Link..">
+
+                        <input type="submit" value="Add Website" id="sidebtn">
+                    </form>
+
+                    <div class="dispset">
+
+                        <div class="disphead">
+                            List of Websites in Side Bar:
+                        </div>
+
+                        <div id="displist">
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+                <div class="flex-con-setset" id="workspaceset">
+                    <form action="/action_page.php" id="myform">
+                        <label for="fname" class="formleb">Add a Website to your workspace 1</label>
+                        <input type="text" id="websitelink" name="website" placeholder="Website Link..">
+
+                        <input type="submit" value="Add Website" id="btn">
+                    </form>
+
+                    <form action="/action_page.php" id="myform">
+                        <label for="fname" class="formleb">Add a Website to your workspace 2</label>
+                        <input type="text" id="websitelink" name="website" placeholder="Website Link..">
+
+                        <input type="submit" value="Add Website" id="btn">
+                    </form>
+
+                    <form action="/action_page.php" id="myform">
+                        <label for="fname" class="formleb">Add a Website to your workspace 3</label>
+                        <input type="text" id="websitelink" name="website" placeholder="Website Link..">
+
+                        <input type="submit" value="Add Website" id="btn">
+                    </form>
+
+                    <form action="/action_page.php" id="myform">
+                        <label for="fname" class="formleb">Add a Website to your workspace 4</label>
+                        <input type="text" id="websitelink" name="website" placeholder="Website Link..">
+
+                        <input type="submit" value="Add Website" id="btn">
+                    </form>
+                </div>
+
+                <div class="flex-con-setset" id="contactset">
                     <form action="/action_page.php" id="myform">
                         <label for="fname" class="formleb">List of website links</label>
                         <input type="text" id="fname" name="firstname" placeholder="Your name..">
@@ -486,18 +586,17 @@
                         <label for="fname" class="formleb">List of website links</label>
                         <input type="text" id="fname" name="firstname" placeholder="Your name..">
 
-                        <label for="fname" class="formleb">List of website links</label>
+                        <label for="fname" class="formleb">List of website</label>
                         <input type="text" id="fname" name="firstname" placeholder="Your name..">
 
                         <label for="fname" class="formleb">List of website links</label>
                         <input type="text" id="fname" name="firstname" placeholder="Your name..">
 
-
-
-
-                        <input type="submit" value="Submit" id="btn">
+                        <input type="submit" value="Update" id="btn">
                     </form>
                 </div>
+
+
             </div>
 
         </div>

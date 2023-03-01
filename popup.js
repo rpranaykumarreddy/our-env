@@ -179,9 +179,45 @@ function worksclick(type) {
 
 var setng = document.getElementById("sett");
 var setmain = document.getElementById("setmain");
+var setview = document.getElementById("setview");
 setng.addEventListener("click", settingsbut, false);
 
 function settingsbut() {
-    setng.setAttribute("style", "height:629px;width:1346px;z-index:20;");
+    setng.setAttribute("style", "height:629px;width:1346px;z-index:20;background: rgb(46, 44, 44);");
     setmain.setAttribute("style", "display:flex;");
+    setview.setAttribute("style", "display:none;");
+}
+
+
+var sidebarclick = document.getElementById("sidebarclick");
+var workspaceclick = document.getElementById("workspaceclick");
+var contactclick = document.getElementById("contactclick");
+sidebarclick.addEventListener("click", sidebarfun, false);
+workspaceclick.addEventListener("click", workspacefun, false);
+contactclick.addEventListener("click", contactfun, false);
+
+
+
+
+var sidebarclk = document.getElementById("sidebarset");
+var workspaceclk = document.getElementById("workspaceset");
+var contactclk = document.getElementById("contactset");
+
+function sidebarfun() {
+    console.log(hello);
+    sidebarclk.setAttribute("style", "display:block;");
+    workspaceclk.setAttribute("style", "display:none;");
+    contactclk.setAttribute("style", "display:none;");
+}
+
+function workspacefun() {
+    sidebarclk.setAttribute("style", "display:none;");
+    workspaceclk.setAttribute("style", "display:block;");
+    contactclk.setAttribute("style", "display:none;");
+}
+
+function contactfun() {
+    sidebarclk.setAttribute("style", "display:none;");
+    workspaceclk.setAttribute("style", "display:none;");
+    contactclk.setAttribute("style", "display:block;");
 }
