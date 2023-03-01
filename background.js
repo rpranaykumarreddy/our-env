@@ -142,14 +142,10 @@ var Dummy = {
     sidebar: [
         "https://wethinc.in",
         "https://youtube.com",
-        "https://www.instagram.com",
-        "https://wethinc.in",
-        "https://youtube.com",
-        "https://www.instagram.com",
-        "https://wethinc.in",
-        "https://youtube.com",
-        "https://www.instagram.com",
-        "https://wethinc.in"
+        "https://github.com/rpranaykumarreddy",
+        "https://practice.geeksforgeeks.org/batch/cip-1",
+        "https://discord.com/channels/783758394166345779/790483500264456192",
+        "https://www.linkedin.com/in/rpranaykumarreddy/"
     ],
     workspaces: [{
         name: "Mails",

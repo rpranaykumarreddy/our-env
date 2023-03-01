@@ -15,6 +15,19 @@
     "background": {
         "service_worker": "background.js"
     },
+    "web_accessible_resources": [
+        {
+            "resources": [
+                "_favicon/*"
+            ],
+            "matches": [
+                "<all_urls>"
+            ],
+            "extension_ids": [
+                "*"
+            ]
+        }
+    ],
     "content_scripts": [
         {
             "run_at": "document_end",
@@ -39,6 +52,7 @@
         "notifications",
         "contextMenus",
         "offscreen",
-        "tabs"
+        "tabs",
+        "favicon"
     ]
 }

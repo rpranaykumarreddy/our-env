@@ -1,5 +1,8 @@
 const site = window.location.hostname;
-
+// var urls = null;
+// chrome.runtime.sendMessage({ 'message': 'notify', 'tit': "Side Bar Limit exceeded", 'msg': "Hey folk, you have exceeded the limit of Side bar icons(i.e. 10). Please remove the any app from the settings." }, function (response) {
+//     console.log('response', response);
+// });
 
 //alert(site + "is opened");
 var url = ["https://wethinc.in/blog", "https://www.geeksforgeeks.org", "https://youtube.com", "https://wethinc.in", "https://www.geeksforgeeks.org", "https://youtube.com"];
@@ -46,7 +49,16 @@ function funout() {
     custom_element.setAttribute("style", "left:-55px;")
 }
 
+function faviconURL(u) {
+    const url = new URL(chrome.runtime.getURL("/_favicon/"));
+    url.searchParams.set("pageUrl", u);
+    url.searchParams.set("size", "64");
+    return url.toString();
+}
 
+//   const img = document.createElement('img');
+//   img.src = faviconURL("https://www.google.com")
+//   document.body.appendChild(img);
 
 function append(inp) {
     var alink = document.createElement("a");
@@ -54,7 +66,8 @@ function append(inp) {
     custom_element.append(alink);
     var elem1 = document.createElement("img");
     var urlfev = new URL(url[inp]);
-    elem1.setAttribute("src", urlfev.origin + "/favicon.ico");
+    //elem1.setAttribute("src", urlfev.origin + "/favicon.ico");
+    elem1.setAttribute("src", faviconURL(urlfev.origin));
     elem1.className = "image";
     alink.append(elem1);
 }
