@@ -1,10 +1,10 @@
 var DataSet = null;
 chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        console.log(request, sender, sendResponse) // not listened 
+    function (request, sender, sendResponse) {
+        //console.log(request, sender, sendResponse) // not listened 
         switch (request.message) {
             case 'SendingDataSet':
-                console.log("Init Call Data", request);
+                //console.log("Init Call Data", request);
                 DataSet = request.Dataset;
                 InitCall(request.Dataset);
                 sendResponse({ data: 'Thank you' });
@@ -14,36 +14,32 @@ chrome.runtime.onMessage.addListener(
 document.addEventListener('DOMContentLoaded', () => {
     startTime();
     setInterval(() => { startTime(); }, 1000);
-    chrome.runtime.sendMessage({ 'message': 'IAmReady' }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'IAmReady' }, function (response) {
         console.log('response', response);
     });
 });
 
 /*Audio settings*/
 function startPlay() {
-    chrome.runtime.sendMessage({ 'message': 'StartPlay' }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'StartPlay' }, function (response) {
         console.log('response', response);
     });
 }
 
 function stopPlay() {
-    chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function (response) {
         console.log('response', response);
     });
 }
 
 function changeVolume() {
-    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': 100 }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': 100 }, function (response) {
         console.log('response', response);
     });
 }
 
 function InitCall(data) {
     console.log("Dataset:", data);
-    var wrks1 = document.getElementById("WS1TG");
-    var wrks2 = document.getElementById("WS2TG");
-    var wrks3 = document.getElementById("WS3TG");
-    var wrks4 = document.getElementById("WS4TG");
     var volumeMeter = document.getElementById("volumeMeter");
     var volumeRanger = document.getElementById("volumeRanger");
     volumeMeter.innerHTML = (data.sound.volume * 100);
@@ -54,11 +50,24 @@ function InitCall(data) {
     } else {
         playSoundScape.src = "icon\\play-circle.svg";
     }
+    var work = document.getElementsByClassName("for-WSTG");
+    for (var worki = 0; worki < 4; worki++) {
+        work[worki].innerHTML = '<img class="ionIcon" data-color="#000000" src="' + data.workspaces[worki].icon + '" alt="">';
+        work[worki].innerHTML += "<h3>" + data.workspaces[worki].name + "</h3>";
+    }
 
-    wrks1.innerHTML += data.workspaces[0].name;
-    wrks2.innerHTML += data.workspaces[1].name;
-    wrks3.innerHTML += data.workspaces[2].name;
-    wrks4.innerHTML += data.workspaces[3].name;
+    var cont = document.getElementsByClassName("for-Cont");
+    for (var conti = 0; conti < 3; conti++) {
+        cont[conti].innerHTML = '<img class="ionIcon" data-color="#000000" src="' + data.contact[conti].type + '" alt="">';
+        cont[conti].innerHTML += "<h3>" + data.contact[conti].name + "</h3>";
+    }
+
+    var TopIcon = document.getElementsByClassName("for-TopIcon");
+    for (var Topi = 0; Topi < 4; Topi++) {
+        TopIcon[Topi].innerHTML = '<img class="ionIcon" data-color="#000000" src="' + data.topApps[Topi].icon + '" alt="">';
+        TopIcon[Topi].innerHTML += "<h3>" + data.topApps[Topi].name + "</h3>";
+    }
+
     var qtcl = document.getElementById("QTG");
     var qu = document.getElementById("TGQuoation");
     var au = document.getElementById("Author");
@@ -67,6 +76,39 @@ function InitCall(data) {
     qu.innerHTML = data.quote;
     au.innerHTML = data.quoteAuthor;
 }
+
+/*Top-4 icons Click*/
+var Top1 = document.getElementById("T1Icon");
+var Top2 = document.getElementById("T2Icon");
+var Top3 = document.getElementById("T3Icon");
+var Top4 = document.getElementById("T4Icon");
+Top1.addEventListener("click", () => { TopClick(0); }, false);
+Top2.addEventListener("click", () => { TopClick(1); }, false);
+Top3.addEventListener("click", () => { TopClick(2); }, false);
+Top4.addEventListener("click", () => { TopClick(3); }, false);
+
+function TopClick(type) {
+    console.log('Asking Top Icons Click', type);
+    chrome.runtime.sendMessage({ 'message': 'openTopIcon', 'type': type }, function (response) {
+        console.log('response', response);
+    });
+}
+
+/*Contact Click*/
+var cont1 = document.getElementById("Con1");
+var cont2 = document.getElementById("Con2");
+var cont2 = document.getElementById("Con3");
+cont1.addEventListener("click", () => { contactClick(0); }, false);
+cont2.addEventListener("click", () => { contactClick(1); }, false);
+cont3.addEventListener("click", () => { contactClick(2); }, false);
+
+function contactClick(type) {
+    console.log('Asking contactClick', type);
+    chrome.runtime.sendMessage({ 'message': 'openContact', 'type': type }, function (response) {
+        console.log('response', response);
+    });
+}
+
 /*SVG Filter*/
 addSvgFilterToImages();
 
@@ -113,7 +155,7 @@ function startTime() {
     var curYear = today.getFullYear();
     var date = curWeekDay + ", " + curDay + " " + curMonth + " " + curYear;
     document.getElementById("date").innerHTML = date;
-    var time = setTimeout(function() { startTime() }, 500);
+    var time = setTimeout(function () { startTime() }, 500);
 }
 
 function checkTime(i) {
@@ -122,6 +164,33 @@ function checkTime(i) {
     }
     return i;
 }
+/*Auto Focus*/
+var playAutoFocus = document.getElementById("autoFocusBut");
+var AutoFocusRangerHour = document.getElementById("AutoFocusRangerHour");
+var AutoFocusRangerMin = document.getElementById("AutoFocusRangerMin");
+var boolFocus = false;
+playAutoFocus.addEventListener("click", () => {
+    console.log("clicked on open button");
+    if (boolFocus) {
+        console.log("clicked on F open button");
+        chrome.runtime.sendMessage({ 'message': 'StopFocus', 'time': 6000 }, function (response) {
+            console.log('focus open response', response);
+            if (response.data == 'Success') {
+                boolFocus = false;
+                playAutoFocus.src = "icon/lock-closed.svg";
+            }
+        });
+    } else {
+        console.log("clicked on F start button");
+        chrome.runtime.sendMessage({ 'message': 'StartFocus', 'volume': (volumeRanger.value / 100) }, function (response) {
+            console.log('focus close response', response);
+            if (response.data == 'Success') {
+                boolFocus = true;
+                playAutoFocus.src = "icon/lock-open.svg";
+            }
+        });
+    }
+}, false);
 
 /*SoundScape Play*/
 var playSoundScape = document.getElementById("playSoundScape");
@@ -130,7 +199,7 @@ var volumeRanger = document.getElementById("volumeRanger");
 var bolSound = false;
 volumeRanger.addEventListener("change", () => {
     volumeMeter.innerHTML = volumeRanger.value;
-    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': (volumeRanger.value / 100) }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': (volumeRanger.value / 100) }, function (response) {
         //console.log('response', response);
     });
 }, false);
@@ -138,7 +207,7 @@ playSoundScape.addEventListener("click", () => {
     console.log("clicked on play button");
     if (bolSound) {
         console.log("clicked on stop button");
-        chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function(response) {
+        chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function (response) {
             console.log('audio stop response', response);
             if (response.data == "Success") {
                 bolSound = false;
@@ -147,7 +216,7 @@ playSoundScape.addEventListener("click", () => {
         });
     } else {
         console.log("clicked on play button");
-        chrome.runtime.sendMessage({ 'message': 'StartPlay', 'volume': (volumeRanger.value / 100) }, function(response) {
+        chrome.runtime.sendMessage({ 'message': 'StartPlay', 'volume': (volumeRanger.value / 100) }, function (response) {
             console.log('audio play response', response);
             if (response.data == "Success") {
                 bolSound = true;
@@ -159,19 +228,19 @@ playSoundScape.addEventListener("click", () => {
 
 
 /*Workspace opening & clicks */
-var wrks1 = document.getElementById("WS1TG");
+var wrks1 = document.getElementById("WS1");
 wrks1.addEventListener("click", () => { worksclick(0); }, false);
-var wrks2 = document.getElementById("WS2TG");
+var wrks2 = document.getElementById("WS2");
 wrks2.addEventListener("click", () => { worksclick(1); }, false);
-var wrks3 = document.getElementById("WS3TG");
+var wrks3 = document.getElementById("WS3");
 wrks3.addEventListener("click", () => { worksclick(2); }, false);
-var wrks4 = document.getElementById("WS4TG");
+var wrks4 = document.getElementById("WS4");
 wrks4.addEventListener("click", () => { worksclick(3); }, false);
 
 
 function worksclick(type) {
     console.log('Asking Workclick', type);
-    chrome.runtime.sendMessage({ 'message': 'openWorkspace', 'type': type }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'openWorkspace', 'type': type }, function (response) {
         console.log('response', response);
     });
 }

@@ -10,10 +10,10 @@
     <style>
         body {
             background-clip: border-box;
-            background-image: url("3.jpg");
-            background-position: center;
+            background-image: url("1.jpg");
+            /* background-position: top; */
             background-repeat: no-repeat;
-            background-size: auto;
+            background-size: 110%;
         }
         
          :root {
@@ -42,7 +42,7 @@
         html,
         body {
             height: max-content;
-            margin: 10px;
+            padding: 10px;
         }
         /* For presentation only, no need to copy the code below */
         
@@ -60,10 +60,10 @@
             bottom: 0px;
             position: absolute;
             /* From https://css.glass */
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 16px;
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-            backdrop-filter: blur(11.3px);
+            backdrop-filter: blur(25px);
             -webkit-backdrop-filter: blur(11.3px);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
@@ -79,7 +79,7 @@
             grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
             gap: 10px 10px;
             grid-auto-flow: row;
-            grid-template-areas: "VCG VCG VCG Notifi Notifi Notifi Notifi T1Icon CouDG CouDG" "NewsG NewsG NewsG WS1TG WS2TG WS3TG WS4TG T2Icon SouScG SouScG" "NewsG NewsG NewsG TimG TimG TimG TimG T3Icon AuFoG AuFoG" "NewsG NewsG NewsG TimG TimG TimG TimG T4Icon TODO TODO" "Con2 Con1 SBarG SBarG SBarG SBarG SBarG SBarG TODO TODO" "SetGrid WeaG QTG QTG QTG QTG QTG QTG TODO TODO";
+            grid-template-areas: "VCG VCG VCG Notifi Notifi Notifi Notifi T1Icon CouDG CouDG" "NewsG NewsG NewsG WS1TG WS2TG WS3TG WS4TG T2Icon SouScG SouScG" "NewsG NewsG NewsG TimG TimG TimG TimG T3Icon AuFoG AuFoG" "NewsG NewsG NewsG TimG TimG TimG TimG T4Icon TODO TODO" "Con2 Con1 SBarG SBarG SBarG SBarG SBarG SBarG TODO TODO" "SetGrid Con3 QTG QTG QTG QTG QTG QTG TODO TODO";
         }
         
         .TODO {
@@ -93,11 +93,6 @@
         #sett {
             grid-area: SetGrid;
         }
-        
-        #WeaG {
-            grid-area: WeaG;
-        }
-        
         .SBarG {
             grid-area: SBarG;
         }
@@ -117,7 +112,6 @@
         .SouScG {
             grid-area: SouScG;
         }
-        
         .SouScG .parFlex {
             height: calc(90vh / 6);
             width: calc(90vw / 5);
@@ -126,7 +120,6 @@
             justify-content: space-evenly;
             align-items: center;
         }
-        
         .SouScG .parFlex div {
             display: flex;
             flex-direction: column;
@@ -135,11 +128,11 @@
             height: calc(90vh / 6);
             display: flex;
         }
-        
+
         .SouScG img {
             height: 80%;
         }
-        
+
         .SouScG input {
             margin-top: 10px;
         }
@@ -147,7 +140,6 @@
         .AuFoG {
             grid-area: AuFoG;
         }
-        
         .AuFoG .parFlex {
             height: calc(90vh / 6);
             width: calc(90vw / 5);
@@ -156,7 +148,6 @@
             justify-content: space-evenly;
             align-items: center;
         }
-        
         .AuFoG .parFlex div {
             display: flex;
             flex-direction: column;
@@ -165,15 +156,15 @@
             height: calc(90vh / 6);
             display: flex;
         }
-        
+
         .AuFoG img {
             height: 80%;
         }
-        
+
         .AuFoG input {
             margin-top: 10px;
         }
-        
+
         .VCG {
             grid-area: VCG;
         }
@@ -181,50 +172,72 @@
         .NewsG {
             grid-area: NewsG;
         }
-        
-        .Con1 {
+
+        #Con1 {
             grid-area: Con1;
         }
-        
-        .Con2 {
+
+        #Con2 {
             grid-area: Con2;
         }
-        
-        .T1Icon {
+
+        #Con3 {
+            grid-area: Con3;
+        }
+
+        #T1Icon {
             grid-area: T1Icon;
         }
-        
-        .T2Icon {
+
+        #T2Icon {
             grid-area: T2Icon;
         }
-        
-        .T3Icon {
+
+        #T3Icon {
             grid-area: T3Icon;
         }
-        
-        .T4Icon {
+
+        #T4Icon {
             grid-area: T4Icon;
         }
-        
-        #WS1TG {
+
+        #WS1 {
             grid-area: WS1TG;
             cursor: pointer;
+            padding: 10px;
         }
-        
-        #WS2TG {
+
+        #WS2 {
             grid-area: WS2TG;
             cursor: pointer;
+            padding: 10px;
         }
-        
-        #WS3TG {
+
+        #WS3 {
             grid-area: WS3TG;
             cursor: pointer;
+            padding: 10px;
         }
-        
-        #WS4TG {
+
+        #WS4 {
             grid-area: WS4TG;
             cursor: pointer;
+            padding: 10px;
         }
+
+        /* workSpace css*/
+        .workSpace-desi {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            font-weight: bold;height: inherit;
+        }
+
+        .workSpace-desi img {
+            width: 4vw;
+        }
+
         /*Time settings*/
         
         .Time-View {
@@ -635,27 +648,72 @@
         <div class="comp-grid AuFoG">
             <div class="parFlex">
                 <div class="right">
-                    <input id="AutoFocusRanger" type="number" min="0" max="10" value="2" step="1" />
+                    <input id="AutoFocusRangerHour" type="number" min="0" max="10" value="0" step="1" />
+                    <input id="AutoFocusRangerMin" type="number" min="0" max="59" value="25" step="1" />
                 </div>
                 <div class="left">
-                    <img id="playSoundScape" class="ionIcon" data-color="#000000" src="icon\\play-circle.svg" alt="">
+                    <img id="autoFocusBut" class="ionIcon" data-color="#000000" src="icon/lock-closed.svg" alt="">
                 </div>
             </div>
         </div>
         <div class="comp-grid VCG">VCG</div>
         <div class="comp-grid NewsG">NewsG</div>
-        <div class="comp-grid Con1">Contact--1</div>
-        <div class="comp-grid Con2">Contact-2</div>
-        <div class="comp-grid T1Icon">T1Icon</div>
-        <div class="comp-grid T2Icon">T2Icon</div>
-        <div class="comp-grid T3Icon">T3Icon</div>
-        <div class="comp-grid T4Icon">T4Icon</div>
-        <div class="comp-grid" id="WS1TG">
-            <ion-icon name="heart"></ion-icon>
+        <div class="comp-grid" id="Con1">
+            <div class="workSpace-desi for-Cont" id="cont1">
+                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+            </div>
         </div>
-        <div class="comp-grid" id="WS2TG">workSpace 2</div>
-        <div class="comp-grid" id="WS3TG">workSpace 3</div>
-        <div class="comp-grid" id="WS4TG">workSpace 4</div>
+        <div class="comp-grid" id="Con2">
+            <div class="workSpace-desi for-Cont" id="cont2">
+                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+            </div>
+        </div>
+        
+        <div class="comp-grid" id="Con3">
+            <div class="workSpace-desi for-Cont" id="cont3">
+                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+            </div>
+        </div>
+        <div class="comp-grid T1Icon" id="T1Icon">
+            <div class="workSpace-desi for-TopIcon" id="Top1">
+                <img class="ionIcon" data-color="#000000" src="icon/logo-linkedin.svg" alt="">
+            </div>
+        </div>
+        <div class="comp-grid T2Icon" id="T2Icon">
+            <div class="workSpace-desi for-TopIcon" id="Top2">
+                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+            </div>
+        </div>
+        <div class="comp-grid T3Icon" id="T3Icon">
+            <div class="workSpace-desi for-TopIcon" id="Top3">
+                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+            </div>
+        </div>
+        <div class="comp-grid T4Icon" id="T4Icon">
+            <div class="workSpace-desi for-TopIcon" id="Top4">
+                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+            </div>
+        </div>
+        <div class="comp-grid" id="WS1">
+            <div class="workSpace-desi for-WSTG" id="WS1TG">
+                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+            </div>
+        </div>
+        <div class="comp-grid" id="WS2">
+            <div class="workSpace-desi for-WSTG" id="WS2TG">
+                <img class="ionIcon" data-color="#000000" src="icon/logo-github.svg" alt="">
+            </div>
+        </div>
+        <div class="comp-grid" id="WS3">
+            <div class="workSpace-desi for-WSTG" id="WS3TG">
+                <img class="ionIcon" data-color="#000000" src="icon/logo-figma.svg" alt="">
+            </div>
+        </div>
+        <div class="comp-grid" id="WS4">
+            <div class="workSpace-desi for-WSTG" id="WS4TG">
+                <img class="ionIcon" data-color="#000000" src="icon/videocam.svg" alt="">
+            </div>
+        </div>
     </div>
 </body>
 
