@@ -15,8 +15,8 @@
             background-repeat: no-repeat;
             background-size: 110%;
         }
-        
-         :root {
+
+        :root {
             --c1: #7A87F8;
             --c2: #E8F4FE;
             --c3: #FBF4C9;
@@ -26,7 +26,7 @@
             --cd: #000000;
             --cd2: #474747;
         }
-        
+
         * {
             -webkit-user-select: none;
             /* Safari */
@@ -38,14 +38,15 @@
             margin: 0px;
             padding: 0px;
         }
-        
+
         html,
         body {
             height: max-content;
             padding: 10px;
         }
+
         /* For presentation only, no need to copy the code below */
-        
+
         .container .comp-grid {
             border-radius: 20px;
             transition: all ease-in-out 2s;
@@ -67,7 +68,7 @@
             -webkit-backdrop-filter: blur(11.3px);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        
+
         .container {
             top: 10px;
             bottom: 10px;
@@ -81,58 +82,68 @@
             grid-auto-flow: row;
             grid-template-areas: "VCG VCG VCG Notifi Notifi Notifi Notifi T1Icon CouDG CouDG" "NewsG NewsG NewsG WS1TG WS2TG WS3TG WS4TG T2Icon SouScG SouScG" "NewsG NewsG NewsG TimG TimG TimG TimG T3Icon AuFoG AuFoG" "NewsG NewsG NewsG TimG TimG TimG TimG T4Icon TODO TODO" "Con2 Con1 SBarG SBarG SBarG SBarG SBarG SBarG TODO TODO" "SetGrid Con3 QTG QTG QTG QTG QTG QTG TODO TODO";
         }
-        
+
         .TODO {
             grid-area: TODO;
         }
-        
+
         .QTG {
             grid-area: QTG;
         }
-        
+
         #sett {
             grid-area: SetGrid;
         }
-        #sett .ionIcon{
+
+        #sett .ionIcon {
             width: 4vw;
             height: 4vw;
         }
-        #sett .div-flex{
+
+        #sett .div-flex {
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
             align-items: center;
-            font-weight: bold;height: inherit; }
-        .setOpen{
-            height:629px !important;
-            width: 1346px !important;;
-            z-index:20 !important;
+            font-weight: bold;
+            height: inherit;
         }
-        .setOpen .hidOpen{
+
+        .setOpen {
+            height: 629px !important;
+            width: 1346px !important;
+            ;
+            z-index: 20 !important;
+        }
+
+        .setOpen .hidOpen {
             opacity: 0;
         }
-        .setOpen #setmain{
-            display:flex;
+
+        .setOpen #setmain {
+            display: flex;
         }
+
         .SBarG {
             grid-area: SBarG;
         }
-        
+
         .TimG {
             grid-area: TimG;
         }
-        
+
         .CouDG {
             grid-area: CouDG;
         }
-        
+
         .Notifi {
             grid-area: Notifi;
         }
-        
+
         .SouScG {
             grid-area: SouScG;
         }
+
         .SouScG .parFlex {
             height: calc(90vh / 6);
             width: calc(90vw / 5);
@@ -141,6 +152,7 @@
             justify-content: space-evenly;
             align-items: center;
         }
+
         .SouScG .parFlex div {
             display: flex;
             flex-direction: column;
@@ -157,10 +169,11 @@
         .SouScG input {
             margin-top: 10px;
         }
-        
+
         .AuFoG {
             grid-area: AuFoG;
         }
+
         .AuFoG .parFlex {
             height: calc(90vh / 6);
             width: calc(90vw / 5);
@@ -169,6 +182,7 @@
             justify-content: space-evenly;
             align-items: center;
         }
+
         .AuFoG .parFlex div {
             display: flex;
             flex-direction: column;
@@ -189,7 +203,7 @@
         .VCG {
             grid-area: VCG;
         }
-        
+
         .NewsG {
             grid-area: NewsG;
         }
@@ -247,12 +261,14 @@
         }
 
         /* workSpace css*/
+
         .workSpace-desi {
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
             align-items: center;
-            font-weight: bold;height: inherit;
+            font-weight: bold;
+            height: inherit;
         }
 
         .workSpace-desi img {
@@ -260,7 +276,7 @@
         }
 
         /*Time settings*/
-        
+
         .Time-View {
             width: 100%;
             height: 100%;
@@ -275,13 +291,13 @@
             left: 0;
             bottom: 0;
         }
-        
+
         #clock {
             font-family: sans-serif;
             font-size: 8vw;
             color: #000;
         }
-        
+
         #clock span {
             color: #000;
             font-size: 3vw;
@@ -290,7 +306,7 @@
             top: -4vw;
             left: 10px;
         }
-        
+
         #date {
             margin-top: 15px;
             letter-spacing: 3px;
@@ -298,12 +314,13 @@
             font-family: arial, sans-serif;
             color: #000;
         }
+
         /*Quotation*/
-        
+
         #QTG {
             cursor: pointer;
         }
-        
+
         .QTG {
             font-size: 1.5vh;
             font-family: 'Courier New', Courier, monospace;
@@ -321,11 +338,11 @@
             left: 0;
             bottom: 0;
         }
-        
+
         .QTG div {
             position: relative;
         }
-        
+
         .QTG #Author {
             font-size: 1.5vh;
             text-align: right;
@@ -333,12 +350,13 @@
             right: 0px;
             position: absolute;
         }
+
         /*Search bar*/
-        
+
         .SBarG {
             overflow: hidden;
         }
-        
+
         .SBarG form {
             width: 100%;
             height: 100%;
@@ -349,7 +367,7 @@
             left: 0;
             bottom: 0;
         }
-        
+
         .SBarG form input,
         button {
             background: transparent;
@@ -357,7 +375,7 @@
             border: 0;
             font-size: 4vh;
         }
-        
+
         .SBarG form input[type="text"] {
             outline: 0;
             width: 100%;
@@ -368,7 +386,7 @@
             z-index: 1;
             position: relative;
         }
-        
+
         .SBarG form button {
             transition: all 0.3s ease-in-out;
             display: block;
@@ -379,15 +397,15 @@
             font-weight: bold;
             background: #57bd84 !important;
         }
-        
+
         .SBarG form input:not(:placeholder-shown) {
             width: calc(100% - 10vw);
         }
-        
+
         .SBarG form input:not(:placeholder-shown)+button {
             right: 0vw;
         }
-        
+
         .SBarG form label {
             position: fixed;
             clip: rect(1px, 1px, 1px, 1px);
@@ -397,13 +415,14 @@
             width: 1px;
             overflow: hidden;
         }
-        
+
         .SBarG form button img {
             width: 4vw;
             height: 4vw;
             fill: white;
             /* filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(220deg) brightness(108%) contrast(104%); */
         }
+
         /* .container .comp-grid:hover {
             width: 102%;
             height: 102%;
@@ -415,16 +434,26 @@
             align-items: center;
             justify-content: center;
         } */
-        
+
         .flex-con-set {
+            /* bottom: 10px;
+            left: 10px; */
+            height: 0vh;
+            width: 0vw;
+            bottom: 0px;
+            left: 0px;
+            transition: all 1s ease-in-out;
             display: flex;
+            overflow: hidden;
             flex-flow: row wrap;
             justify-content: space-evenly;
             padding: 0;
             margin: 0;
             list-style: none;
+            position: fixed;
+            background: rgb(46, 44, 44) !important;
         }
-        
+
         .flex-con-scrll {
             background: rgb(46, 44, 44);
             padding: 10px;
@@ -436,8 +465,9 @@
             font-weight: bold;
             font-size: 3em;
             text-align: center;
+            overflow: hidden;
         }
-        
+
         .flex-con-setset {
             background: rgb(46, 44, 44);
             padding: 10px;
@@ -448,25 +478,21 @@
             color: white;
             font-weight: bold;
             font-size: 3em;
-            overflow: scroll;
+            overflow: hidden;
         }
-        
+
         #sidebarset {
             display: block;
         }
-        
+
         #workspaceset {
             display: none;
         }
-        
+
         #contactset {
             display: none;
         }
-        
-        #setmain {
-            display: none;
-        }
-        
+
         .scrll-item {
             height: 40px;
             padding: 5px;
@@ -475,11 +501,11 @@
             text-align: left;
             font-family: 'Times New Roman', Times, serif;
         }
-        
+
         .formleb {
             font-size: 20px;
         }
-        
+
         input[type=text],
         select {
             width: 100%;
@@ -493,7 +519,7 @@
             border: 0px solid #ccc;
             font-size: 20px;
         }
-        
+
         input[type=submit] {
             width: 100%;
             background-color: #414941;
@@ -504,24 +530,59 @@
             border-radius: 4px;
             cursor: pointer;
         }
-        
+
         input[type=submit]:hover {
             background-color: #262b27;
         }
-        
+
         .dispset {
             height: 100%;
             width: 100%;
         }
-        
+
         .disphead {
-            height: 100%;
-            width: 100%;
+            height: auto;
+            width: auto;
         }
-        
+
         #displist {
-            height: 100%;
-            width: 100%;
+            height: auto;
+            width: auto;
+        }
+
+        .listadd {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+        }
+
+        .listaddtext {
+            position: left;
+        }
+
+        .listaddmark {
+            position: right;
+        }
+
+        .close-but {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+        }
+
+        .close-but img {
+            width: 4vw;
+        }
+
+        .sett-open {
+            /* height: 90vh !important;
+            width: 90vw !important; */
+            bottom: 10px;
+            left: 10px;
+            height: calc(100vh - 20px) !important;
+            width: calc(100vw - 20px) !important;
+            z-index: 20 !important;
+            display: flex;
         }
     </style>
 </head>
@@ -536,10 +597,7 @@
             </div>
         </div>
         <div class="comp-grid" id="sett">
-                <div class="hidOpen">
-                    <img class="ionIcon" data-color="#000000" src="icon/settings.svg" alt="">
-                    <h3>settings</h3>
-                </div>
+            <div id="setview">settings</div>
             <div class="flex-con-set" id="setmain">
                 <div class="flex-con-scrll">
                     <div class="scrll-item" id="sidebarclick">
@@ -563,9 +621,9 @@
 
                 </div>
                 <div class="flex-con-setset" id="sidebarset">
-                    <form id="myform">
+                    <form id="myform1" class="form-div">
                         <label for="fname" class="formleb">Add a Website to Side Bar</label>
-                        <input type="text" id="websitelink" name="website" placeholder="Website Link..">
+                        <input type="text" id="websitelink1" name="website" placeholder="Website Link..">
 
                         <input type="submit" value="Add Website" id="sidebtn">
                     </form>
@@ -586,21 +644,21 @@
                 </div>
 
                 <div class="flex-con-setset" id="workspaceset">
-                    <form action="/action_page.php" id="myform">
-                        <label for="fname" class="formleb">Add a Website to your workspace 1</label>
-                        <input type="text" id="websitelink" name="website" placeholder="Website Link..">
+                    <form id="myform2">
+                        <label for="fname" class="formleb">Add a Website to your workspace work</label>
+                        <input type="text" id="websitelink2" name="website" placeholder="Website Link..">
 
                         <input type="submit" value="Add Website" id="btn">
                     </form>
 
-                    <form action="/action_page.php" id="myform">
+                    <form id="myform">
                         <label for="fname" class="formleb">Add a Website to your workspace 2</label>
                         <input type="text" id="websitelink" name="website" placeholder="Website Link..">
 
                         <input type="submit" value="Add Website" id="btn">
                     </form>
 
-                    <form action="/action_page.php" id="myform">
+                    <form id="myform">
                         <label for="fname" class="formleb">Add a Website to your workspace 3</label>
                         <input type="text" id="websitelink" name="website" placeholder="Website Link..">
 
@@ -633,111 +691,127 @@
                     </form>
                 </div>
 
+                <div>
+                    <div class="close-but" id="close-fun">
+                        <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                    </div>
+                </div>
+
 
             </div>
-
-        </div>
-        <div class="comp-grid SBarG">
-            <!-- <form action="http://www.google.com/search" method="get">
+            <div class="container">
+                <div class="comp-grid TODO">TODO</div>
+                <div class="comp-grid QTG" id="QTG">
+                    <div>
+                        <h1 id="TGQuoation">"Do what ever you want,<br>Be Ready the consequences"</h1>
+                        <div id="Author">-RPKR Inc</div>
+                    </div>
+                </div>
+                <div class="comp-grid" id="WeaG">WeaG</div>
+                <div class="comp-grid SBarG">
+                    <!-- <form action="http://www.google.com/search" method="get">
                 <input type="text" name="q"/>
                 <input type="submit" value="search" />
             </form> -->
-            <form action="http://www.google.com/search" method="get" role="search" autocomplete="off">
-                <label for="search">Search for stuff</label>
-                <input id="search" type="text" name="q" placeholder="Search..." autofocus required />
-                <button type="submit"><img class="ionIcon" data-color="#ffffff" src="icon/logo-google.svg" alt=""></button>
-            </form>
-        </div>
-        <div class="comp-grid TimG">
-            <div class="Time-View">
-                <div id="clock"></div>
-                <div id="date"></div>
-            </div>
-        </div>
-        <div class="comp-grid CouDG">CouDG</div>
-        <div class="comp-grid Notifi">Notifi</div>
-        <div class="comp-grid SouScG">
-            <div class="parFlex">
-                <div class="right">
-                    <img id="playSoundScape" class="ionIcon" data-color="#000000" src="icon\\play-circle.svg" alt="">
+                    <form action="http://www.google.com/search" method="get" role="search" autocomplete="off">
+                        <label for="search">Search for stuff</label>
+                        <input id="search" type="text" name="q" placeholder="Search..." autofocus required />
+                        <button type="submit"><img class="ionIcon" data-color="#ffffff" src="icon/logo-google.svg"
+                                alt=""></button>
+                    </form>
                 </div>
-                <div class="left">
-                    <h3>Volume: <span id="volumeMeter">100</span></h3>
-                    <input id="volumeRanger" type="range" min="0" max="100" value="100" step="1" />
+                <div class="comp-grid TimG">
+                    <div class="Time-View">
+                        <div id="clock"></div>
+                        <div id="date"></div>
+                    </div>
                 </div>
-            </div>
-        </div>
+                <div class="comp-grid CouDG">CouDG</div>
+                <div class="comp-grid Notifi">Notifi</div>
+                <div class="comp-grid SouScG">
+                    <div class="parFlex">
+                        <div class="right">
+                            <img id="playSoundScape" class="ionIcon" data-color="#000000" src="icon\\play-circle.svg"
+                                alt="">
+                        </div>
+                        <div class="left">
+                            <h3>Volume: <span id="volumeMeter">100</span></h3>
+                            <input id="volumeRanger" type="range" min="0" max="100" value="100" step="1" />
+                        </div>
+                    </div>
+                </div>
 
-        <div class="comp-grid AuFoG">
-            <div class="parFlex">
-                <div class="right">
-                    <input id="AutoFocusRangerHour" type="number" min="0" max="10" value="0" step="1" />
-                    <input id="AutoFocusRangerMin" type="number" min="0" max="59" value="25" step="1" />
+                <div class="comp-grid AuFoG">
+                    <div class="parFlex">
+                        <div class="right">
+                            <input id="AutoFocusRangerHour" type="number" min="0" max="10" value="0" step="1" />
+                            <input id="AutoFocusRangerMin" type="number" min="0" max="59" value="25" step="1" />
+                        </div>
+                        <div class="left">
+                            <img id="autoFocusBut" class="ionIcon" data-color="#000000" src="icon/lock-closed.svg"
+                                alt="">
+                        </div>
+                    </div>
                 </div>
-                <div class="left">
-                    <img id="autoFocusBut" class="ionIcon" data-color="#000000" src="icon/lock-closed.svg" alt="">
+                <div class="comp-grid VCG">VCG</div>
+                <div class="comp-grid NewsG">NewsG</div>
+                <div class="comp-grid" id="Con1">
+                    <div class="workSpace-desi for-Cont" id="cont1">
+                        <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid" id="Con2">
+                    <div class="workSpace-desi for-Cont" id="cont2">
+                        <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                    </div>
+                </div>
+
+                <div class="comp-grid" id="Con3">
+                    <div class="workSpace-desi for-Cont" id="cont3">
+                        <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid T1Icon" id="T1Icon">
+                    <div class="workSpace-desi for-TopIcon" id="Top1">
+                        <img class="ionIcon" data-color="#000000" src="icon/logo-linkedin.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid T2Icon" id="T2Icon">
+                    <div class="workSpace-desi for-TopIcon" id="Top2">
+                        <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid T3Icon" id="T3Icon">
+                    <div class="workSpace-desi for-TopIcon" id="Top3">
+                        <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid T4Icon" id="T4Icon">
+                    <div class="workSpace-desi for-TopIcon" id="Top4">
+                        <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid" id="WS1">
+                    <div class="workSpace-desi for-WSTG" id="WS1TG">
+                        <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid" id="WS2">
+                    <div class="workSpace-desi for-WSTG" id="WS2TG">
+                        <img class="ionIcon" data-color="#000000" src="icon/logo-github.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid" id="WS3">
+                    <div class="workSpace-desi for-WSTG" id="WS3TG">
+                        <img class="ionIcon" data-color="#000000" src="icon/logo-figma.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid" id="WS4">
+                    <div class="workSpace-desi for-WSTG" id="WS4TG">
+                        <img class="ionIcon" data-color="#000000" src="icon/videocam.svg" alt="">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="comp-grid VCG">VCG</div>
-        <div class="comp-grid NewsG">NewsG</div>
-        <div class="comp-grid" id="Con1">
-            <div class="workSpace-desi for-Cont" id="cont1">
-                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid" id="Con2">
-            <div class="workSpace-desi for-Cont" id="cont2">
-                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-            </div>
-        </div>
-        
-        <div class="comp-grid" id="Con3">
-            <div class="workSpace-desi for-Cont" id="cont3">
-                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid T1Icon" id="T1Icon">
-            <div class="workSpace-desi for-TopIcon" id="Top1">
-                <img class="ionIcon" data-color="#000000" src="icon/logo-linkedin.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid T2Icon" id="T2Icon">
-            <div class="workSpace-desi for-TopIcon" id="Top2">
-                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid T3Icon" id="T3Icon">
-            <div class="workSpace-desi for-TopIcon" id="Top3">
-                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid T4Icon" id="T4Icon">
-            <div class="workSpace-desi for-TopIcon" id="Top4">
-                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid" id="WS1">
-            <div class="workSpace-desi for-WSTG" id="WS1TG">
-                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid" id="WS2">
-            <div class="workSpace-desi for-WSTG" id="WS2TG">
-                <img class="ionIcon" data-color="#000000" src="icon/logo-github.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid" id="WS3">
-            <div class="workSpace-desi for-WSTG" id="WS3TG">
-                <img class="ionIcon" data-color="#000000" src="icon/logo-figma.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid" id="WS4">
-            <div class="workSpace-desi for-WSTG" id="WS4TG">
-                <img class="ionIcon" data-color="#000000" src="icon/videocam.svg" alt="">
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>
