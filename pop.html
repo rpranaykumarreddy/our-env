@@ -93,6 +93,27 @@
         #sett {
             grid-area: SetGrid;
         }
+        #sett .ionIcon{
+            width: 4vw;
+            height: 4vw;
+        }
+        #sett .div-flex{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            font-weight: bold;height: inherit; }
+        .setOpen{
+            height:629px !important;
+            width: 1346px !important;;
+            z-index:20 !important;
+        }
+        .setOpen .hidOpen{
+            opacity: 0;
+        }
+        .setOpen #setmain{
+            display:flex;
+        }
         .SBarG {
             grid-area: SBarG;
         }
@@ -515,7 +536,10 @@
             </div>
         </div>
         <div class="comp-grid" id="sett">
-            <div id="setview">settings</div>
+                <div class="hidOpen">
+                    <img class="ionIcon" data-color="#000000" src="icon/settings.svg" alt="">
+                    <h3>settings</h3>
+                </div>
             <div class="flex-con-set" id="setmain">
                 <div class="flex-con-scrll">
                     <div class="scrll-item" id="sidebarclick">
@@ -613,7 +637,6 @@
             </div>
 
         </div>
-        <div class="comp-grid" id="WeaG">WeaG</div>
         <div class="comp-grid SBarG">
             <!-- <form action="http://www.google.com/search" method="get">
                 <input type="text" name="q"/>
