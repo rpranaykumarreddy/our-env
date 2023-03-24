@@ -401,12 +401,22 @@
         } */
         
         .flex-con-set {
+            /* bottom: 10px;
+            left: 10px; */
+            height: 0vh;
+            width: 0vw;
+            bottom: 0px;
+            left: 0px;
+            transition: all 1s ease-in-out;
             display: flex;
+            overflow: hidden;
             flex-flow: row wrap;
             justify-content: space-evenly;
             padding: 0;
             margin: 0;
             list-style: none;
+            position: fixed;
+            background: rgb(46, 44, 44) !important;
         }
         
         .flex-con-scrll {
@@ -420,6 +430,7 @@
             font-weight: bold;
             font-size: 3em;
             text-align: center;
+            overflow: hidden;
         }
         
         .flex-con-setset {
@@ -432,7 +443,7 @@
             color: white;
             font-weight: bold;
             font-size: 3em;
-            overflow: scroll;
+            overflow: hidden;
         }
         
         #sidebarset {
@@ -444,10 +455,6 @@
         }
         
         #contactset {
-            display: none;
-        }
-        
-        #setmain {
             display: none;
         }
         
@@ -499,18 +506,157 @@
         }
         
         .disphead {
-            height: 100%;
-            width: 100%;
+            height: auto;
+            width: auto;
         }
         
         #displist {
-            height: 100%;
-            width: 100%;
+            height: auto;
+            width: auto;
+        }
+        
+        .listadd {
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+        }
+        
+        .listaddtext {
+            position: left;
+        }
+        
+        .listaddmark {
+            position: right;
+        }
+        
+        .close-but {
+            position: absolute;
+            top: 1px;
+            right: 1px;
+        }
+        
+        .close-but img {
+            width: 4vw;
+        }
+        
+        .sett-open {
+            /* height: 90vh !important;
+            width: 90vw !important; */
+            bottom: 10px;
+            left: 10px;
+            height: calc(100vh - 20px) !important;
+            width: calc(100vw - 20px) !important;
+            z-index: 20 !important;
+            display: flex;
         }
     </style>
 </head>
 
 <body>
+    <div class="flex-con-set" id="setmain">
+        <div class="flex-con-scrll">
+            <div class="scrll-item" id="sidebarclick">
+                <select name="websiteset" id="websettng">
+                    <option value="SideBar">Side Bar</option>
+                    <option value="Work Space1">Work Space 1</option>
+                    <option value="Work Space2">Work Space 2</option>
+                    <option value="Work Space3">Work Space 3</option>
+                    <option value="Work Space4">Work Space 4</option>
+                  </select>
+            </div>
+            <div class="scrll-item" id="contactclick">
+                Contact
+            </div>
+            <div class="scrll-item">
+                Sound Scape
+            </div>
+            <div class="scrll-item">
+                Quote settings
+            </div>
+            <div class="scrll-item">
+                V card
+            </div>
+
+        </div>
+        <div class="flex-con-setset" id="sidebarset">
+            <form id="myform1" class="form-div">
+                <label for="fname" class="formleb">Add a Website to Side Bar</label>
+                <input type="text" id="websitelink1" name="website" placeholder="Website Link..">
+
+                <input type="submit" value="Add Website" id="sidebtn">
+            </form>
+
+            <div class="dispset">
+
+                <div class="disphead">
+                    List of Websites in Side Bar:
+                </div>
+
+                <div id="displist">
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <div class="flex-con-setset" id="workspaceset">
+            <form id="myform2">
+                <label for="fname" class="formleb">Add a Website to your workspace work</label>
+                <input type="text" id="websitelink2" name="website" placeholder="Website Link..">
+
+                <input type="submit" value="Add Website" id="btn">
+            </form>
+
+            <form id="myform">
+                <label for="fname" class="formleb">Add a Website to your workspace 2</label>
+                <input type="text" id="websitelink" name="website" placeholder="Website Link..">
+
+                <input type="submit" value="Add Website" id="btn">
+            </form>
+
+            <form id="myform">
+                <label for="fname" class="formleb">Add a Website to your workspace 3</label>
+                <input type="text" id="websitelink" name="website" placeholder="Website Link..">
+
+                <input type="submit" value="Add Website" id="btn">
+            </form>
+
+            <form action="/action_page.php" id="myform">
+                <label for="fname" class="formleb">Add a Website to your workspace 4</label>
+                <input type="text" id="websitelink" name="website" placeholder="Website Link..">
+
+                <input type="submit" value="Add Website" id="btn">
+            </form>
+        </div>
+
+        <div class="flex-con-setset" id="contactset">
+            <form action="/action_page.php" id="myform">
+                <label for="fname" class="formleb">List of website links</label>
+                <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                <label for="fname" class="formleb">List of website links</label>
+                <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                <label for="fname" class="formleb">List of website</label>
+                <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                <label for="fname" class="formleb">List of website links</label>
+                <input type="text" id="fname" name="firstname" placeholder="Your name..">
+
+                <input type="submit" value="Update" id="btn">
+            </form>
+        </div>
+
+        <div>
+            <div class="close-but" id="close-fun">
+                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+            </div>
+        </div>
+
+
+    </div>
     <div class="container">
         <div class="comp-grid TODO">TODO</div>
         <div class="comp-grid QTG" id="QTG">
@@ -519,106 +665,13 @@
                 <div id="Author">-RPKR Inc</div>
             </div>
         </div>
+
         <div class="comp-grid" id="sett">
-            <div id="setview">settings</div>
-            <div class="flex-con-set" id="setmain">
-                <div class="flex-con-scrll">
-                    <div class="scrll-item" id="sidebarclick">
-                        Side bar
-                    </div>
-                    <div class="scrll-item" id="workspaceclick">
-                        Work Spaces
-                    </div>
-                    <div class="scrll-item" id="contactclick">
-                        Contact
-                    </div>
-                    <div class="scrll-item">
-                        Sound Scape
-                    </div>
-                    <div class="scrll-item">
-                        Quote settings
-                    </div>
-                    <div class="scrll-item">
-                        V card
-                    </div>
-
-                </div>
-                <div class="flex-con-setset" id="sidebarset">
-                    <form id="myform">
-                        <label for="fname" class="formleb">Add a Website to Side Bar</label>
-                        <input type="text" id="websitelink" name="website" placeholder="Website Link..">
-
-                        <input type="submit" value="Add Website" id="sidebtn">
-                    </form>
-
-                    <div class="dispset">
-
-                        <div class="disphead">
-                            List of Websites in Side Bar:
-                        </div>
-
-                        <div id="displist">
-                        </div>
+            settings</div>
 
 
 
-                    </div>
 
-                </div>
-
-                <div class="flex-con-setset" id="workspaceset">
-                    <form action="/action_page.php" id="myform">
-                        <label for="fname" class="formleb">Add a Website to your workspace 1</label>
-                        <input type="text" id="websitelink" name="website" placeholder="Website Link..">
-
-                        <input type="submit" value="Add Website" id="btn">
-                    </form>
-
-                    <form action="/action_page.php" id="myform">
-                        <label for="fname" class="formleb">Add a Website to your workspace 2</label>
-                        <input type="text" id="websitelink" name="website" placeholder="Website Link..">
-
-                        <input type="submit" value="Add Website" id="btn">
-                    </form>
-
-                    <form action="/action_page.php" id="myform">
-                        <label for="fname" class="formleb">Add a Website to your workspace 3</label>
-                        <input type="text" id="websitelink" name="website" placeholder="Website Link..">
-
-                        <input type="submit" value="Add Website" id="btn">
-                    </form>
-
-                    <form action="/action_page.php" id="myform">
-                        <label for="fname" class="formleb">Add a Website to your workspace 4</label>
-                        <input type="text" id="websitelink" name="website" placeholder="Website Link..">
-
-                        <input type="submit" value="Add Website" id="btn">
-                    </form>
-                </div>
-
-                <div class="flex-con-setset" id="contactset">
-                    <form action="/action_page.php" id="myform">
-                        <label for="fname" class="formleb">List of website links</label>
-                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-                        <label for="fname" class="formleb">List of website links</label>
-                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-                        <label for="fname" class="formleb">List of website</label>
-                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-                        <label for="fname" class="formleb">List of website links</label>
-                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-                        <input type="submit" value="Update" id="btn">
-                    </form>
-                </div>
-
-
-            </div>
-
-        </div>
-        <div class="comp-grid" id="WeaG">WeaG</div>
         <div class="comp-grid SBarG">
             <!-- <form action="http://www.google.com/search" method="get">
                 <input type="text" name="q"/>

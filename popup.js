@@ -1,3 +1,6 @@
+var urlist = ["https://wethinc.in/blog", "https://www.geeksforgeeks.org", "https://youtube.com", "https://wethinc.in", "https://www.geeksforgeeks.org", "https://youtube.com"];
+
+
 var DataSet = null;
 chrome.runtime.onMessage.addListener(
     function(request, sender, sendResponse) {
@@ -249,12 +252,18 @@ function worksclick(type) {
 var setng = document.getElementById("sett");
 var setmain = document.getElementById("setmain");
 var setview = document.getElementById("setview");
+var setng = document.getElementById("sett");
+var setclose = document.getElementById("close-fun");
+
+setclose.addEventListener("click", settingsclose, false);
 setng.addEventListener("click", settingsbut, false);
 
 function settingsbut() {
-    setng.setAttribute("style", "height:629px;width:1346px;z-index:20;background: rgb(46, 44, 44);");
-    setmain.setAttribute("style", "display:flex;");
-    setview.setAttribute("style", "display:none;");
+    setmain.classList.add("sett-open");
+}
+
+function settingsclose() {
+    setmain.classList.remove("sett-open");
 }
 
 
@@ -289,4 +298,42 @@ function contactfun() {
     sidebarclk.setAttribute("style", "display:none;");
     workspaceclk.setAttribute("style", "display:none;");
     contactclk.setAttribute("style", "display:block;");
+}
+
+
+var inputVal = document.getElementById("myform1");
+var inputVals = document.getElementsByClassName("form-div");
+
+inputVals[0].addEventListener("submit", (evt) => {
+    evt.preventDefault();
+    addtoarray()
+}, false);
+var subvalue = document.getElementById("websitelink1");
+
+
+
+function addtoarray() {
+    let valuee = subvalue.value;
+    urlist.push(valuee);
+    addweblist(urlist.length - 1);
+}
+
+function addweblist(inp) {
+    var websites = document.getElementById("displist");
+    const listweb = document.createElement('div');
+    listweb.className = "listadd";
+    const listwebtext = document.createElement('div');
+    listwebtext.className = "listaddtext";
+    const listwebmark = document.createElement('div');
+    listwebmark.className = "listaddmark";
+    listwebtext.innerHTML = urlist[inp];
+    listwebmark.innerHTML = "remove";
+    websites.append(listweb);
+    listweb.append(listwebtext);
+    listweb.append(listwebmark);
+}
+
+
+for (i = 0; i < urlist.length; i++) {
+    addweblist(i);
 }
