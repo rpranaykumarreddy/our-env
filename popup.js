@@ -337,3 +337,11 @@ function addweblist(inp) {
 for (i = 0; i < urlist.length; i++) {
     addweblist(i);
 }
+
+/*Battery Level*/
+
+chrome.alarms.create(
+  "Battery",
+  {delayInMinutes:0}
+  ,()=>{console.log("alarm")}
+)

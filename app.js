@@ -46,13 +46,13 @@ function funin() {
 }
 
 function funout() {
-    custom_element.setAttribute("style", "left:-55px;")
+    custom_element.setAttribute("style", "left:-45px;")
 }
 
 function faviconURL(u) {
     const url = new URL(chrome.runtime.getURL("/_favicon/"));
     url.searchParams.set("pageUrl", u);
-    url.searchParams.set("size", "64");
+    url.searchParams.set("size", "32");
     return url.toString();
 }
 
@@ -66,8 +66,9 @@ function append(inp) {
     custom_element.append(alink);
     var elem1 = document.createElement("img");
     var urlfev = new URL(url[inp]);
-    //elem1.setAttribute("src", urlfev.origin + "/favicon.ico");
-    elem1.setAttribute("src", faviconURL(urlfev.origin));
+    elem1.setAttribute("src", "https://www.google.com/s2/favicons?domain=" + urlfev.host + "&sz=128");
+    // elem1.setAttribute("src", urlfev.origin + "/favicon.ico");
+    // elem1.setAttribute("src", faviconURL(urlfev.origin));
     elem1.className = "image";
     alink.append(elem1);
 }

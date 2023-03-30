@@ -549,6 +549,63 @@
             z-index: 20 !important;
             display: flex;
         }
+        /*Battery*/
+        .battery-main{
+            font-size: 1.5vh;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+            width: 28vw;
+            overflow: hidden;
+            padding: 2vh;
+        }
+        .bat-opts{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: fit-content;
+            width:100%;
+        }
+        .bat-opts .right{display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            height: 100%;
+            width:100%;
+            margin-bottom: 3vh;
+        }
+
+        .bat-opts .left{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+            height: 100%;
+            margin-bottom: 3vh;
+            width:100%;
+        }
+        .bat-opts .left div,.bat-opts .right div{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+            width:50%;
+        }
+
+        .bat-stats{
+            margin-left: 1vw;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: flex-start;
+            flex-direction: column;
+            height: 100%;
+            width:100%;
+        }
+
     </style>
 </head>
 
@@ -587,16 +644,11 @@
             </form>
 
             <div class="dispset">
-
                 <div class="disphead">
                     List of Websites in Side Bar:
                 </div>
-
                 <div id="displist">
                 </div>
-
-
-
             </div>
 
         </div>
@@ -715,7 +767,40 @@
             </div>
         </div>
         <div class="comp-grid VCG">VCG</div>
-        <div class="comp-grid NewsG">NewsG</div>
+        <div class="comp-grid NewsG">
+            <div class="battery-main">
+                <div class="bat-opts">
+                    <div class="right">
+                        <div>
+                            <h2>Low Level</h2>
+                            <input type="number" max="50" min="10" value="30" step="5" name="" id="">
+                        </div>
+                        <div>
+                            <h2>high Level</h2>
+                            <input type="number" max="90" min="50" value="80" step="5" name="" id="">
+                        </div>
+                    </div>
+                    <div class="left">
+                        <div>
+                            <h2>Charge Steps</h2>
+                            <input type="number" max="50" min="20" value="25" step="5" name="" id="">
+                        </div>
+                        <div>
+                            <h2><input type="checkbox" name="bat-alarm" id="bat-alarm">
+                                <label for="bat-alarm">Alarm</label>
+                            </h2>
+        
+                        </div>
+                    </div>
+                </div>
+                <div class="bat-stats">
+                    <h2>Battery Level: <span id="bat-level"></span></h2>
+                    <h2>Battery Status: <span id="bat-sat"></span></h2>
+                    <h2>Time for full charge: <span id="bat-full"></span></h2>
+                    <h2>Time for Discharge: <span id="bat-dis"></span></h2>
+                </div>
+            </div>
+        </div>
         <div class="comp-grid" id="Con1">
             <div class="workSpace-desi for-Cont" id="cont1">
                 <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
