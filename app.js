@@ -5,7 +5,11 @@ const site = window.location.hostname;
 // });
 
 //alert(site + "is opened");
-var url = ["https://wethinc.in/blog", "https://www.geeksforgeeks.org", "https://youtube.com", "https://wethinc.in", "https://www.geeksforgeeks.org", "https://youtube.com"];
+var url = null;
+chrome.storage.local.get(["DataSet"]).then((result) => {
+    url = result.DataSet.sidebar;
+    ini();
+});
 
 
 
@@ -15,30 +19,9 @@ custom_element.innerHTML = "";
 document.body.append(custom_element);
 
 
-
-const addbut = document.createElement('div');
-addbut.className = "addbut";
-addbut.innerHTML = "<h1>add</h1>";
-custom_element.append(addbut);
-
-addbut.addEventListener("click", addbutton, false);
-
 custom_element.addEventListener("mouseover", funin, false);
 custom_element.addEventListener("mouseout", funout, false);
 
-
-function addbutton() {
-    if (i < 10) {
-        url[i] = window.location.origin;
-        console.log(i);
-        append(i);
-        i = i + 1;
-    } else {
-        chrome.runtime.sendMessage({ 'message': 'notify', 'tit': "Side Bar Limit exceeded", 'msg': "Hey folk, you have exceeded the limit of Side bar icons(i.e. 10). Please remove the any app from the settings." }, function(response) {
-            console.log('response', response);
-        });
-    }
-}
 
 
 function funin() {
@@ -85,10 +68,12 @@ function click(inp) {
 }
 
 
-for (i = 0; i < url.length; i++) {
-    append(i);
-    console.log(i);
-    console.log(url[i]);
+function ini() {
+    for (i = 0; i < url.length; i++) {
+        append(i);
+        console.log(i);
+        console.log(url[i]);
+    }
 }
 
 

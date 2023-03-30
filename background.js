@@ -1,7 +1,12 @@
 chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
+    function(request, sender, sendResponse) {
         console.log('req', request.message) // not listened 
         switch (request.message) {
+            case "updateSettings":
+                sendResponse({ data: 'Success' });
+                SetDateset(request.data);
+                console.log("Updating setting", request.data);
+                break;
             case 'IAmReady':
                 sendResponse({ data: 'Success' });
                 console.log('req Replay', request.message);
@@ -68,10 +73,11 @@ function removeTab(id) {
     chrome.tabs.remove(id);
 }
 var focusSet = null;
+
 function StartFocus(time) {
     DataSet.autoFocus.timeTill = time;
     DataSet.autoFocus.active = true;
-    SetDateset();
+    SetDateset(DataSet);
     focusSet = setInterval(() => {
         getCurrentTab().then((tab) => {
             if (tab != undefined) {
@@ -89,6 +95,7 @@ function StartFocus(time) {
         });
     }, 1000);
 }
+
 function StopFocus() {
     clearInterval(focusSet);
     DataSet.autoFocus.timeTill = 100;
@@ -148,67 +155,68 @@ var Dummy = {
         "https://www.linkedin.com/in/rpranaykumarreddy/"
     ],
     workspaces: [{
-        name: "Mails",
-        icon: "icon/mail.svg",
-        urls: [
-            "https://mail.google.com/mail/u/0/#inbox",
-            "https://mail.google.com/mail/u/1/#inbox",
-            "https://mail.google.com/mail/u/2/#inbox",
-            "https://mail.google.com/mail/u/3/#inbox",
-            "https://mail.google.com/mail/u/4/#inbox",
-            "https://www.icloud.com/mail/",
-            "https://outlook.office365.com/mail/",
-            "https://www.linkedin.com/in/rpranaykumarreddy/",
-            "https://twitter.com/home",
-            "https://app.slack.com/client/T04FU1XRVJQ/C04FB1VJCUX"
-        ]
-    },
-    {
-        name: "Dev",
-        icon: "icon/logo-docker.svg",
-        urls: [
-            "https://www.theodinproject.com/paths/foundations/courses/foundations",
-            "https://fireship.io/courses/",
-            "https://beta.reactjs.org/learn",
-            "https://scrimba.com/learn/learnreact",
-            "https://www.youtube.com/c/WebDevSimplified/playlists",
-            "https://nodejs.org/en/docs/guides/",
-            "https://www.tutorialsteacher.com/nodejs",
-            "https://beta.reactjs.org/",
-            "https://create-react-app.dev/docs/getting-started"
-        ]
-    },
-    {
-        name: "Design",
-        icon: "icon/logo-figma.svg",
-        urls: [
-            "https://usepanda.com/?ref=producthunt",
-            "https://fontflipper.com/upload",
-            "https://undraw.co/illustrations",
-            "https://jitter.video/templates/",
-            "https://ionic.io/ionicons",
-            "https://designstripe.com/search/illustrations/startup"
-        ]
-    },
-    {
-        name: "Filmmaking",
-        icon: "icon/videocam.svg",
-        urls: ["https://www.indieshortsmag.com/",
-            "https://en.wikipedia.org/wiki/Hero%27s_journey",
-            "http://www.movieoutline.com/",
-            "https://gointothestory.blcklst.com/90-archive-links-f9c2db802548",
-            "https://www.youtube.com/user/filmriot/videos",
-            "https://www.youtube.com/user/FilmmakerIQcom/videos",
-            "https://www.hurlbutacademy.com/browse/",
-            "http://www.jamuura.com/blog/",
-            "https://nofilmschool.com/topics/directing",
-            "https://www.filmmaking.net/",
-            "https://filmora.wondershare.com/video-editor/best-free-video-editing-software-without-watermark.html",
-            "https://naalyrics.com/search/?q=sianikudu",
-            "https://www.telugulyrics.co.in/page/2/?s=krishna",
-            "http://telugu.surli.in/aaradugula-bullettu-lyrics-atthaarintiki-daaredi/"
-        ]
-    }],
+            name: "Mails",
+            icon: "icon/mail.svg",
+            urls: [
+                "https://mail.google.com/mail/u/0/#inbox",
+                "https://mail.google.com/mail/u/1/#inbox",
+                "https://mail.google.com/mail/u/2/#inbox",
+                "https://mail.google.com/mail/u/3/#inbox",
+                "https://mail.google.com/mail/u/4/#inbox",
+                "https://www.icloud.com/mail/",
+                "https://outlook.office365.com/mail/",
+                "https://www.linkedin.com/in/rpranaykumarreddy/",
+                "https://twitter.com/home",
+                "https://app.slack.com/client/T04FU1XRVJQ/C04FB1VJCUX"
+            ]
+        },
+        {
+            name: "Dev",
+            icon: "icon/logo-docker.svg",
+            urls: [
+                "https://www.theodinproject.com/paths/foundations/courses/foundations",
+                "https://fireship.io/courses/",
+                "https://beta.reactjs.org/learn",
+                "https://scrimba.com/learn/learnreact",
+                "https://www.youtube.com/c/WebDevSimplified/playlists",
+                "https://nodejs.org/en/docs/guides/",
+                "https://www.tutorialsteacher.com/nodejs",
+                "https://beta.reactjs.org/",
+                "https://create-react-app.dev/docs/getting-started"
+            ]
+        },
+        {
+            name: "Design",
+            icon: "icon/logo-figma.svg",
+            urls: [
+                "https://usepanda.com/?ref=producthunt",
+                "https://fontflipper.com/upload",
+                "https://undraw.co/illustrations",
+                "https://jitter.video/templates/",
+                "https://ionic.io/ionicons",
+                "https://designstripe.com/search/illustrations/startup"
+            ]
+        },
+        {
+            name: "Filmmaking",
+            icon: "icon/videocam.svg",
+            urls: ["https://www.indieshortsmag.com/",
+                "https://en.wikipedia.org/wiki/Hero%27s_journey",
+                "http://www.movieoutline.com/",
+                "https://gointothestory.blcklst.com/90-archive-links-f9c2db802548",
+                "https://www.youtube.com/user/filmriot/videos",
+                "https://www.youtube.com/user/FilmmakerIQcom/videos",
+                "https://www.hurlbutacademy.com/browse/",
+                "http://www.jamuura.com/blog/",
+                "https://nofilmschool.com/topics/directing",
+                "https://www.filmmaking.net/",
+                "https://filmora.wondershare.com/video-editor/best-free-video-editing-software-without-watermark.html",
+                "https://naalyrics.com/search/?q=sianikudu",
+                "https://www.telugulyrics.co.in/page/2/?s=krishna",
+                "http://telugu.surli.in/aaradugula-bullettu-lyrics-atthaarintiki-daaredi/"
+            ]
+        }
+    ],
     sound: {
         music: "soundScapes/Adventure.mp3",
         play: false,
@@ -232,14 +240,14 @@ var Dummy = {
         timeTill: 100,
     },
     contact: [{
-        name: "Pranay",
-        type: "icon/logo-whatsapp.svg",
-        link: "https://wa.me/917680904589"
-    },
-        {
-        name: "Varun",
+            name: "Pranay",
             type: "icon/logo-whatsapp.svg",
-        link: "https://wa.me/917806026905"
+            link: "https://wa.me/917680904589"
+        },
+        {
+            name: "Varun",
+            type: "icon/logo-whatsapp.svg",
+            link: "https://wa.me/917806026905"
         },
         {
             name: "GDSC",
@@ -262,9 +270,11 @@ chrome.storage.local.get(["DataSet"]).then((result) => {
         DataSet = result.DataSet;
     }
 });
-function SetDateset() {
-    chrome.storage.local.set({ "DataSet": DataSet }).then(() => {
-        console.log("DataSet is set to", DataSet);
+
+function SetDateset(data) {
+    chrome.storage.local.set({ "DataSet": data }).then(() => {
+        DataSet = data;
+        console.log("DataSet is set to", data);
         SendDataToNew();
     });
 }
@@ -278,6 +288,7 @@ chrome.runtime.onInstalled.addListener(() => {
     var child4 = chrome.contextMenus.create({ id: "contextwrk3", "title": "Workspace 3", "parentId": parent1 });
     var child5 = chrome.contextMenus.create({ id: "contextwrk4", "title": "Workspace 4", "parentId": parent1 });
 });
+
 function contextClick(info, tab) {
     console.log(info, tab);
     const { menuItemId } = info;
@@ -304,7 +315,7 @@ function contextClick(info, tab) {
             console.log(DataSet.workspaces[3].urls);
             break;
     }
-    SetDateset();
+    SetDateset(DataSet);
 }
 
 chrome.contextMenus.onClicked.addListener(contextClick);
@@ -326,15 +337,18 @@ function workSpacesOpen(type) {
         chrome.tabs.create({ url: DataSet.workspaces[type].urls[i], active: false, index: 50 });
     }
 }
+
 function contactOpen(type) {
     chrome.tabs.create({ url: DataSet.contact[type].link, active: false, index: 50 });
 }
+
 function TopIconOpen(type) {
     chrome.tabs.create({ url: DataSet.topApps[type].link, active: false, index: 1 });
 }
 /*Quotations data to load*/
 var Quotdata = null;
 StoreQuotation();
+
 function StoreQuotation() {
     fetch(chrome.runtime.getURL("filteredData.json"))
         .then(response => response.json())
@@ -362,12 +376,11 @@ function SendDataToNew() {
             DataSet.quote = q.Quote;
             DataSet.quoteAuthor = q.Author;
             DataSet.quoteLastUpdate = d.getTime();
-            SetDateset();
+            SetDateset(DataSet);
         } else {
-            chrome.runtime.sendMessage({ 'message': 'SendingDataSet', 'Dataset': DataSet }, function (response) {
+            chrome.runtime.sendMessage({ 'message': 'SendingDataSet', 'Dataset': DataSet }, function(response) {
                 //console.log('response', response);
             });
         }
     }
 }
-
