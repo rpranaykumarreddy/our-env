@@ -7,7 +7,7 @@ chrome.runtime.onMessage.addListener(
         //console.log(request, sender, sendResponse) // not listened 
         switch (request.message) {
             case 'SendingDataSet':
-                //console.log("Init Call Data", request);
+                console.log("Init Call Data", request);
                 DataSet = request.Dataset;
                 InitCall(request.Dataset);
                 sendResponse({ data: 'Thank you' });
@@ -78,6 +78,7 @@ function InitCall(data) {
     qtcl.addEventListener("click", () => { window.open(str, "_self") })
     qu.innerHTML = data.quote;
     au.innerHTML = data.quoteAuthor;
+    settingsUpdate(data);
 }
 
 /*Top-4 icons Click*/
@@ -248,11 +249,9 @@ function worksclick(type) {
     });
 }
 
-
+/*Settings */
 var setng = document.getElementById("sett");
 var setmain = document.getElementById("setmain");
-var setview = document.getElementById("setview");
-var setng = document.getElementById("sett");
 var setclose = document.getElementById("close-fun");
 
 setclose.addEventListener("click", settingsclose, false);
@@ -266,74 +265,266 @@ function settingsclose() {
     setmain.classList.remove("sett-open");
 }
 
-
-var sidebarclick = document.getElementById("sidebarclick");
-var workspaceclick = document.getElementById("workspaceclick");
-var contactclick = document.getElementById("contactclick");
-sidebarclick.addEventListener("click", sidebarfun, false);
-workspaceclick.addEventListener("click", workspacefun, false);
-contactclick.addEventListener("click", contactfun, false);
-
-
-
-
-var sidebarclk = document.getElementById("sidebarset");
-var workspaceclk = document.getElementById("workspaceset");
-var contactclk = document.getElementById("contactset");
-
-function sidebarfun() {
-    console.log(hello);
-    sidebarclk.setAttribute("style", "display:block;");
-    workspaceclk.setAttribute("style", "display:none;");
-    contactclk.setAttribute("style", "display:none;");
+displayget = document.getElementsByClassName("scrll-item");
+for (i = 0; i < displayget.length; i++) {
+    displayget[i].addEventListener("click", (evt) => { displayfun(evt.target.dataset.menuId) }, false);
 }
+displayfun(0);
 
-function workspacefun() {
-    sidebarclk.setAttribute("style", "display:none;");
-    workspaceclk.setAttribute("style", "display:block;");
-    contactclk.setAttribute("style", "display:none;");
-}
-
-function contactfun() {
-    sidebarclk.setAttribute("style", "display:none;");
-    workspaceclk.setAttribute("style", "display:none;");
-    contactclk.setAttribute("style", "display:block;");
+function displayfun(input) {
+    // console.log(evt.target.dataset.menuId);
+    //input = evt.target.dataset.menuId;
+    console.log(input, "display fun");
+    var displayquick = document.getElementsByClassName("flex-con-setset");
+    for (i = 0; i < displayquick.length; i++) {
+        displayquick[i].classList.add("dispnone");
+        displayquick[i].classList.remove("disblock");
+    }
+    displayquick[input].classList.remove("dispnone");
+    displayquick[input].classList.add("disblock");
+    // if (input == 0) {
+    //     displayquick[0].classList.add("dispnone");
+    // }
 }
 
 
-var inputVal = document.getElementById("myform1");
-var inputVals = document.getElementsByClassName("form-div");
+// var sidebarclk = document.getElementById("sidebarset");
+// var workspaceclk1 = document.getElementById("workspaceset1");
+// var workspaceclk2 = document.getElementById("workspaceset2");
+// var workspaceclk3 = document.getElementById("workspaceset3");
+// var workspaceclk4 = document.getElementById("workspaceset4");
 
-inputVals[0].addEventListener("submit", (evt) => {
-    evt.preventDefault();
-    addtoarray()
-}, false);
-var subvalue = document.getElementById("websitelink1");
+// var contactmain = document.getElementById("contactclick");
+// var blockmain = document.getElementById("blockclick");
+// var dropclk = document.getElementById("dropdownset");
+// var contclk = document.getElementById("contactset");
+// var blockclk = document.getElementById("blockedset");
+// contactmain.addEventListener("click", contactclk, false);
+// blockmain.addEventListener("click", blockedclk, false);
 
+// function contactclk() {
+//     dropclk.setAttribute("style", "display:none;");
+//     contclk.setAttribute("style", "display:block;");
+//     blockclk.setAttribute("style", "display:none;");
+// }
 
+// function blockedclk() {
+//     dropclk.setAttribute("style", "display:none;");
+//     contclk.setAttribute("style", "display:none;");
+//     blockclk.setAttribute("style", "display:block;");
+// }
 
-function addtoarray() {
-    let valuee = subvalue.value;
-    urlist.push(valuee);
-    addweblist(urlist.length - 1);
+function addwebsidelist(arr, inx, mainpos) {
+    var websites = document.getElementById("displist-" + inx);
+    console.log(arr);
+    websites.innerHTML = "";
+    for (inp = 0; inp < arr.length; inp++) {
+        var div = document.createElement('div');
+        div.setAttribute('class', 'listadd');
+        div.innerHTML = `
+        <div class="listaddtext">${arr[inp]}</div>
+        <div class="listsideaddmark" data-form-id = "${mainpos}" data-menu-id = "${inp }" data-text="${arr[inp]}">remove</div>`;
+        websites.appendChild(div);
+    }
+    console.log("1 calleddddd");
+    addremoveSidebar();
 }
 
-function addweblist(inp) {
-    var websites = document.getElementById("displist");
-    const listweb = document.createElement('div');
-    listweb.className = "listadd";
-    const listwebtext = document.createElement('div');
-    listwebtext.className = "listaddtext";
-    const listwebmark = document.createElement('div');
-    listwebmark.className = "listaddmark";
-    listwebtext.innerHTML = urlist[inp];
-    listwebmark.innerHTML = "remove";
-    websites.append(listweb);
-    listweb.append(listwebtext);
-    listweb.append(listwebmark);
+//addwebworkspacelist(data.workspaces[0].urls, 1, "workspaces", 0);
+function addwebworkspacelist(arr, inx, mainpos, arraypos) {
+    var websites = document.getElementById("displist-" + inx);
+    console.log(arr);
+    websites.innerHTML = "";
+    for (inp = 0; inp < arr.length; inp++) {
+        var div = document.createElement('div');
+        div.setAttribute('class', 'listadd');
+        div.innerHTML = `
+        <div class="listaddtext">${arr[inp]}</div>
+        <div class="listworkaddmark" data-form-id = "${mainpos}" data-menu-id = "${inp }" data-text="${arr[inp]}" data-link-id="${arraypos}">remove</div>`;
+        websites.appendChild(div);
+    }
+    addremoveworkspace();
+}
+
+function addremoveworkspace() {
+    var cla = document.getElementsByClassName("listworkaddmark");
+    console.log(cla[0]);
+    console.log("2 remove workspace called");
+    for (inp = 0; inp < cla.length; inp++) {
+        console.log("for loop remove");
+        cla[inp].addEventListener("click", (evt) => {
+            removeworkspace(evt.target.dataset.formId, evt.target.dataset.menuId, evt.target.dataset.text, evt.target.dataset.linkId)
+        }, false);
+    }
+}
+
+function addremoveSidebar() {
+    var cla1 = document.getElementsByClassName("listsideaddmark");
+    console.log(cla1[0]);
+    console.log("2 remove sidebar calleddddd");
+    for (inp = 0; inp < cla1.length; inp++) {
+        console.log("for loop remove");
+        cla1[inp].addEventListener("click", (evt) => {
+            removesidebar(evt.target.dataset.formId, evt.target.dataset.menuId, evt.target.dataset.text)
+        }, false);
+    }
+}
+
+function removeworkspace(arrname, arrindex, text, arrlink) {
+    console.log(arrname, arrindex, text, arrlink);
+    console.log("3 remove workspace added");
+    console.log(DataSet[arrname][arrlink].urls[arrindex], text);
+    if (text == DataSet[arrname][arrlink].urls[arrindex]) {
+        DataSet[arrname][arrlink].urls.splice(arrindex, 1);
+    }
+    settingsUpdate(DataSet);
+    SetDateset(DataSet);
+}
+
+function removesidebar(arrname, arrindex, text) {
+    console.log(arrname);
+    console.log("3 remove Sidebar added");
+    //if (text == DataSet[arrname][arrindex]) { DataSet[arrname].splice(arrindex, 1); }
+    if (arrname == "autoFocus.block") {
+        if (text == DataSet.autoFocus.block[arrindex]) { DataSet.autoFocus.block.splice(arrindex, 1); }
+    } else {
+        if (text == DataSet[arrname][arrindex]) { DataSet[arrname].splice(arrindex, 1); }
+    }
+    settingsUpdate(DataSet);
+    SetDateset(DataSet);
+}
+
+function settingsUpdate(data) {
+    console.log("settings update called");
+    addwebsidelist(data.sidebar, 0, "sidebar");
+    addwebworkspacelist(data.workspaces[0].urls, 1, "workspaces", 0);
+    addwebworkspacelist(data.workspaces[1].urls, 2, "workspaces", 1);
+    addwebworkspacelist(data.workspaces[2].urls, 3, "workspaces", 2);
+    addwebworkspacelist(data.workspaces[3].urls, 4, "workspaces", 3);
+    addwebsidelist(data.autoFocus.block, 5, "autoFocus.block");
 }
 
 
-for (i = 0; i < urlist.length; i++) {
-    addweblist(i);
+var buttonsideclick = document.getElementById("sidebutton");
+buttonsideclick.addEventListener("click", (evt) => { updateEndForm(evt.target.dataset.inputId) }, false);
+
+var blockclick = document.getElementById("blockbutton");
+blockclick.addEventListener("click", (evt) => { updateEndForm(evt.target.dataset.inputId) }, false);
+
+var buttonworkclick = document.getElementById("workbutton-0");
+buttonworkclick.addEventListener("click", (evt) => { updateworkEndForm(evt.target.dataset.inputId) }, false);
+
+var buttonworkclick = document.getElementById("workbutton-1");
+buttonworkclick.addEventListener("click", (evt) => { updateworkEndForm(evt.target.dataset.inputId) }, false);
+
+var buttonworkclick = document.getElementById("workbutton-2");
+buttonworkclick.addEventListener("click", (evt) => { updateworkEndForm(evt.target.dataset.inputId) }, false);
+
+var buttonworkclick = document.getElementById("workbutton-3");
+buttonworkclick.addEventListener("click", (evt) => { updateworkEndForm(evt.target.dataset.inputId) }, false);
+
+
+// for (i = 0; i < 4; i++) {
+//     var buttonworkclick = document.getElementById("workbutton-" + i);
+//     buttonworkclick.addEventListener("click", (evt) => { updateworkEndForm(evt.target.dataset.inputId) }, false);
+// }
+
+function updateEndForm(evt) {
+    console.log(evt)
+    console.log("called data update");
+    input = document.getElementById(evt);
+    invalue = input.value;
+    indir = input.getAttribute("data-form-link");
+    if (indir == "autoFocus.block") {
+        leng = DataSet.autoFocus.block.length;
+        DataSet.autoFocus.block[leng] = invalue;
+    } else {
+        leng = DataSet[indir].length;
+        DataSet[indir][leng] = invalue;
+    }
+    settingsUpdate(DataSet);
+    SetDateset(DataSet);
+}
+
+function updateworkEndForm(evt) {
+    console.log(evt);
+    console.log("called data update");
+    input = document.getElementById(evt);
+    invalue = input.value;
+    indir = input.getAttribute("data-form-link");
+    console.log(DataSet.workspaces[indir].urls);
+    leng = DataSet.workspaces[indir].urls.length;
+    console.log(DataSet[indir]);
+    DataSet.workspaces[indir].urls[leng] = invalue;
+    settingsUpdate(DataSet);
+    SetDateset(DataSet);
+}
+
+function SetDateset(data) {
+    chrome.runtime.sendMessage({ 'message': 'updateSettings', 'data': data }, function(response) {
+        console.log('Set Data response', response);
+    });
+}
+
+function listQ() {
+    console.log("SoundScape Called");
+    DataSet.sound.music = "soundScapes\Jungle Rain.mp3";
+    console.log(DataSet.sound.music);
+    SetDateset(DataSet);
+}
+document.getElementById("soundsettng").addEventListener("change", listQ);
+
+function listcontact() {
+    console.log("contact change Called");
+    var elem = document.getElementById("contactsite1");
+    console.log(contactdrop.selectedIndex);
+    if (contactdrop.selectedIndex == 0) {
+        elem.setAttribute("placeholder", "Enter Phone Number");
+    } else if (contactdrop.selectedIndex == 1) {
+        elem.setAttribute("placeholder", "Enter Mail");
+    }
+} {
+    /* <select name="consiteset" data-form-id="0" class="ContactType" id="contactsettng1">
+    <option value="1">Whatsapp Chat</option>
+    <option value="2">Mail to </option>
+    </select>
+    <input type="text" data-form-id="0" class="contactInput" name="Contact" placeholder="Website Link.."> */
+}
+
+// contform = document.getElementById("contactsite");
+// contform.addEventListener("change", (evt) => { contac
+contactDrop = document.getElementsByClassName("ContactType");
+contactInput = document.getElementsByClassName("contactInput");
+for (i = 0; i < contactDrop.length; i++) {
+    contactDrop[i].addEventListener("change", (evt) => { contactfun(evt.target.dataset.formId) }, false);
+    contactInput[i].addEventListener("change", (evt) => { contactfun(evt.target.dataset.formId) }, false);
+}
+
+function contactfun(evt) {
+
+    console.log("contact fun called", evt, contactDrop[evt].selectedIndex, contactInput[evt].value);
+    if (contactDrop[evt].selectedIndex == 0) {
+        contactInput[evt].setAttribute("placeholder", "Enter Phone Number with country code");
+    } else if (contactDrop[evt].selectedIndex == 1) {
+        contactInput[evt].setAttribute("placeholder", "Enter Mail");
+    }
+    if (contactDrop[evt].selectedIndex == 0) {
+        DataSet.contact[evt].link = "https://wa.me/" + contactInput[evt].value;
+    } else if (contactDrop[evt].selectedIndex == 1) {
+        DataSet.contact[evt].link = "https://mailto:" + contactInput[evt].value;
+    }
+    console.log(DataSet.contact[evt].link);
+    SetDateset(DataSet);
+}
+
+
+iconform = document.getElementById("top4");
+iconform.addEventListener("change", (evt) => { topfun(evt.target.dataset.formId) }, false);
+
+function topfun(evt) {
+    console.log(evt);
+    console.log(DataSet.topApps[evt].link);
+    DataSet.topApps[evt].link = iconform.value;
+    console.log(DataSet.topApps[evt].link);
+    SetDateset(DataSet);
 }

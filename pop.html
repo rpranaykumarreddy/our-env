@@ -417,6 +417,7 @@
             list-style: none;
             position: fixed;
             background: rgb(46, 44, 44) !important;
+            z-index: 20;
         }
         
         .flex-con-scrll {
@@ -443,10 +444,9 @@
             color: white;
             font-weight: bold;
             font-size: 3em;
-            overflow: hidden;
+            overflow: auto;
         }
-        
-        #sidebarset {
+        /* #sidebarset {
             display: block;
         }
         
@@ -457,13 +457,14 @@
         #contactset {
             display: none;
         }
+         */
         
         .scrll-item {
             height: 40px;
-            padding: 5px;
-            width: 180px;
+            width: 170px;
             font-size: 20px;
-            text-align: left;
+            margin: 5px;
+            text-align: center;
             font-family: 'Times New Roman', Times, serif;
         }
         
@@ -474,15 +475,156 @@
         input[type=text],
         select {
             width: 100%;
-            padding: 12px 20px;
-            margin: 8px 0;
             display: block;
-            height: 30px;
+            text-align: center;
+            height: 100%;
             color: #f3f3f3;
             background-color: #313131;
-            padding: 12px;
             border: 0px solid #ccc;
             font-size: 20px;
+        }
+        
+        #consettng {
+            width: 200px;
+            display: block;
+            text-align: center;
+            height: 100%;
+            color: #f3f3f3;
+            background-color: #313131;
+            border: 0px solid #ccc;
+            font-size: 20px;
+        }
+        
+        #contactsettng1 {
+            width: 200px;
+            display: block;
+            text-align: center;
+            height: 100%;
+            color: #f3f3f3;
+            background-color: #313131;
+            border: 0px solid #ccc;
+            font-size: 20px;
+        }
+        
+        #contactsettng2 {
+            width: 200px;
+            display: block;
+            text-align: center;
+            height: 100%;
+            color: #f3f3f3;
+            background-color: #313131;
+            border: 0px solid #ccc;
+            font-size: 20px;
+        }
+        
+        #contactsettng3 {
+            width: 200px;
+            display: block;
+            text-align: center;
+            height: 100%;
+            color: #f3f3f3;
+            background-color: #313131;
+            border: 0px solid #ccc;
+            font-size: 20px;
+        }
+        
+        #soundsettng {
+            width: 200px;
+            display: block;
+            text-align: center;
+            height: 100%;
+            color: #f3f3f3;
+            background-color: #313131;
+            border: 0px solid #ccc;
+            font-size: 20px;
+        }
+        
+        #consite1 {
+            width: 500px;
+            display: block;
+            text-align: center;
+            height: 100%;
+            color: #f3f3f3;
+            background-color: #313131;
+            border: 0px solid #ccc;
+            font-size: 20px;
+        }
+        
+        #contactsite {
+            width: 500px;
+            display: block;
+            text-align: center;
+            height: 100%;
+            color: #f3f3f3;
+            background-color: #313131;
+            border: 0px solid #ccc;
+            font-size: 20px;
+        }
+        
+        #top4 {
+            width: 40%;
+            margin: 20px;
+            display: block;
+            text-align: center;
+            height: 100%;
+            color: #f3f3f3;
+            background-color: #313131;
+            border: 0px solid #ccc;
+            font-size: 20px;
+        }
+        
+        input[type=submit],
+        #conbtn {
+            width: 200px;
+            background-color: #414941;
+            color: white;
+            height: 100%;
+            margin: 0px !important;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .contflex {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 10px;
+            height: 40px;
+            flex-wrap: wrap;
+        }
+        
+        #websitelink1 {
+            width: 77%;
+            display: block;
+            text-align: center;
+            height: 100%;
+            color: #f3f3f3;
+            background-color: #313131;
+            border: 0px solid #ccc;
+            font-size: 20px;
+        }
+        
+        input[type=submit],
+        #sidebtn {
+            width: 20%;
+            background-color: #414941;
+            color: white;
+            height: 100%;
+            margin: 0px !important;
+            text-align: center;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .websiteflex {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            margin: 10px;
+            height: 40px;
         }
         
         input[type=submit] {
@@ -501,7 +643,7 @@
         }
         
         .dispset {
-            height: 100%;
+            height: fit-content;
             width: 100%;
         }
         
@@ -525,6 +667,14 @@
             position: left;
         }
         
+        .listsideaddmark {
+            position: right;
+        }
+        
+        .listworkaddmark {
+            position: right;
+        }
+        
         .listaddmark {
             position: right;
         }
@@ -545,9 +695,18 @@
             bottom: 10px;
             left: 10px;
             height: calc(100vh - 20px) !important;
+            border-radius: 10px;
             width: calc(100vw - 20px) !important;
             z-index: 20 !important;
             display: flex;
+        }
+        
+        .dispnone {
+            display: none !important;
+        }
+        
+        .disblock {
+            display: block !important;
         }
     </style>
 </head>
@@ -555,41 +714,224 @@
 <body>
     <div class="flex-con-set" id="setmain">
         <div class="flex-con-scrll">
-            <div class="scrll-item" id="sidebarclick">
-                <select name="websiteset" id="websettng">
-                    <option value="SideBar">Side Bar</option>
-                    <option value="Work Space1">Work Space 1</option>
-                    <option value="Work Space2">Work Space 2</option>
-                    <option value="Work Space3">Work Space 3</option>
-                    <option value="Work Space4">Work Space 4</option>
-                  </select>
+            <div class="scrll-item" data-menu-id="0" id="quickclick">
+                Quick Access
             </div>
-            <div class="scrll-item" id="contactclick">
-                Contact
+            <div class="scrll-item" data-menu-id="1" id="contactclick">
+                Settings
             </div>
-            <div class="scrll-item">
-                Sound Scape
+            <div class="scrll-item" data-menu-id="2" id="blockclick">
+                Website Block
             </div>
-            <div class="scrll-item">
-                Quote settings
+            <div class="scrll-item" data-menu-id="3" id="sidebarclick">
+                V Card
             </div>
-            <div class="scrll-item">
-                V card
+        </div>
+        <div id="dropdownset">
+
+            <div class="flex-con-setset" id="sidebarset">
+                <form id="myform1" class="form-div-side">
+                    <label for="fname" class="formleb">Add a Website to Side Bar</label>
+
+                    <div class="websiteflex">
+                        <input type="text" data-form-link="sidebar" id="SideBarInput" name="website" placeholder="Website Link..">
+                        <input type="button" data-input-id="SideBarInput" value="Add Website" class="sub-form-div-side" id="sidebutton">
+                    </div>
+                </form>
+                <div class="dispset">
+
+                    <div class="disphead">
+                        List of Websites in Side Bar:
+                    </div>
+
+                    <div id="displist-0">
+                    </div>
+                </div>
+
+
+                <form id="myform1" class="form-div-side">
+                    <label for="fname" class="formleb">Add a Website to workSpace 1</label>
+                    <div class="websiteflex">
+                        <input type="text" data-form-link="0" id="work1Input" name="website" placeholder="Website Link..">
+                        <input type="button" data-input-id="work1Input" value="Add Website" class="sub-form-div-side" id="workbutton-0">
+                    </div>
+                </form>
+
+                <div class="dispset">
+
+                    <div class="disphead">
+                        List of Websites in workSpace 1:
+                    </div>
+
+                    <div id="displist-1">
+                    </div>
+                </div>
+
+
+                <form id="myform1" class="form-div-side">
+                    <label for="fname" class="formleb">Add a Website to workSpace 2</label>
+                    <div class="websiteflex">
+                        <input type="text" data-form-link="1" id="work2Input" name="website" placeholder="Website Link..">
+                        <input type="button" data-input-id="work2Input" value="Add Website" class="sub-form-div-side" id="workbutton-1">
+                    </div>
+                </form>
+
+                <div class="dispset">
+
+                    <div class="disphead">
+                        List of Websites in workSpace 2:
+                    </div>
+
+                    <div id="displist-2">
+                    </div>
+
+
+
+                </div>
+
+
+                <form id="myform1" class="form-div-side">
+                    <label for="fname" class="formleb">Add a Website to workSpace 3</label>
+                    <div class="websiteflex">
+                        <input type="text" data-form-link="2" id="work3Input" name="website" placeholder="Website Link..">
+                        <input type="button" data-input-id="work3Input" value="Add Website" class="sub-form-div-side" id="workbutton-2">
+                    </div>
+                </form>
+
+                <div class="dispset">
+
+                    <div class="disphead">
+                        List of Websites in workSpace 3:
+                    </div>
+
+                    <div id="displist-3">
+                    </div>
+                </div>
+
+
+                <form id="myform1" class="form-div-side">
+                    <label for="fname" class="formleb">Add a Website to workSpace 4</label>
+                    <div class="websiteflex">
+                        <input type="text" data-form-link="3" id="work4Input" name="website" placeholder="Website Link..">
+                        <input type="button" data-input-id="work4Input" value="Add Website" class="sub-form-div-side" id="workbutton-3">
+                    </div>
+                </form>
+
+                <div class="dispset">
+
+                    <div class="disphead">
+                        List of Websites in workSpace 4:
+                    </div>
+
+                    <div id="displist-4">
+                    </div>
+
+
+
+                </div>
             </div>
+        </div>
+
+        <div class="flex-con-setset" id="contactset">
+            <form id="myform1" class="form-div">
+                <label for="fname" class="formleb">Contact Settings</label>
+
+                <div class="contflex">
+                    <select name="consiteset" data-form-id="0" class="ContactType" id="contactsettng1">
+                        <option value="1">Whatsapp Chat</option>
+                        <option value="2">Mail to </option>
+                      </select>
+
+                    <input type="text" data-form-id="0" class="contactInput" id="consite1" name="Contact" placeholder="">
+
+                </div>
+
+                <div class="contflex">
+                    <select name="consiteset" data-form-id="1" class="ContactType" id="contactsettng2">
+                        <option value="1">Whatsapp Chat</option>
+                        <option value="2">Mail to </option>
+                      </select>
+
+                    <input type="text" data-form-id="1" class="contactInput" id="consite1" name="Contact" placeholder="">
+
+                </div>
+
+                <div class="contflex">
+                    <select name="consiteset" data-form-id="2" class="ContactType" id="contactsettng3">
+                        <option value="1">Whatsapp Chat</option>
+                        <option value="2">Mail to </option>
+                      </select>
+
+                    <input type="text" data-form-id="2" class="contactInput" id="consite1" name="Contact" placeholder="">
+
+                </div>
+
+
+
+
+            </form>
+
+            <form id="myform1" class="form-div">
+                <label for="fname" class="formleb">Sound Scape Settings</label>
+
+                <div class="contflex">
+                    <select name="consiteset" id="soundsettng">
+                        <option value="1">Whatsapp Chat</option>
+                        <option value="2">Whatsapp Call</option>
+                        <option value="3">Mail to</option>
+                      </select>
+                </div>
+
+            </form>
+
+            <form id="myform1" class="form-div">
+                <label for="fname" class="formleb">Top 4 Settings</label>
+
+                <div class="contflex">
+                    <input type="text" id="top4" data-form-id="0" name="top1icon" placeholder="Website Link..">
+                    <input type="text" id="top4" data-form-id="1" name="top2icon" placeholder="Website Link..">
+                    <input type="text" id="top4" data-form-id="2" name="top3icon" placeholder="Website Link..">
+                    <input type="text" id="top4" data-form-id="3" name="top4icon" placeholder="Website Link..">
+                </div>
+
+            </form>
 
         </div>
-        <div class="flex-con-setset" id="sidebarset">
-            <form id="myform1" class="form-div">
-                <label for="fname" class="formleb">Add a Website to Side Bar</label>
-                <input type="text" id="websitelink1" name="website" placeholder="Website Link..">
 
-                <input type="submit" value="Add Website" id="sidebtn">
+        <div class="flex-con-setset" id="blockedset">
+            <form id="myform1" class="form-div">
+                <label for="fname" class="formleb">Blocked Websites</label>
+                <div class="websiteflex">
+
+                    <input type="text" data-form-link="autoFocus.block" id="blockInput" name="website" placeholder="Website Link..">
+                    <input type="button" data-input-id="blockInput" value="Add Website" class="sub-form-div-side" id="blockbutton">
+
+                </div>
             </form>
 
             <div class="dispset">
 
                 <div class="disphead">
-                    List of Websites in Side Bar:
+                    List of Blocked Websites:
+                </div>
+
+                <div id="displist-5">
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <div class="flex-con-setset" id="blockedset">
+            <form id="myform1" class="form-div">
+                <label for="fname" class="formleb">V Card</label>
+            </form>
+
+            <div class="dispset">
+
+                <div class="disphead">
+                    List of Blocked Websites:
                 </div>
 
                 <div id="displist">
@@ -598,60 +940,15 @@
 
 
             </div>
-
         </div>
 
-        <div class="flex-con-setset" id="workspaceset">
-            <form id="myform2">
-                <label for="fname" class="formleb">Add a Website to your workspace work</label>
-                <input type="text" id="websitelink2" name="website" placeholder="Website Link..">
 
-                <input type="submit" value="Add Website" id="btn">
-            </form>
 
-            <form id="myform">
-                <label for="fname" class="formleb">Add a Website to your workspace 2</label>
-                <input type="text" id="websitelink" name="website" placeholder="Website Link..">
 
-                <input type="submit" value="Add Website" id="btn">
-            </form>
-
-            <form id="myform">
-                <label for="fname" class="formleb">Add a Website to your workspace 3</label>
-                <input type="text" id="websitelink" name="website" placeholder="Website Link..">
-
-                <input type="submit" value="Add Website" id="btn">
-            </form>
-
-            <form action="/action_page.php" id="myform">
-                <label for="fname" class="formleb">Add a Website to your workspace 4</label>
-                <input type="text" id="websitelink" name="website" placeholder="Website Link..">
-
-                <input type="submit" value="Add Website" id="btn">
-            </form>
-        </div>
-
-        <div class="flex-con-setset" id="contactset">
-            <form action="/action_page.php" id="myform">
-                <label for="fname" class="formleb">List of website links</label>
-                <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-                <label for="fname" class="formleb">List of website links</label>
-                <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-                <label for="fname" class="formleb">List of website</label>
-                <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-                <label for="fname" class="formleb">List of website links</label>
-                <input type="text" id="fname" name="firstname" placeholder="Your name..">
-
-                <input type="submit" value="Update" id="btn">
-            </form>
-        </div>
 
         <div>
             <div class="close-but" id="close-fun">
-                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                <img class="ionIcon" data-color="#ffffff" src="icon/close-circle.svg" alt="">
             </div>
         </div>
 
@@ -667,7 +964,11 @@
         </div>
 
         <div class="comp-grid" id="sett">
-            settings</div>
+            <div class="workSpace-desi">
+                <img class="ionIcon" data-color="#000000" src="icon/settings.svg" alt="">
+                <bold>Settings</bold>
+            </div>
+        </div>
 
 
 
