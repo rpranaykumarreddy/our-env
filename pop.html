@@ -418,6 +418,7 @@
             overflow: hidden;
             flex-flow: row wrap;
             justify-content: space-evenly;
+            align-items: center;
             padding: 0;
             margin: 0;
             list-style: none;
@@ -430,8 +431,7 @@
             background: rgb(46, 44, 44);
             padding: 10px;
             margin: 5px;
-            width: 200px;
-            height: 600px;
+            width: 20vw;
             margin-top: 10px;
             color: white;
             font-weight: bold;
@@ -444,8 +444,8 @@
             background: rgb(46, 44, 44);
             padding: 10px;
             margin: 5px;
-            width: 1000px;
-            height: 600px;
+            width: 76vw;
+            height: 95vh;
             margin-top: 10px;
             color: white;
             font-weight: bold;
@@ -688,8 +688,8 @@
 
         .close-but {
             position: absolute;
-            top: 1px;
-            right: 1px;
+            top: 10px;
+            right: 40px;
         }
 
         .close-but img {
@@ -776,6 +776,42 @@
 
         .disblock {
             display: block !important;
+        }
+
+        .count-opt {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .count-disp {
+            width: 18vw;
+            height: inherit;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        .cou-fle {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        #count-day,
+        #count-hour,
+        #count-mins {
+            font-size: 5vh;
+            font-weight: bold;
+        }
+
+        #count-text-day,
+        #count-text-hour,
+        #count-text-mins {
+            font-size: 2vh;
         }
     </style>
 </head>
@@ -901,12 +937,8 @@
                     <div class="disphead">
                         List of Websites in workSpace 4:
                     </div>
-
                     <div id="displist-4">
                     </div>
-
-
-
                 </div>
             </div>
         </div>
@@ -945,12 +977,7 @@
 
                     <input type="text" data-form-id="2" class="contactInput" id="consite1" name="Contact"
                         placeholder="">
-
                 </div>
-
-
-
-
             </form>
 
             <form id="myform1" class="form-div">
@@ -1030,8 +1057,6 @@
                 <img class="ionIcon" data-color="#ffffff" src="icon/close-circle.svg" alt="">
             </div>
         </div>
-
-
     </div>
     <div class="container">
         <div class="comp-grid TODO">TODO</div>
@@ -1048,10 +1073,6 @@
                 <bold>Settings</bold>
             </div>
         </div>
-
-
-
-
         <div class="comp-grid SBarG">
             <!-- <form action="http://www.google.com/search" method="get">
                 <input type="text" name="q"/>
@@ -1070,7 +1091,29 @@
                 <div id="date"></div>
             </div>
         </div>
-        <div class="comp-grid CouDG">CouDG</div>
+        <div class="comp-grid CouDG">
+            <div class="count-opt dispnone">
+                <input type="datetime-local" id="meeting-time" name="meeting-time" value="2024-06-12T19:30"
+                    min="2020-06-07T00:00" max="">
+                <br>
+                <input type="button" value="Submit">
+            </div>
+            <div class="count-disp">
+                <div class="day cou-fle">
+                    <div id="count-day">
+                        1000</div>
+                    <div id="count-text-day">Day</div>
+                </div>
+                <div class="hour cou-fle">
+                    <div id="count-hour">30</div>
+                    <div id="count-text-hour">Hour</div>
+                </div>
+                <div class="mins cou-fle">
+                    <div id="count-mins">30</div>
+                    <div id="count-text-mins">Mins</div>
+                </div>
+            </div>
+        </div>
         <div class="comp-grid Notifi">Notifi</div>
         <div class="comp-grid SouScG">
             <div class="parFlex">
@@ -1087,8 +1130,8 @@
         <div class="comp-grid AuFoG">
             <div class="parFlex">
                 <div class="right">
-                    <input id="AutoFocusRangerHour" type="number" min="0" max="10" value="0" step="1" />
-                    <input id="AutoFocusRangerMin" type="number" min="0" max="59" value="25" step="1" />
+                    <h3>No of Pomo</h3>
+                    <input id="AutoFocusRanger" type="number" min="1" max="8" value="2" step="1" />
                 </div>
                 <div class="left">
                     <img id="autoFocusBut" class="ionIcon" data-color="#000000" src="icon/lock-closed.svg" alt="">
@@ -1102,27 +1145,27 @@
                     <div class="right">
                         <div>
                             <h2>Low Level</h2>
-                            <input type="number" max="50" min="10" value="30" step="5" name="" id="">
+                            <input type="number" max="50" min="10" value="30" step="5" class="bat-Inp" name="bat-low-level" id="bat-low-level">
                         </div>
                         <div>
                             <h2>high Level</h2>
-                            <input type="number" max="90" min="50" value="80" step="5" name="" id="">
+                            <input type="number" max="90" min="50" value="80" step="5" class="bat-Inp" name="bat-high-level" id="bat-high-level">
                         </div>
                     </div>
                     <div class="left">
                         <div>
                             <h2>Charge Steps</h2>
-                            <input type="number" max="50" min="20" value="25" step="5" name="" id="">
+                            <input type="number" max="50" min="20" value="25" step="5" class="bat-Inp" name="bat-step" id="bat-step">
                         </div>
                         <div>
-                            <h2><input type="checkbox" name="bat-alarm" id="bat-alarm">
+                            <h2><input type="checkbox" class="bat-Inp" name="bat-alarm" id="bat-alarm">
                                 <label for="bat-alarm">Alarm</label>
                             </h2>
 
                         </div>
                     </div>
                 </div>
-                <div class="bat-stats">
+                <div class="bat-stats" id="bat-stats">
                     <h2>Battery Level: <span id="bat-level"></span></h2>
                     <h2>Battery Status: <span id="bat-sat"></span></h2>
                     <h2>Time for full charge: <span id="bat-full"></span></h2>

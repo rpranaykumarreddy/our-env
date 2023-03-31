@@ -28,6 +28,7 @@ chrome.runtime.onMessage.addListener(
                 sendResponse({ data: 'Success' });
                 break;
             case 'notify':
+                sendResponse({ data: 'Success' });
                 notify(request.tit, request.msg);
                 break;
             case 'StartPlay':
@@ -86,8 +87,8 @@ function StartFocus(time) {
                 //console.log(testUrl.host);
                 for (var hosti = 0; hosti < DataSet.autoFocus.block.length; hosti++) {
                     //console.log("Enter tab:", DataSet.autoFocus.block[hosti], testUrl.host);
-                    if (testUrl.host == DataSet.autoFocus.block[hosti]) {
-                        console.log("Removed tab:", testUrl.host);
+                    if (testUrl.hostname == DataSet.autoFocus.block[hosti]) {
+                        console.log("Removed tab:", testUrl.hostname);
                         removeTab(tab.id);
                     }
                 }
@@ -144,7 +145,7 @@ var Dummy = {
     search: "http://www.google.com/search",
     quote: "",
     quoteAuthor: "",
-    quoteCat: ["Life", "Positive", "Happiness", "Education"],
+    quoteCat: ["Life", "Positive", "Education"],
     quoteLastUpdate: 100,
     sidebar: [
         "https://wethinc.in",
@@ -154,6 +155,12 @@ var Dummy = {
         "https://discord.com/channels/783758394166345779/790483500264456192",
         "https://www.linkedin.com/in/rpranaykumarreddy/"
     ],
+    battery:{
+        lowLevel:30,
+        highLevel:80,
+        step:25,
+        boolAlarm:false
+    },
     workspaces: [{
             name: "Mails",
             icon: "icon/mail.svg",
@@ -228,11 +235,7 @@ var Dummy = {
         { link: "https://www.linkedin.com/in/rpranaykumarreddy/", name: "Linkedin", icon: "icon/logo-linkedin.svg" }
     ],
     countDown: {
-        date: 30,
-        month: 3,
-        year: 2023,
-        hour: 23,
-        minute: 50
+        date: null
     },
     autoFocus: {
         active: false,

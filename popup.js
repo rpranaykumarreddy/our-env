@@ -42,8 +42,39 @@ function changeVolume() {
 }
 
 function InitCall(data) {
+    var work = document.getElementsByClassName("for-WSTG");
+    for (var worki = 0; worki < 4; worki++) {
+        work[worki].innerHTML = '<img class="ionIcon" data-color="#000000" src="' + data.workspaces[worki].icon + '" alt="">';
+        work[worki].innerHTML += "<h3>" + data.workspaces[worki].name + "</h3>";
+    }
+    var cont = document.getElementsByClassName("for-Cont");
+    for (var conti = 0; conti < 3; conti++) {
+        cont[conti].innerHTML = '<img class="ionIcon" data-color="#000000" src="' + data.contact[conti].type + '" alt="">';
+        cont[conti].innerHTML += "<h3>" + data.contact[conti].name + "</h3>";
+    }
+    var TopIcon = document.getElementsByClassName("for-TopIcon");
+    for (var Topi = 0; Topi < 4; Topi++) {
+        TopIcon[Topi].innerHTML = '<img class="ionIcon" data-color="#000000" src="' + data.topApps[Topi].icon + '" alt="">';
+        TopIcon[Topi].innerHTML += "<h3>" + data.topApps[Topi].name + "</h3>";
+    }
     console.log("Dataset:", data);
-    var volumeMeter = document.getElementById("volumeMeter");
+    var qtcl = document.getElementById("QTG");
+    var qu = document.getElementById("TGQuoation");
+    var au = document.getElementById("Author");
+    var str = "https://www.google.com/search?q=explain \"" + data.quote + "\" by " + data.quoteAuthor;
+    qtcl.addEventListener("click", () => { window.open(str, "_self") })
+    qu.innerHTML = data.quote;
+    au.innerHTML = data.quoteAuthor;
+    var inpBatLow=document.getElementById("bat-low-level"),
+    inpBatHigh=document.getElementById("bat-high-level")
+    inpStep = document.getElementById("bat-step");
+    inpAlarm = document.getElementById("bat-alarm");
+    inpBatLow.value=data.battery.lowLevel;
+    inpBatHigh.value=data.battery.highLevel;
+    inpStep.value=data.battery.step;
+    inpAlarm.checked=data.battery.boolAlarm;
+    changeBattery();
+ var volumeMeter = document.getElementById("volumeMeter");
     var volumeRanger = document.getElementById("volumeRanger");
     volumeMeter.innerHTML = (data.sound.volume * 100);
     volumeRanger.value = (data.sound.volume * 100);
@@ -53,31 +84,6 @@ function InitCall(data) {
     } else {
         playSoundScape.src = "icon\\play-circle.svg";
     }
-    var work = document.getElementsByClassName("for-WSTG");
-    for (var worki = 0; worki < 4; worki++) {
-        work[worki].innerHTML = '<img class="ionIcon" data-color="#000000" src="' + data.workspaces[worki].icon + '" alt="">';
-        work[worki].innerHTML += "<h3>" + data.workspaces[worki].name + "</h3>";
-    }
-
-    var cont = document.getElementsByClassName("for-Cont");
-    for (var conti = 0; conti < 3; conti++) {
-        cont[conti].innerHTML = '<img class="ionIcon" data-color="#000000" src="' + data.contact[conti].type + '" alt="">';
-        cont[conti].innerHTML += "<h3>" + data.contact[conti].name + "</h3>";
-    }
-
-    var TopIcon = document.getElementsByClassName("for-TopIcon");
-    for (var Topi = 0; Topi < 4; Topi++) {
-        TopIcon[Topi].innerHTML = '<img class="ionIcon" data-color="#000000" src="' + data.topApps[Topi].icon + '" alt="">';
-        TopIcon[Topi].innerHTML += "<h3>" + data.topApps[Topi].name + "</h3>";
-    }
-
-    var qtcl = document.getElementById("QTG");
-    var qu = document.getElementById("TGQuoation");
-    var au = document.getElementById("Author");
-    var str = "https://www.google.com/search?q=explain \"" + data.quote + "\" by " + data.quoteAuthor;
-    qtcl.addEventListener("click", () => { window.open(str, "_self") })
-    qu.innerHTML = data.quote;
-    au.innerHTML = data.quoteAuthor;
     settingsUpdate(data);
 }
 
@@ -170,8 +176,7 @@ function checkTime(i) {
 }
 /*Auto Focus*/
 var playAutoFocus = document.getElementById("autoFocusBut");
-var AutoFocusRangerHour = document.getElementById("AutoFocusRangerHour");
-var AutoFocusRangerMin = document.getElementById("AutoFocusRangerMin");
+var AutoFocusRangerMin = document.getElementById("AutoFocusRanger");
 var boolFocus = false;
 playAutoFocus.addEventListener("click", () => {
     console.log("clicked on open button");
@@ -286,33 +291,6 @@ function displayfun(input) {
     //     displayquick[0].classList.add("dispnone");
     // }
 }
-
-
-// var sidebarclk = document.getElementById("sidebarset");
-// var workspaceclk1 = document.getElementById("workspaceset1");
-// var workspaceclk2 = document.getElementById("workspaceset2");
-// var workspaceclk3 = document.getElementById("workspaceset3");
-// var workspaceclk4 = document.getElementById("workspaceset4");
-
-// var contactmain = document.getElementById("contactclick");
-// var blockmain = document.getElementById("blockclick");
-// var dropclk = document.getElementById("dropdownset");
-// var contclk = document.getElementById("contactset");
-// var blockclk = document.getElementById("blockedset");
-// contactmain.addEventListener("click", contactclk, false);
-// blockmain.addEventListener("click", blockedclk, false);
-
-// function contactclk() {
-//     dropclk.setAttribute("style", "display:none;");
-//     contclk.setAttribute("style", "display:block;");
-//     blockclk.setAttribute("style", "display:none;");
-// }
-
-// function blockedclk() {
-//     dropclk.setAttribute("style", "display:none;");
-//     contclk.setAttribute("style", "display:none;");
-//     blockclk.setAttribute("style", "display:block;");
-// }
 
 function addwebsidelist(arr, inx, mainpos) {
     var websites = document.getElementById("displist-" + inx);
@@ -437,7 +415,8 @@ function updateEndForm(evt) {
     indir = input.getAttribute("data-form-link");
     if (indir == "autoFocus.block") {
         leng = DataSet.autoFocus.block.length;
-        DataSet.autoFocus.block[leng] = invalue;
+        let testUrl = new URL(invalue);
+        DataSet.autoFocus.block[leng] = testUrl.hostname;
     } else {
         leng = DataSet[indir].length;
         DataSet[indir][leng] = invalue;
@@ -531,8 +510,96 @@ function topfun(evt) {
 
 /*Battery Level*/
 
-chrome.alarms.create(
-  "Battery",
-  {delayInMinutes:0}
-  ,()=>{console.log("alarm")}
-)
+
+
+navigator.getBattery().then((battery) => {
+    console.log("success battery");
+    var batterySupported = document.getElementById("bat-stats"),
+    batteryLevel = document.getElementById("bat-level"),
+    chargingStatus = document.getElementById("bat-sat"),
+    batteryCharged = document.getElementById("bat-full"),
+    batteryDischarged = document.getElementById("bat-dis"),
+    inpBatLow=document.getElementById("bat-low-level"),
+    inpBatHigh=document.getElementById("bat-high-level")
+    inpStep=document.getElementById("bat-step"), prevBatLevel=0,boolPlug=true;
+  function updateAllBatteryInfo() {
+    updateChargeInfo();
+    updateLevelInfo();
+    updateChargingInfo();
+    updateDischargingInfo();
+  }
+
+  updateAllBatteryInfo();
+
+  battery.addEventListener("chargingchange", () => {
+    updateChargeInfo();
+  });
+  function updateChargeInfo() {
+    chargingStatus.innerHTML=battery.charging ? "Yes" : "No";
+    prevBatLevel=battery.level;
+    console.log(`Battery charging? ${battery.charging ? "Yes" : "No"}`);
+  }
+
+  battery.addEventListener("levelchange", () => {
+    updateLevelInfo();
+  });
+  function updateLevelInfo() {
+    batteryLevel.innerHTML=Math.floor(battery.level * 100)+"%";
+    console.log(`Battery level: ${battery.level * 100}%`);
+    let bat=battery.level;
+    console.log(inpBatHigh);
+    if(bat>(inpBatHigh.value)){
+ chrome.runtime.sendMessage({ 'message': 'notify' ,'tit':'Battery is high','msg':'Remove the charging for a better battery'}, function(response) {
+        console.log('response', response);
+    });}else if((bat<inpBatLow.value) && boolPlug){
+ chrome.runtime.sendMessage({ 'message': 'notify' ,'tit':'Plug in the charger','msg':'Plug in the charger for a better battery'}, function(response) {
+        console.log('response', response);
+        boolPlug=false;
+        setTimeout(()=>{
+            boolPlug=true;
+        },900*1000);
+    });}else if(bat-prevBatLevel>inpStep.value ){
+ chrome.runtime.sendMessage({ 'message': 'notify' ,'tit':'No single charge','msg':'Remove the charging for a better battery'}, function(response) {
+        console.log('response', response);
+    });}
+  }
+
+  battery.addEventListener("chargingtimechange", () => {
+    updateChargingInfo();
+  });
+  function updateChargingInfo() {
+     batteryCharged.innerHTML=Math.floor((battery.chargingTime)/60) +" mins";
+    console.log(`Battery charging time: ${battery.chargingTime} seconds`);
+  }
+
+  battery.addEventListener("dischargingtimechange", () => {
+    updateDischargingInfo();
+  });
+  function updateDischargingInfo() {
+    batteryDischarged.innerHTML=Math.floor(battery.dischargingTime/60) +" mins";
+    console.log(`Battery discharging time: ${battery.dischargingTime} seconds`);
+  }
+});
+    
+function changeBattery() {
+    var cla1 = document.getElementsByClassName("bat-Inp");
+    console.log("added battery change");
+    for (inp = 0; inp < cla1.length; inp++) {
+        cla1[inp].addEventListener("change", (evt) => {
+            updateBatteryBG(evt);
+        }, false);
+    }
+}
+
+function updateBatteryBG(evt) {
+    console.log("call battery change",evt);
+    var inpBatLow=document.getElementById("bat-low-level"),
+    inpBatHigh=document.getElementById("bat-high-level")
+    inpStep = document.getElementById("bat-step");
+    inpAlarm = document.getElementById("bat-alarm");
+    DataSet.battery.lowLevel=inpBatLow.value;
+    DataSet.battery.highLevel=inpBatHigh.value;
+    DataSet.battery.step=inpStep.value;
+    DataSet.battery.boolAlarm=inpAlarm.checked;
+    SetDateset(DataSet);
+}
