@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Env</title>
-    <script src="popup.js" defer></script>
     <style>
         body {
             background-clip: border-box;
@@ -109,6 +108,8 @@
 
         .Notifi {
             grid-area: Notifi;
+            font-weight: bolder;
+            font-size: 20px;
         }
 
         .SouScG {
@@ -568,9 +569,20 @@
             font-size: 20px;
         }
 
-        #top4 {
+        .top4 {
             width: 40%;
             margin: 20px;
+            display: block;
+            text-align: center;
+            height: 100%;
+            color: #f3f3f3;
+            background-color: #313131;
+            border: 0px solid #ccc;
+            font-size: 20px;
+        }
+
+        .profile {
+            width: 30% !important;
             display: block;
             text-align: center;
             height: 100%;
@@ -596,7 +608,7 @@
         .contflex {
             display: flex;
             flex-direction: row;
-            justify-content: space-between;
+            justify-content: space-evenly;
             margin: 10px;
             height: 40px;
             flex-wrap: wrap;
@@ -632,6 +644,20 @@
             justify-content: space-between;
             margin: 10px;
             height: 40px;
+        }
+
+        .form-main {
+            width: 50% !important;
+            height: 100% !important;
+        }
+
+        .button-main {
+            width: 20% !important;
+            height: 100% !important;
+        }
+
+        .iconselect {
+            width: 20% !important;
         }
 
         input[type=submit] {
@@ -709,6 +735,7 @@
         }
 
         /*Battery*/
+
         .battery-main {
             font-size: 1.5vh;
             display: flex;
@@ -813,6 +840,158 @@
         #count-text-mins {
             font-size: 2vh;
         }
+
+        /* Remove margins and padding from the list */
+
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Style the list items */
+
+        ul li {
+            cursor: pointer;
+            position: relative;
+            padding: 0px 8px 0px 40px;
+            list-style-type: none;
+            background: #eee;
+            font-size: 18px;
+            transition: 0.2s;
+            /* make the list items unselectable */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Set all odd list items to a different color (zebra-stripes) */
+
+        ul li:nth-child(odd) {
+            background: #f9f9f9;
+        }
+
+        /* Darker background-color on hover */
+
+        ul li:hover {
+            background: #ddd;
+        }
+
+        /* When clicked on, add a background color and strike out text */
+
+        ul li.checked {
+            background: #888;
+            color: #fff;
+            text-decoration: line-through;
+        }
+
+        /* Add a "checked" mark when clicked on */
+
+        ul li.checked::before {
+            content: '';
+            position: absolute;
+            border-color: #fff;
+            border-style: solid;
+            border-width: 0 2px 2px 0;
+            top: 5px;
+            left: 16px;
+            transform: rotate(45deg);
+            height: 8px;
+            width: 4px;
+        }
+
+        /* Style the close button */
+
+        .close {
+            position: absolute;
+            right: 0;
+            top: 0;
+            padding: 0px 16px 0px 16px;
+        }
+
+        .close:hover {
+            background-color: #f44336;
+            color: white;
+        }
+
+        /* Style the header */
+
+        .todomain {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .header {
+            background-color: transparent;
+            top: 0px;
+            padding: 10px;
+            color: rgb(10, 8, 8);
+            text-align: center;
+        }
+
+        /* Clear floats after the header */
+
+        .header:after {
+            top: 0px;
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* Style the input */
+
+        .checkbox {
+            width: 2%;
+        }
+
+        input[type=text],
+        .todoform {
+            width: 100%;
+            display: block;
+            text-align: center;
+            height: 80%;
+            color: #f3f3f3;
+            background-color: #313131;
+            border: 0px solid #ccc;
+            font-size: 20px;
+        }
+
+        input {
+            margin: 0;
+            border: none;
+            border-radius: 0;
+            width: 75%;
+            padding: 10px;
+            float: left;
+            font-size: 16px;
+        }
+
+        /* Style the "Add" button */
+
+        .addBtn {
+            padding: 10px;
+            width: 20%;
+            background: #d9d9d9;
+            color: #555;
+            float: left;
+            text-align: center;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s;
+            border-radius: 0;
+        }
+
+        .addBtn:hover {
+            background-color: #bbb;
+        }
+
+        .form-control {
+            font-size: 20px !important;
+            display: grid !important;
+            grid-template-columns: 30px auto;
+            gap: 5px;
+        }
     </style>
 </head>
 
@@ -840,9 +1019,9 @@
 
                     <div class="websiteflex">
                         <input type="text" data-form-link="sidebar" id="SideBarInput" name="website"
-                            placeholder="Website Link..">
-                        <input type="button" data-input-id="SideBarInput" value="Add Website" class="sub-form-div-side"
-                            id="sidebutton">
+                            placeholder="Website Link.." class="form-main">
+                        <input type="button" data-input-id="SideBarInput" value="Add Website"
+                            class="button-main sub-form-div-side" id="sidebutton">
                     </div>
                 </form>
                 <div class="dispset">
@@ -860,9 +1039,11 @@
                     <label for="fname" class="formleb">Add a Website to workSpace 1</label>
                     <div class="websiteflex">
                         <input type="text" data-form-link="0" id="work1Input" name="website"
-                            placeholder="Website Link..">
-                        <input type="button" data-input-id="work1Input" value="Add Website" class="sub-form-div-side"
-                            id="workbutton-0">
+                            placeholder="Website Link.." class="form-main">
+                        <input type="button" data-input-id="work1Input" value="Add Website"
+                            class="button-main sub-form-div-side" id="workbutton-0">
+
+                        <select name="iconSidebar" class="iconselect" data-form-id="0"></select>
                     </div>
                 </form>
 
@@ -881,9 +1062,10 @@
                     <label for="fname" class="formleb">Add a Website to workSpace 2</label>
                     <div class="websiteflex">
                         <input type="text" data-form-link="1" id="work2Input" name="website"
-                            placeholder="Website Link..">
-                        <input type="button" data-input-id="work2Input" value="Add Website" class="sub-form-div-side"
-                            id="workbutton-1">
+                            placeholder="Website Link.." class="form-main">
+                        <input type="button" data-input-id="work2Input" value="Add Website"
+                            class="button-main sub-form-div-side" id="workbutton-1">
+                        <select name="iconSidebar" class="iconselect" data-form-id="1"></select>
                     </div>
                 </form>
 
@@ -905,9 +1087,10 @@
                     <label for="fname" class="formleb">Add a Website to workSpace 3</label>
                     <div class="websiteflex">
                         <input type="text" data-form-link="2" id="work3Input" name="website"
-                            placeholder="Website Link..">
-                        <input type="button" data-input-id="work3Input" value="Add Website" class="sub-form-div-side"
-                            id="workbutton-2">
+                            placeholder="Website Link.." class="form-main">
+                        <input type="button" data-input-id="work3Input" value="Add Website"
+                            class="button-main sub-form-div-side" id="workbutton-2">
+                        <select name="iconSidebar" class="iconselect" data-form-id="2"></select>
                     </div>
                 </form>
 
@@ -926,9 +1109,10 @@
                     <label for="fname" class="formleb">Add a Website to workSpace 4</label>
                     <div class="websiteflex">
                         <input type="text" data-form-link="3" id="work4Input" name="website"
-                            placeholder="Website Link..">
-                        <input type="button" data-input-id="work4Input" value="Add Website" class="sub-form-div-side"
-                            id="workbutton-3">
+                            placeholder="Website Link.." class="form-main">
+                        <input type="button" data-input-id="work4Input" value="Add Website"
+                            class="button-main sub-form-div-side" id="workbutton-3">
+                        <select name="iconSidebar" class="iconselect" data-form-id=></select>
                     </div>
                 </form>
 
@@ -944,6 +1128,65 @@
         </div>
 
         <div class="flex-con-setset" id="contactset">
+            <form id="myform1" class="form-div">
+                <label for="fname" class="formleb">General Settings</label>
+
+                <div class="contflex">
+                    <input type="text" class="profile" data-form-id="0" name="firstname" placeholder="">
+                    <input type="text" class="profile" data-form-id="1" name="lastname" placeholder="Website Link..">
+                    <input type="text" class="profile" data-form-id="2" name="nickname" placeholder="Website Link..">
+                </div>
+                <div class="contflex">
+                    <select name="consiteset" class="searchType" id="contactsettng1">
+                        <option value="0" id="searchselect" disabled></option>
+                        <option value="1">Whatsapp Chat</option>
+                        <option value="2">Mail to </option>
+                    </select>
+                </div>
+
+
+            </form>
+            <form id="myform1" class="form-div">
+                <label for="fname" class="formleb">Quote</label>
+                <div class="contflex">
+                    <label class="form-control">
+                        <input type="checkbox" name="checkbox" class="checkbox1" data-form-id="0" />
+                        Life
+                    </label>
+                    <label class="form-control">
+                        <input type="checkbox" name="checkbox" class="checkbox1" data-form-id="1" />
+                        Positive
+                    </label>
+                    <label class="form-control">
+                        <input type="checkbox" name="checkbox" class="checkbox1" data-form-id="2" />
+                        Happiness
+                    </label>
+                    <label class="form-control">
+                        <input type="checkbox" name="checkbox" class="checkbox1" data-form-id="3" />
+                        Education
+                    </label>
+
+                    <label class="form-control">
+                        <input type="checkbox" name="checkbox-checked" class="checkbox1" data-form-id="4" />
+                        Funny
+                    </label>
+                    <label class="form-control">
+                        <input type="checkbox" name="checkbox-checked" class="checkbox1" data-form-id="5" />
+                        Love
+                    </label>
+                    <label class="form-control">
+                        <input type="checkbox" name="checkbox-checked" class="checkbox1" data-form-id="6" />
+                        Arts
+                    </label>
+                    <label class="form-control">
+                        <input type="checkbox" name="checkbox-checked" class="checkbox1" data-form-id="7" />
+                        Other
+                    </label>
+
+                </div>
+
+
+            </form>
             <form id="myform1" class="form-div">
                 <label for="fname" class="formleb">Contact Settings</label>
 
@@ -977,6 +1220,7 @@
 
                     <input type="text" data-form-id="2" class="contactInput" id="consite1" name="Contact"
                         placeholder="">
+
                 </div>
             </form>
 
@@ -985,9 +1229,17 @@
 
                 <div class="contflex">
                     <select name="consiteset" id="soundsettng">
-                        <option value="1">Whatsapp Chat</option>
-                        <option value="2">Whatsapp Call</option>
-                        <option value="3">Mail to</option>
+                        <option value="1" id="sounddisable" disabled></option>
+                        <option value="1">Adventure</option>
+                        <option value="2">Calming Raindrops</option>
+                        <option value="3">Deep Ambience</option>
+                        <option value="4">Downpours</option>
+                        <option value="5">Jungle Rain</option>
+                        <option value="6">Like The Flowing River</option>
+                        <option value="7">Morning Birds Singing</option>
+                        <option value="8">Ocean Waves On The Beach</option>
+                        <option value="9">Distant Thunder sounds</option>
+                        <option value="10">Water Dripping in a Cave</option>
                     </select>
                 </div>
 
@@ -997,10 +1249,10 @@
                 <label for="fname" class="formleb">Top 4 Settings</label>
 
                 <div class="contflex">
-                    <input type="text" id="top4" data-form-id="0" name="top1icon" placeholder="Website Link..">
-                    <input type="text" id="top4" data-form-id="1" name="top2icon" placeholder="Website Link..">
-                    <input type="text" id="top4" data-form-id="2" name="top3icon" placeholder="Website Link..">
-                    <input type="text" id="top4" data-form-id="3" name="top4icon" placeholder="Website Link..">
+                    <input type="text" class="top4" data-form-id="0" name="top1icon" placeholder="Top 1 Icon">
+                    <input type="text" class="top4" data-form-id="1" name="top2icon" placeholder="Top 2 Icon">
+                    <input type="text" class="top4" data-form-id="2" name="top3icon" placeholder="Top 3 Icon">
+                    <input type="text" class="top4" data-form-id="3" name="top4icon" placeholder="Top 4 Icon">
                 </div>
 
             </form>
@@ -1059,174 +1311,208 @@
         </div>
     </div>
     <div class="container">
-        <div class="comp-grid TODO">TODO</div>
-        <div class="comp-grid QTG" id="QTG">
-            <div>
-                <h1 id="TGQuoation">"Do what ever you want,<br>Be Ready the consequences"</h1>
-                <div id="Author">-RPKR Inc</div>
-            </div>
-        </div>
+        <div class="comp-grid TODO">
+            <div class="todomain">
+                <div id="myDIV" class="header">
+                    <h2 style="margin:5px">My To Do List</h2>
+                    <input type="text" id="myInput" placeholder="Title..." class="todoform">
+                    <!-- <span onclick="newElement()" class="addBtn">Add</span> -->
+                </div>
 
-        <div class="comp-grid" id="sett">
-            <div class="workSpace-desi">
-                <img class="ionIcon" data-color="#000000" src="icon/settings.svg" alt="">
-                <bold>Settings</bold>
+                <ul id="myUL">
+
             </div>
-        </div>
-        <div class="comp-grid SBarG">
-            <!-- <form action="http://www.google.com/search" method="get">
+            <div class="container">
+                <div class="comp-grid TODO">
+                    <div class="todomain">
+                        <div id="myDIV" class="header">
+                            <h2 style="margin:5px">My To Do List</h2>
+                            <input type="text" id="myInput" placeholder="Title..." class="todoform">
+                            <!-- <span onclick="newElement()" class="addBtn">Add</span> -->
+                        </div>
+
+                        <ul id="myUL">
+
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="comp-grid QTG" id="QTG">
+                    <div>
+                        <h1 id="TGQuoation">"Do what ever you want,<br>Be Ready the consequences"</h1>
+                        <div id="Author">-RPKR Inc</div>
+                    </div>
+                </div>
+
+                <div class="comp-grid" id="sett">
+                    <div class="workSpace-desi">
+                        <img class="ionIcon" data-color="#000000" src="icon/settings.svg" alt="">
+                        <bold>Settings</bold>
+                    </div>
+                </div>
+                <div class="comp-grid SBarG">
+                    <!-- <form action="http://www.google.com/search" method="get">
                 <input type="text" name="q"/>
                 <input type="submit" value="search" />
             </form> -->
-            <form action="http://www.google.com/search" method="get" role="search" autocomplete="off">
-                <label for="search">Search for stuff</label>
-                <input id="search" type="text" name="q" placeholder="Search..." autofocus required />
-                <button type="submit"><img class="ionIcon" data-color="#ffffff" src="icon/logo-google.svg"
-                        alt=""></button>
-            </form>
-        </div>
-        <div class="comp-grid TimG">
-            <div class="Time-View">
-                <div id="clock"></div>
-                <div id="date"></div>
-            </div>
-        </div>
-        <div class="comp-grid CouDG">
-            <div class="count-opt">
-                <input type="datetime-local" id="meeting-time" name="meeting-time" value="2024-06-12T19:30"
-                    min="2020-06-07T00:00" max="">
-                <br>
-                <input type="button" value="Submit">
-            </div>
-            <div class="count-disp  dispnone">
-                <div class="day cou-fle">
-                    <div id="count-day">
-                        1000</div>
-                    <div id="count-text-day">Day</div>
+                    <form action="http://www.google.com/search" method="get" role="search" autocomplete="off">
+                        <label for="search">Search for stuff</label>
+                        <input id="search" type="text" name="q" placeholder="Search..." autofocus required />
+                        <button type="submit"><img class="ionIcon" data-color="#ffffff" src="icon/logo-google.svg"
+                                alt=""></button>
+                    </form>
                 </div>
-                <div class="hour cou-fle">
-                    <div id="count-hour">30</div>
-                    <div id="count-text-hour">Hour</div>
-                </div>
-                <div class="mins cou-fle">
-                    <div id="count-mins">30</div>
-                    <div id="count-text-mins">Mins</div>
-                </div>
-            </div>
-        </div>
-        <div class="comp-grid Notifi">Notifi</div>
-        <div class="comp-grid SouScG">
-            <div class="parFlex">
-                <div class="right">
-                    <img id="playSoundScape" class="ionIcon" data-color="#000000" src="icon\\play-circle.svg" alt="">
-                </div>
-                <div class="left">
-                    <h3>Volume: <span id="volumeMeter">100</span></h3>
-                    <input id="volumeRanger" type="range" min="0" max="100" value="100" step="1" />
-                </div>
-            </div>
-        </div>
-
-        <div class="comp-grid AuFoG">
-            <div class="parFlex">
-                <div class="right">
-                    <h3>Auto Focus</h3>
-                </div>
-                <div class="left">
-                    <img id="autoFocusBut" class="ionIcon" data-color="#000000" src="icon/lock-closed.svg" alt="">
-                </div>
-            </div>
-        </div>
-        <div class="comp-grid VCG">VCG</div>
-        <div class="comp-grid NewsG">
-            <div class="battery-main">
-                <div class="bat-opts">
-                    <div class="right">
-                        <div>
-                            <h2>Low Level</h2>
-                            <input type="number" max="50" min="10" value="30" step="5" class="bat-Inp" name="bat-low-level" id="bat-low-level">
-                        </div>
-                        <div>
-                            <h2>high Level</h2>
-                            <input type="number" max="90" min="50" value="80" step="5" class="bat-Inp" name="bat-high-level" id="bat-high-level">
-                        </div>
+                <div class="comp-grid TimG">
+                    <div class="Time-View">
+                        <div id="clock"></div>
+                        <div id="date"></div>
                     </div>
-                    <div class="left">
-                        <div>
-                            <h2>Charge Steps</h2>
-                            <input type="number" max="50" min="20" value="25" step="5" class="bat-Inp" name="bat-step" id="bat-step">
+                </div>
+                <div class="comp-grid CouDG">
+                    <div class="count-opt">
+                        <input type="datetime-local" id="meeting-time" name="meeting-time" value="2024-06-12T19:30"
+                            min="2020-06-07T00:00" max="">
+                        <br>
+                        <input type="button" value="Submit">
+                    </div>
+                    <div class="count-disp  dispnone">
+                        <div class="day cou-fle">
+                            <div id="count-day">
+                                1000</div>
+                            <div id="count-text-day">Day</div>
                         </div>
-                        <div>
-                            <h2>Notify Interval</h2>
-                            <input type="number" max="50" min="5" value="15" step="5" class="bat-Inp" name="bat-alarm" id="bat-alarm">
+                        <div class="hour cou-fle">
+                            <div id="count-hour">30</div>
+                            <div id="count-text-hour">Hour</div>
+                        </div>
+                        <div class="mins cou-fle">
+                            <div id="count-mins">30</div>
+                            <div id="count-text-mins">Mins</div>
                         </div>
                     </div>
                 </div>
-                <div class="bat-stats" id="bat-stats">
-                    <h2>Battery Level: <span id="bat-level"></span></h2>
-                    <h2>Battery Status: <span id="bat-sat"></span></h2>
-                    <h2>Time for full charge: <span id="bat-full"></span></h2>
-                    <h2>Time for Discharge: <span id="bat-dis"></span></h2>
+                <div class="comp-grid Notifi">Notifi</div>
+                <div class="comp-grid SouScG">
+                    <div class="parFlex">
+                        <div class="right">
+                            <img id="playSoundScape" class="ionIcon" data-color="#000000" src="icon\\play-circle.svg"
+                                alt="">
+                        </div>
+                        <div class="left">
+                            <h3>Volume: <span id="volumeMeter">100</span></h3>
+                            <input id="volumeRanger" type="range" min="0" max="100" value="100" step="1" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comp-grid AuFoG">
+                    <div class="parFlex">
+                        <div class="right">
+                            <h3>Auto Focus</h3>
+                        </div>
+                        <div class="left">
+                            <img id="autoFocusBut" class="ionIcon" data-color="#000000" src="icon/lock-closed.svg"
+                                alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="comp-grid VCG">VCG</div>
+                <div class="comp-grid NewsG">
+                    <div class="battery-main">
+                        <div class="bat-opts">
+                            <div class="right">
+                                <div>
+                                    <h2>Low Level</h2>
+                                    <input type="number" max="50" min="10" value="30" step="5" class="bat-Inp"
+                                        name="bat-low-level" id="bat-low-level">
+                                </div>
+                                <div>
+                                    <h2>high Level</h2>
+                                    <input type="number" max="90" min="50" value="80" step="5" class="bat-Inp"
+                                        name="bat-high-level" id="bat-high-level">
+                                </div>
+                            </div>
+                            <div class="left">
+                                <div>
+                                    <h2>Charge Steps</h2>
+                                    <input type="number" max="50" min="20" value="25" step="5" class="bat-Inp"
+                                        name="bat-step" id="bat-step">
+                                </div>
+                                <div>
+                                    <h2>Notify Interval</h2>
+                                    <input type="number" max="50" min="5" value="15" step="5" class="bat-Inp"
+                                        name="bat-alarm" id="bat-alarm">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bat-stats" id="bat-stats">
+                            <h2>Battery Level: <span id="bat-level"></span></h2>
+                            <h2>Battery Status: <span id="bat-sat"></span></h2>
+                            <h2>Time for full charge: <span id="bat-full"></span></h2>
+                            <h2>Time for Discharge: <span id="bat-dis"></span></h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="comp-grid" id="Con1">
+                    <div class="workSpace-desi for-Cont" id="cont1">
+                        <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid" id="Con2">
+                    <div class="workSpace-desi for-Cont" id="cont2">
+                        <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                    </div>
+                </div>
+
+                <div class="comp-grid" id="Con3">
+                    <div class="workSpace-desi for-Cont" id="cont3">
+                        <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid T1Icon" id="T1Icon">
+                    <div class="workSpace-desi for-TopIcon" id="Top1">
+                        <img class="ionIcon" data-color="#000000" src="icon/logo-linkedin.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid T2Icon" id="T2Icon">
+                    <div class="workSpace-desi for-TopIcon" id="Top2">
+                        <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid T3Icon" id="T3Icon">
+                    <div class="workSpace-desi for-TopIcon" id="Top3">
+                        <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid T4Icon" id="T4Icon">
+                    <div class="workSpace-desi for-TopIcon" id="Top4">
+                        <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid" id="WS1">
+                    <div class="workSpace-desi for-WSTG" id="WS1TG">
+                        <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid" id="WS2">
+                    <div class="workSpace-desi for-WSTG" id="WS2TG">
+                        <img class="ionIcon" data-color="#000000" src="icon/logo-github.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid" id="WS3">
+                    <div class="workSpace-desi for-WSTG" id="WS3TG">
+                        <img class="ionIcon" data-color="#000000" src="icon/logo-figma.svg" alt="">
+                    </div>
+                </div>
+                <div class="comp-grid" id="WS4">
+                    <div class="workSpace-desi for-WSTG" id="WS4TG">
+                        <img class="ionIcon" data-color="#000000" src="icon/videocam.svg" alt="">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="comp-grid" id="Con1">
-            <div class="workSpace-desi for-Cont" id="cont1">
-                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid" id="Con2">
-            <div class="workSpace-desi for-Cont" id="cont2">
-                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-            </div>
-        </div>
 
-        <div class="comp-grid" id="Con3">
-            <div class="workSpace-desi for-Cont" id="cont3">
-                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid T1Icon" id="T1Icon">
-            <div class="workSpace-desi for-TopIcon" id="Top1">
-                <img class="ionIcon" data-color="#000000" src="icon/logo-linkedin.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid T2Icon" id="T2Icon">
-            <div class="workSpace-desi for-TopIcon" id="Top2">
-                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid T3Icon" id="T3Icon">
-            <div class="workSpace-desi for-TopIcon" id="Top3">
-                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid T4Icon" id="T4Icon">
-            <div class="workSpace-desi for-TopIcon" id="Top4">
-                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid" id="WS1">
-            <div class="workSpace-desi for-WSTG" id="WS1TG">
-                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid" id="WS2">
-            <div class="workSpace-desi for-WSTG" id="WS2TG">
-                <img class="ionIcon" data-color="#000000" src="icon/logo-github.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid" id="WS3">
-            <div class="workSpace-desi for-WSTG" id="WS3TG">
-                <img class="ionIcon" data-color="#000000" src="icon/logo-figma.svg" alt="">
-            </div>
-        </div>
-        <div class="comp-grid" id="WS4">
-            <div class="workSpace-desi for-WSTG" id="WS4TG">
-                <img class="ionIcon" data-color="#000000" src="icon/videocam.svg" alt="">
-            </div>
-        </div>
-    </div>
+            <!-- <script src="iconListObject.js"></script> -->
+            <script src="popup.js"></script>
 </body>
 
 </html>
