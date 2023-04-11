@@ -146,6 +146,11 @@ var Dummy = {
     quoteAuthor: "",
     quoteCat: ["Life", "Positive", "Happiness", "Education"],
     quoteLastUpdate: 100,
+    todo: [
+        "varun",
+        "reddy",
+        "bokka"
+    ],
     sidebar: [
         "https://wethinc.in",
         "https://youtube.com",
