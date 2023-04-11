@@ -53,6 +53,7 @@
         "contextMenus",
         "offscreen",
         "tabs",
-        "favicon"
+        "favicon",
+        "alarms"
     ]
 }

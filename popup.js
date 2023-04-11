@@ -849,3 +849,9 @@ function iconfun(evt) {
     console.log(DataSet.workspaces[evt]);
     SetDateset(DataSet);
 }
+
+/*Battery Level*/
+
+chrome.alarms.create(
+    "Battery", { delayInMinutes: 0 }, () => { console.log("alarm") }
+)
