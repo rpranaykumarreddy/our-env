@@ -992,6 +992,36 @@
             grid-template-columns: 30px auto;
             gap: 5px;
         }
+
+        /*V Card style*/
+        
+         .fle-vcard {
+            height: calc(90vh / 6);
+            width: calc(27vw);
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+
+         .fle-vcard div {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: calc(90vh / 6);
+            display: flex;
+        }
+        .fle-vcard img{
+            height: 60%;
+        }
+.fle-vcard .right{
+    width:18vw;
+    height: inherit;
+}
+.fle-vcard .left{
+    width:6vw;
+}
     </style>
 </head>
 
@@ -1327,7 +1357,6 @@
                 <div id="Author">-RPKR Inc</div>
             </div>
         </div>
-
         <div class="comp-grid" id="sett">
             <div class="workSpace-desi">
                 <img class="ionIcon" data-color="#000000" src="icon/settings.svg" alt="">
@@ -1342,51 +1371,51 @@
             <form action="http://www.google.com/search" method="get" role="search" autocomplete="off">
                 <label for="search">Search for stuff</label>
                 <input id="search" type="text" name="q" placeholder="Search..." autofocus required />
-                <button type="submit"><img class="ionIcon" data-color="#ffffff" src="icon/logo-google.svg" alt=""></button>
-                </form>
+                <button type="submit"><img class="ionIcon" data-color="#ffffff" src="icon/logo-google.svg"
+                        alt=""></button>
+            </form>
+        </div>
+        <div class="comp-grid TimG">
+            <div class="Time-View">
+                <div id="clock"></div>
+                <div id="date"></div>
+            </div>
+        </div>
+        <div class="comp-grid CouDG">
+            <div class="count-opt" id="count-opt">
+                <input type="datetime-local" id="meeting-time" name="meeting-time" value="2024-06-12T19:30"
+                    min="2020-06-07T00:00" max="">
+                <br>
+                <input type="button" value="Submit" id="countButCl">
+            </div>
+            <div class="count-disp dispnone" id="count-disp">
+                <div class="day cou-fle">
+                    <div id="count-day">
+                        1000</div>
+                    <div id="count-text-day">Day</div>
                 </div>
-                <div class="comp-grid TimG">
-                    <div class="Time-View">
-                        <div id="clock"></div>
-                        <div id="date"></div>
-                    </div>
+                <div class="hour cou-fle">
+                    <div id="count-hour">30</div>
+                    <div id="count-text-hour">Hour</div>
                 </div>
-                <div class="comp-grid CouDG">
-                    <div class="count-opt">
-                        <input type="datetime-local" id="meeting-time" name="meeting-time" value="2024-06-12T19:30"
-                            min="2020-06-07T00:00" max="">
-                        <br>
-                        <input type="button" value="Submit">
-                    </div>
-                    <div class="count-disp  dispnone">
-                        <div class="day cou-fle">
-                            <div id="count-day">
-                                1000</div>
-                            <div id="count-text-day">Day</div>
-                        </div>
-                        <div class="hour cou-fle">
-                            <div id="count-hour">30</div>
-                            <div id="count-text-hour">Hour</div>
-                        </div>
-                        <div class="mins cou-fle">
-                            <div id="count-mins">30</div>
-                            <div id="count-text-mins">Mins</div>
-                        </div>
-                    </div>
+                <div class="mins cou-fle">
+                    <div id="count-mins">30</div>
+                    <div id="count-text-mins">Mins</div>
                 </div>
-                <div class="comp-grid Notifi">Notifi</div>
-                <div class="comp-grid SouScG">
-                    <div class="parFlex">
-                        <div class="right">
+            </div>
+        </div>
+        <div class="comp-grid Notifi" id="notification">Notifications</div>
+        <div class="comp-grid SouScG">
+            <div class="parFlex">
+                <div class="right">
                     <img id="playSoundScape" class="ionIcon" data-color="#000000" src="icon\\play-circle.svg" alt="">
-                    </div>
-                    <div class="left">
-                        <h3>Volume: <span id="volumeMeter">100</span></h3>
-                        <input id="volumeRanger" type="range" min="0" max="100" value="100" step="1" />
-                    </div>
-                    </div>
-                    </div>
-
+                </div>
+                <div class="left">
+                    <h3>Volume: <span id="volumeMeter">100</span></h3>
+                    <input id="volumeRanger" type="range" min="0" max="100" value="100" step="1" />
+                </div>
+            </div>
+        </div>
         <div class="comp-grid AuFoG">
             <div class="parFlex">
                 <div class="right">
@@ -1394,53 +1423,65 @@
                 </div>
                 <div class="left">
                     <img id="autoFocusBut" class="ionIcon" data-color="#000000" src="icon/lock-closed.svg" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="comp-grid VCG">
+            <div class="fle-vcard">
+               <div class="right">
+                    <h3>V Card: <span id="vCardUsername">rpranaykumarreddy</span></h3>
+                </div>
+                <div class="left">
+                    <img id="vCardCopy" class="ionIcon" data-color="#000000" src="icon/clipboard.svg" alt="">
+                </div>                
+            </div>
+        </div>
+        <div class="comp-grid NewsG">
+            <div class="battery-main">
+                <div class="bat-opts">
+                    <div class="right">
+                        <div>
+                            <h2>Low Level</h2>
+                            <input type="number" max="50" min="10" value="30" step="5" class="bat-Inp"
+                                name="bat-low-level" id="bat-low-level">
+                        </div>
+                        <div>
+                            <h2>high Level</h2>
+                            <input type="number" max="90" min="50" value="80" step="5" class="bat-Inp"
+                                name="bat-high-level" id="bat-high-level">
+                        </div>
                     </div>
+                    <div class="left">
+                        <div>
+                            <h2>Charge Steps</h2>
+                            <input type="number" max="50" min="20" value="25" step="5" class="bat-Inp" name="bat-step"
+                                id="bat-step">
+                        </div>
+                        <div>
+                            <h2>Notify Interval</h2>
+                            <input type="number" max="50" min="5" value="15" step="5" class="bat-Inp" name="bat-alarm"
+                                id="bat-alarm">
+                        </div>
                     </div>
-                    </div>
-                    <div class="comp-grid VCG">VCG</div>
-                    <div class="comp-grid NewsG">
-                        <div class="battery-main">
-                            <div class="bat-opts">
-                                <div class="right">
-                                    <div>
-                                        <h2>Low Level</h2>
-                                        <input type="number" max="50" min="10" value="30" step="5" class="bat-Inp" name="bat-low-level" id="bat-low-level">
-                                        </div>
-                                        <div>
-                                            <h2>high Level</h2>
-                                        <input type="number" max="90" min="50" value="80" step="5" class="bat-Inp" name="bat-high-level" id="bat-high-level">
-                                        </div>
-                                        </div>
-                                        <div class="left">
-                                            <div>
-                                                <h2>Charge Steps</h2>
-                            <input type="number" max="50" min="20" value="25" step="5" class="bat-Inp" name="bat-step" id="bat-step">
-                            </div>
-                            <div>
-                                <h2>Notify Interval</h2>
-                            <input type="number" max="50" min="5" value="15" step="5" class="bat-Inp" name="bat-alarm" id="bat-alarm">
-                            </div>
-                            </div>
-                            </div>
-                            <div class="bat-stats" id="bat-stats">
-                                <h2>Battery Level: <span id="bat-level"></span></h2>
-                                <h2>Battery Status: <span id="bat-sat"></span></h2>
-                                <h2>Time for full charge: <span id="bat-full"></span></h2>
-                                <h2>Time for Discharge: <span id="bat-dis"></span></h2>
-                            </div>
-                            </div>
-                            </div>
-                            <div class="comp-grid" id="Con1">
-                                <div class="workSpace-desi for-Cont" id="cont1">
-                                    <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-                                </div>
-                            </div>
-                            <div class="comp-grid" id="Con2">
-                                <div class="workSpace-desi for-Cont" id="cont2">
-                                    <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
-                                </div>
-                            </div>
-
+                </div>
+                <div class="bat-stats" id="bat-stats">
+                    <h2>Battery Level: <span id="bat-level"></span></h2>
+                    <h2>Battery Status: <span id="bat-sat"></span></h2>
+                    <h2>Time for full charge: <span id="bat-full"></span></h2>
+                    <h2>Time for Discharge: <span id="bat-dis"></span></h2>
+                </div>
+            </div>
+        </div>
+        <div class="comp-grid" id="Con1">
+            <div class="workSpace-desi for-Cont" id="cont1">
+                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+            </div>
+        </div>
+        <div class="comp-grid" id="Con2">
+            <div class="workSpace-desi for-Cont" id="cont2">
+                <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
+            </div>
+        </div>
         <div class="comp-grid" id="Con3">
             <div class="workSpace-desi for-Cont" id="cont3">
                 <img class="ionIcon" data-color="#000000" src="icon/mail.svg" alt="">
@@ -1486,7 +1527,7 @@
                 <img class="ionIcon" data-color="#000000" src="icon/videocam.svg" alt="">
             </div>
         </div>
-        </div>
+    </div>
 
     <!-- <script src="iconListObject.js"></script> -->
     <script src="popup.js"></script>

@@ -25,6 +25,9 @@
             ],
             "extension_ids": [
                 "*"
+            ],
+            "exclude_matches": [
+                "./.git/*"
             ]
         }
     ],

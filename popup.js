@@ -74,6 +74,7 @@ function InitCall(data) {
     inpBatHigh.value = data.battery.highLevel;
     inpStep.value = data.battery.step;
     inpAlarm.value = data.battery.alarmMin;
+    checkCountdown(data.countDown.date);
     changeBattery();
     var volumeMeter = document.getElementById("volumeMeter");
     var volumeRanger = document.getElementById("volumeRanger");
@@ -328,7 +329,7 @@ function addwebsidelist(arr, inx, mainpos) {
 //addwebworkspacelist(data.workspaces[0].urls, 1, "workspaces", 0);
 function addwebworkspacelist(arr, inx, mainpos, arraypos) {
     var websites = document.getElementById("displist-" + inx);
-    console.log(arr);
+    // console.log(arr);
     websites.innerHTML = "";
     for (inp = 0; inp < arr.length; inp++) {
         var div = document.createElement('div');
@@ -343,10 +344,10 @@ function addwebworkspacelist(arr, inx, mainpos, arraypos) {
 
 function addremoveworkspace() {
     var cla = document.getElementsByClassName("listworkaddmark");
-    console.log(cla[0]);
-    console.log("2 remove workspace called");
+    // console.log(cla[0]);
+    // console.log("2 remove workspace called");
     for (inp = 0; inp < cla.length; inp++) {
-        console.log("for loop remove");
+        // console.log("for loop remove");
         cla[inp].addEventListener("click", (evt) => {
             removeworkspace(evt.target.dataset.formId, evt.target.dataset.menuId, evt.target.dataset.text, evt.target.dataset.linkId)
         }, false);
@@ -355,10 +356,10 @@ function addremoveworkspace() {
 
 function addremoveSidebar() {
     var cla1 = document.getElementsByClassName("listsideaddmark");
-    console.log(cla1[0]);
-    console.log("2 remove sidebar calleddddd");
+    // console.log(cla1[0]);
+    // console.log("2 remove sidebar calleddddd");
     for (inp = 0; inp < cla1.length; inp++) {
-        console.log("for loop remove");
+        // console.log("for loop remove");
         cla1[inp].addEventListener("click", (evt) => {
             removesidebar(evt.target.dataset.formId, evt.target.dataset.menuId, evt.target.dataset.text)
         }, false);
@@ -366,9 +367,9 @@ function addremoveSidebar() {
 }
 
 function removeworkspace(arrname, arrindex, text, arrlink) {
-    console.log(arrname, arrindex, text, arrlink);
-    console.log("3 remove workspace added");
-    console.log(DataSet[arrname][arrlink].urls[arrindex], text);
+    // console.log(arrname, arrindex, text, arrlink);
+    // console.log("3 remove workspace added");
+    // console.log(DataSet[arrname][arrlink].urls[arrindex], text);
     if (text == DataSet[arrname][arrlink].urls[arrindex]) {
         DataSet[arrname][arrlink].urls.splice(arrindex, 1);
     }
@@ -377,8 +378,8 @@ function removeworkspace(arrname, arrindex, text, arrlink) {
 }
 
 function removesidebar(arrname, arrindex, text) {
-    console.log(arrname);
-    console.log("3 remove Sidebar added");
+    // console.log(arrname);
+    // console.log("3 remove Sidebar added");
     //if (text == DataSet[arrname][arrindex]) { DataSet[arrname].splice(arrindex, 1); }
     if (arrname == "autoFocus.block") {
         if (text == DataSet.autoFocus.block[arrindex]) { DataSet.autoFocus.block.splice(arrindex, 1); }
@@ -390,7 +391,7 @@ function removesidebar(arrname, arrindex, text) {
 }
 
 function settingsUpdate(data) {
-    console.log("settings update called");
+    // console.log("settings update called");
     addwebsidelist(data.sidebar, 0, "sidebar");
     addwebworkspacelist(data.workspaces[0].urls, 1, "workspaces", 0);
     addwebworkspacelist(data.workspaces[1].urls, 2, "workspaces", 1);
@@ -425,8 +426,8 @@ buttonworkclick.addEventListener("click", (evt) => { updateworkEndForm(evt.targe
 // }
 
 function updateEndForm(evt) {
-    console.log(evt)
-    console.log("called data update");
+    // console.log(evt)
+    // console.log("called data update");
     input = document.getElementById(evt);
     invalue = input.value;
     indir = input.getAttribute("data-form-link");
@@ -443,14 +444,14 @@ function updateEndForm(evt) {
 }
 
 function updateworkEndForm(evt) {
-    console.log(evt);
-    console.log("called data update");
+    // console.log(evt);
+    // console.log("called data update");
     input = document.getElementById(evt);
     invalue = input.value;
     indir = input.getAttribute("data-form-link");
-    console.log(DataSet.workspaces[indir].urls);
+    // console.log(DataSet.workspaces[indir].urls);
     leng = DataSet.workspaces[indir].urls.length;
-    console.log(DataSet[indir]);
+    // console.log(DataSet[indir]);
     DataSet.workspaces[indir].urls[leng] = invalue;
     settingsUpdate(DataSet);
     SetDateset(DataSet);
@@ -458,7 +459,7 @@ function updateworkEndForm(evt) {
 
 function SetDateset(data) {
     chrome.runtime.sendMessage({ 'message': 'updateSettings', 'data': data }, function (response) {
-        console.log('Set Data response', response);
+        // console.log('Set Data response', response);
     });
 }
 
@@ -466,7 +467,7 @@ document.getElementById("soundsettng").addEventListener("change", listQ);
 
 function listQ() {
     soundelm = document.getElementById("soundsettng");
-    console.log("sound scape called");
+    // console.log("sound scape called");
     if (soundelm.value == 1) {
         DataSet.sound.music = "soundScapes\Adventure.mp3";
     } else if (soundelm.value == 2) {
@@ -489,7 +490,7 @@ function listQ() {
         DataSet.sound.music = "Water Dripping In a Cave.mp3";
     }
     // DataSet.sound.music = "soundScapes\Jungle Rain.mp3";
-    console.log(DataSet.sound.music);
+    // console.log(DataSet.sound.music);
     SetDateset(DataSet);
 }
 
@@ -511,20 +512,20 @@ function sounddisable(data) {
 }
 
 function searchlist() {
-    console.log(searchdrop[0].value)
+    // console.log(searchdrop[0].value)
     if (searchdrop[0].value == 1) {
         DataSet.search = "http://www.google.com/search";
     } else if (searchdrop[0].value == 2) {
-        console.log("not google");
+        // console.log("not google");
     }
     SetDateset(DataSet);
-    console.log("called google");
+    // console.log("called google");
 }
 
 function listcontact() {
-    console.log("contact change Called");
+    // console.log("contact change Called");
     var elem = document.getElementById("contactsite1");
-    console.log(contactdrop.selectedIndex);
+    // console.log(contactdrop.selectedIndex);
     if (contactdrop.selectedIndex == 0) {
         elem.setAttribute("placeholder", "Enter Phone Number");
     } else if (contactdrop.selectedIndex == 1) {
@@ -542,7 +543,7 @@ function listcontact() {
 // contform.addEventListener("change", (evt) => { contac
 contactDrop = document.getElementsByClassName("ContactType");
 contactInput = document.getElementsByClassName("contactInput");
-console.log(contactInput);
+// console.log(contactInput);
 for (i = 0; i < contactDrop.length; i++) {
     contactDrop[i].addEventListener("change", (evt) => { contactfun(evt.target.dataset.formId) }, false);
     // contactInput[i].addEventListener("change", (evt) => { contactfun(evt.target.dataset.formId) }, false);
@@ -553,17 +554,17 @@ for (i = 0; i < contactInput.length; i++) {
 
 
 function contactdisp(data) {
-    console.log("contact display")
+    // console.log("contact display")
     contactInput = document.getElementsByClassName("contactInput");
     contactInput[0].setAttribute("placeholder", data.contact[0].link);
     contactInput[1].setAttribute("placeholder", data.contact[1].link);
     contactInput[2].setAttribute("placeholder", data.contact[2].link);
-    console.log(data.contact);
+    // console.log(data.contact);
 }
 
 function contactfun(evt) {
 
-    console.log("contact fun called", evt, contactDrop[evt].selectedIndex, contactInput[evt].value);
+    // console.log("contact fun called", evt, contactDrop[evt].selectedIndex, contactInput[evt].value);
     if (contactDrop[evt].selectedIndex == 0) {
         contactInput[evt].setAttribute("placeholder", "Enter Phone Number with country code");
     } else if (contactDrop[evt].selectedIndex == 1) {
@@ -574,7 +575,7 @@ function contactfun(evt) {
     } else if (contactDrop[evt].selectedIndex == 1) {
         DataSet.contact[evt].link = "https://mailto:" + contactInput[evt].value;
     }
-    console.log(DataSet.contact[evt].link);
+    // console.log(DataSet.contact[evt].link);
     SetDateset(DataSet);
     contactdisp(DataSet);
 }
@@ -587,34 +588,34 @@ for (i = 0; i < iconform.length; i++) {
 }
 
 function topfun(evt) {
-    console.log(evt);
-    console.log(DataSet.topApps[evt].link);
+    // console.log(evt);
+    // console.log(DataSet.topApps[evt].link);
     DataSet.topApps[evt].link = iconform[evt].value;
-    console.log(DataSet.topApps[evt].link);
+    // console.log(DataSet.topApps[evt].link);
     SetDateset(DataSet);
     top4fetch(DataSet);
 }
 
 function top4fetch(data) {
-    console.log("top4 fetch called");
+    // console.log("top4 fetch called");
     iconform = document.getElementsByClassName("top4");
     iconform[0].value = data.topApps[0].link;
     iconform[1].value = data.topApps[1].link;
     iconform[2].value = data.topApps[2].link;
     iconform[3].value = data.topApps[3].link;
-    console.log(data.topApps);
+    // console.log(data.topApps);
 }
 
 
 profileform = document.getElementsByClassName("profile");
-console.log(profileform);
+// console.log(profileform);
 for (i = 0; i < profileform.length; i++) {
-    console.log("for loop called");
+    // console.log("for loop called");
     profileform[i].addEventListener("change", (evt) => { profilefun(evt.target.dataset.formId) }, false);
 }
 
 function profilefetch(data) {
-    console.log("profile fetch called");
+    // console.log("profile fetch called");
     profileform = document.getElementsByClassName("profile");
     profileform[0].value = data.firstName;
     profileform[1].value = data.lastName;
@@ -627,10 +628,10 @@ function profilefetch(data) {
 
 
 function profilefun(evt) {
-    console.log("profile settings called");
-    // console.log(DataSet.topApps[evt].link);
+    // console.log("profile settings called");
+    // // console.log(DataSet.topApps[evt].link);
     // DataSet.topApps[evt].link = iconform.value;
-    console.log(profileform[0].value);
+    // console.log(profileform[0].value);
     if (evt == 0) {
         DataSet.firstName = profileform[0].value;
     } else if (evt == 1) {
@@ -641,7 +642,7 @@ function profilefun(evt) {
 
     SetDateset(DataSet);
     profilefetch(DataSet);
-    // console.log(DataSet.topApps[evt].link);
+    // // console.log(DataSet.topApps[evt].link);
     // SetDateset(DataSet);
 }
 
@@ -677,11 +678,11 @@ todoform = document.getElementById("myInput");
 todoform.addEventListener("keypress", (evt) => { newElement(evt) }, false);
 // Create a new list item when clicking on the "Add" button
 function newElement(evt) {
-    console.log("form submit called");
-    console.log(evt.keyCode);
+    // console.log("form submit called");
+    // console.log(evt.keyCode);
     if (evt.keyCode == 13) {
         var valueinp = document.getElementById("myInput").value;
-        console.log("new element called")
+        // console.log("new element called")
         if (inputValue === '') {
             alert("You must write something!");
         } else {
@@ -698,9 +699,9 @@ function tododisp(data) {
     // inputValue = document.getElementById("myInput").value;
     var todosite = document.getElementById("myUL");
     todosite.innerHTML = "";
-    console.log("todo called")
+    // console.log("todo called")
     inputValue = data.todo;
-    console.log(data.todo);
+    // console.log(data.todo);
     for (i = 0; i < inputValue.length; i++) {
         // var div = document.createElement('div');
         // div.setAttribute('class', 'listadd');
@@ -726,9 +727,9 @@ function tododisp(data) {
 }
 
 function removetodo(arrindex) {
-    console.log(arrindex);
-    console.log(" remove todo added");
-    console.log(DataSet.todo[arrindex]);
+    // console.log(arrindex);
+    // console.log(" remove todo added");
+    // console.log(DataSet.todo[arrindex]);
     DataSet.todo.splice(arrindex, 1);
     tododisp(DataSet);
     SetDateset(DataSet);
@@ -743,7 +744,7 @@ function notifi(data) {
     if (hrs < 12)
         greet = 'Good Morning,' + data.firstName;
     else if (hrs >= 12 && hrs <= 17) {
-        console.log(data.firstName);
+        // console.log(data.firstName);
         greet = 'Good Afternoon,' + data.firstName;
     } else if (hrs >= 17 && hrs <= 24)
         greet = 'Good Evening,' + data.firstName;
@@ -759,8 +760,8 @@ for (i = 0; i < checkselect.length; i++) {
 
 
 function checkfun(evt) {
-    console.log("checkbox called");
-    console.log(checkselect[0].checked);
+    // console.log("checkbox called");
+    // console.log(checkselect[0].checked);
     if (evt == 0) {
         var quote = "Life";
     } else if (evt == 1) {
@@ -780,20 +781,20 @@ function checkfun(evt) {
     }
     if (checkselect[evt].checked) {
         DataSet.quoteCat[evt] = quote;
-        console.log("checkbox over");
+        // console.log("checkbox over");
     } else {
         DataSet.quoteCat[evt] = " ";
-        console.log("checkbox another over");
+        // console.log("checkbox another over");
     }
-    console.log(DataSet.quoteCat);
+    // console.log(DataSet.quoteCat);
     SetDateset(DataSet);
     quotecheck(DataSet);
 }
 
 
 function quotecheck(data) {
-    console.log("quote called");
-    console.log(data.quoteCat.includes("Life"));
+    // console.log("quote called");
+    // console.log(data.quoteCat.includes("Life"));
     if (data.quoteCat.includes("Life")) {
         document.getElementsByClassName("checkbox1")[0].checked = true;
     }
@@ -832,9 +833,9 @@ for (i = 0; i < sideIconEle.length; i++) {
 
 
 function iconfun(evt) {
-    console.log("icon called");
+    // console.log("icon called");
     DataSet.workspaces[evt].icon = sideIconEle[evt].value;
-    console.log(DataSet.workspaces[evt]);
+    // console.log(DataSet.workspaces[evt]);
     SetDateset(DataSet);
 }
 
@@ -877,9 +878,9 @@ navigator.getBattery().then((battery) => {
     function updateLevelInfo() {
         batteryLevel.innerHTML = Math.floor(battery.level * 100) + "%";
         console.log(`Battery level: ${battery.level * 100}%`);
-        let bat = battery.level;
-        console.log(inpBatHigh);
-        if ((bat > (inpBatHigh.value))) {
+        let bat = Math.floor(battery.level * 100);
+        console.log(bat + "%");
+        if ((bat > (inpBatHigh.value)) && (battery.charging)) {
             chrome.runtime.sendMessage({ 'message': 'notifyBat', 'tit': 'Battery is high', 'msg': 'Remove the charging for a better battery' }, function (response) {
                 console.log('response', response);
             });
@@ -887,7 +888,7 @@ navigator.getBattery().then((battery) => {
             chrome.runtime.sendMessage({ 'message': 'notifyBat', 'tit': 'Plug in the charger', 'msg': 'Plug in the charger for a better battery' }, function (response) {
                 console.log('response', response);
             });
-        } else if ((bat - prevBatLevel > inpStep.value)) {
+        } else if ((bat - prevBatLevel > inpStep.value) && (battery.charging)) {
             chrome.runtime.sendMessage({ 'message': 'notifyBat', 'tit': 'No single charge', 'msg': 'Remove the charging for a better battery' }, function (response) {
                 console.log('response', response);
             });
@@ -932,4 +933,61 @@ function updateBatteryBG(evt) {
     DataSet.battery.step = inpStep.value;
     DataSet.battery.alarmMin = inpAlarm.value;
     SetDateset(DataSet);
+}
+
+/*count down code*/
+var countOptDis = document.getElementById("count-opt");
+var countDispDis = document.getElementById("count-disp");
+var countButton = document.getElementById("countButCl");
+var CountInpDat = document.getElementById("meeting-time");
+countButton.addEventListener("click", function (event) {
+    console.log("countDown set", CountInpDat.value);
+    DataSet.countDown.date = CountInpDat.value;
+    SetDateset(DataSet);
+}
+);
+var setIntCountDown;
+function checkCountdown(date) {
+    if (date == null) {
+        countOptDis.classList.remove("dispnone");
+        countDispDis.classList.add("dispnone");
+    } else {
+        countDispDis.classList.remove("dispnone");
+        countOptDis.classList.add("dispnone");
+        startCountdown(date);
+        setIntCountDown = setInterval(() => { startCountdown(date); }, 1000);
+    }
+
+}
+function startCountdown(date) {
+    var today = new Date();
+    const dateTarget = new Date(date);
+    console.log(dateTarget, today, "Date setting")
+    if (dateTarget < today) {
+        console.log("countdown done");
+        countOptDis.classList.remove("dispnone");
+        countDispDis.classList.add("dispnone");
+        DataSet.countDown.date = null;
+        SetDateset(DataSet);
+        clearInterval(setIntCountDown);
+    } else {
+        const diffTime = Math.abs(dateTarget - today);
+        const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const diffhours = Math.floor((diffTime - (diffDays * (1000 * 60 * 60 * 24))) / (1000 * 60 * 60));
+        const diffmins = Math.floor((diffTime - (diffhours * (1000 * 60 * 60)) - (diffDays * (1000 * 60 * 60 * 24))) / (1000 * 60));
+        console.log(diffTime, diffDays, diffhours, diffhours, diffmins);
+        EleCountDay = document.getElementById("count-day");
+        EleCountHour = document.getElementById("count-hour");
+        EleCountMin = document.getElementById("count-mins");
+        EleCountTextDay = document.getElementById("count-text-day");
+        EleCountTextHour = document.getElementById("count-text-hour");
+        EleCountTextMin = document.getElementById("count-text-mins");
+        EleCountDay.innerHTML = diffDays;
+        EleCountHour.innerHTML = diffhours;
+        EleCountMin.innerHTML = diffmins;
+        EleCountTextDay.innerHTML = diffDays > 1 ? "Days" : "Day";
+        EleCountTextHour.innerHTML = diffhours > 1 ? "Hours" : "Hour";
+        EleCountTextMin.innerHTML = diffmins > 1 ? "Mins" : "Min";
+    }
+    // var time = setTimeout(function () { startTime() }, 500);
 }

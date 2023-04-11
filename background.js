@@ -62,7 +62,13 @@ chrome.runtime.onMessage.addListener(
                 DataSet.sound.volume = request.volume;
                 VolumeSound(request.volume);
                 sendResponse({ data: 'Success' });
-
+                break;
+            case 'getQuotation':
+                var str = request.topic;
+                var len = Quotdata[str].length;
+                var ran = Math.floor(Math.random() * len);
+                console.log("Quotations" + Quotdata[str][ran]);
+                sendResponse(Quotdata[str][ran]);
                 break;
             case 'getQuotation':
                 var str = request.topic;
@@ -414,73 +420,49 @@ function SendDataToNew() {
 
 
 
-chrome.identity.getAuthToken({
-    interactive: true
-}, function (token) {
-    console.log(token);
-    if (chrome.runtime.lastError) {
-        alert(chrome.runtime.lastError.message);
-        return;
-    }
-    const userInfoUrl = `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`;
-    fetch(userInfoUrl)
-        .then(response => response.json())
-        .then(userInfo => {
-            console.log(userInfo);
-            const email = userInfo.email;
-            const id = userInfo.sub;
-            console.log(`User email: ${email}`);
-            console.log(`User ID: ${id}`);
+// chrome.identity.getAuthToken({
+//     interactive: true
+// }, function (token) {
+//     console.log(token);
+//     if (chrome.runtime.lastError) {
+//         alert(chrome.runtime.lastError.message);
+//         return;
+//     }
+//     const userInfoUrl = `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`;
+//     fetch(userInfoUrl)
+//         .then(response => response.json())
+//         .then(userInfo => {
+//             console.log(userInfo);
+//             const email = userInfo.email;
+//             const id = userInfo.sub;
+//             console.log(`User email: ${email}`);
+//             console.log(`User ID: ${id}`);
 
-            return userInfo;
-        })
-        .then(data => {
-            //       fetch('http://localhost:3000/users/rpkr')
-            // .then(response => response.json()).then(data=>{
-            //     console.log("saved data",data);
-            // })
+//             return userInfo;
+//         })
+//         .then(data => {
+//             const dummyJson = JSON.stringify(Dummy);
+//             const dates = JSON.parse(dummyJson);
 
-            // const requestBody = {
-            //     token: token,
-            //     data: Dummy
-            // };
-            const dummyJson = JSON.stringify(Dummy);
-            const dates = JSON.parse(dummyJson);
-
-            console.log("data to the fetch", data);
-            fetch('http://localhost:3000/users', {
-                method: 'POST',
-                headers: {
-                    'X-User-Id': data.sub,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(dates)
-            })
-                .then((response) => {
-                    console.log("fetch response success", response.statusText);
-                })
-                .catch((error) => {
-                    console.error("fetch response error", error);
-                });
-
-            // console.log("data to the fetch",data);
-            // fetch('http://localhost:3000/users', {
-            //     method: 'POST',
-            //     headers: {
-            //         'X-User-Id': 'rpkr'
-            //     },
-            //     body: Dummy
-            // })
-            //     .then((response) => {
-            //         console.log("fetch respins success",response.statusText);
-            //     })
-            //     .catch((error) => {
-            //         console.error("fetch respins erros",error);
-            //     });
-        });
+//             console.log("data to the fetch", data);
+//             // fetch('http://localhost:3000/users', {
+//             //     method: 'POST',
+//             //     headers: {
+//             //         'X-User-Id': data.sub,
+//             //         'Content-Type': 'application/json'
+//             //     },
+//             //     body: JSON.stringify(dates)
+//             // })
+//             //     .then((response) => {
+//             //         console.log("fetch response success", response.statusText);
+//             //     })
+//             //     .catch((error) => {
+//             //         console.error("fetch response error", error);
+//             //     });
+//         });
 
 
-});
+// });
 
 
 
