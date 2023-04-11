@@ -1,16 +1,21 @@
 chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
+    function (request, sender, sendResponse) {
         console.log('req', request.message) // not listened 
         switch (request.message) {
+            case "loginBackend":
+                chrome.identity.getAuthToken({ 'interactive': true }, function (token) {
+                    console.log("token:", token);
+                });
+                break;
             case "updateSettings":
                 sendResponse({ data: 'Success' });
                 SetDateset(request.data);
                 console.log("Updating setting", request.data);
                 break;
             case 'IAmReady':
-                sendResponse({ data: 'Success' });
                 console.log('req Replay', request.message);
                 SendDataToNew();
+                sendResponse({ data: 'Success' });
                 break;
             case 'openUrl':
                 chrome.tabs.create({ url: request.url, active: false, index: 50 });
@@ -30,6 +35,10 @@ chrome.runtime.onMessage.addListener(
             case 'notify':
                 sendResponse({ data: 'Success' });
                 notify(request.tit, request.msg);
+                break; 
+            case 'notifyBat':
+                sendResponse({ data: 'Success' });
+                notifyBat(request.tit, request.msg);
                 break;
             case 'StartPlay':
                 playSound(DataSet.sound.music, request.volume);
@@ -42,7 +51,7 @@ chrome.runtime.onMessage.addListener(
                 sendResponse({ data: 'Success' });
                 break;
             case 'StartFocus':
-                StartFocus(request.time);
+                StartFocus();
                 sendResponse({ data: 'Success' });
                 break;
             case 'StopFocus':
@@ -75,18 +84,14 @@ function removeTab(id) {
 }
 var focusSet = null;
 
-function StartFocus(time) {
-    DataSet.autoFocus.timeTill = time;
+function StartFocus() {
     DataSet.autoFocus.active = true;
     SetDateset(DataSet);
     focusSet = setInterval(() => {
         getCurrentTab().then((tab) => {
             if (tab != undefined) {
-                //console.log("Tab details", tab);
                 let testUrl = new URL(tab.url);
-                //console.log(testUrl.host);
                 for (var hosti = 0; hosti < DataSet.autoFocus.block.length; hosti++) {
-                    //console.log("Enter tab:", DataSet.autoFocus.block[hosti], testUrl.host);
                     if (testUrl.hostname == DataSet.autoFocus.block[hosti]) {
                         console.log("Removed tab:", testUrl.hostname);
                         removeTab(tab.id);
@@ -99,7 +104,6 @@ function StartFocus(time) {
 
 function StopFocus() {
     clearInterval(focusSet);
-    DataSet.autoFocus.timeTill = 100;
     DataSet.autoFocus.active = false;
 }
 async function getCurrentTab() {
@@ -155,28 +159,28 @@ var Dummy = {
         "https://discord.com/channels/783758394166345779/790483500264456192",
         "https://www.linkedin.com/in/rpranaykumarreddy/"
     ],
-    battery:{
-        lowLevel:30,
-        highLevel:80,
-        step:25,
-        boolAlarm:false
+    battery: {
+        lowLevel: 30,
+        highLevel: 80,
+        step: 25,
+        alarmMin: 15
     },
     workspaces: [{
-            name: "Mails",
-            icon: "icon/mail.svg",
-            urls: [
-                "https://mail.google.com/mail/u/0/#inbox",
-                "https://mail.google.com/mail/u/1/#inbox",
-                "https://mail.google.com/mail/u/2/#inbox",
-                "https://mail.google.com/mail/u/3/#inbox",
-                "https://mail.google.com/mail/u/4/#inbox",
-                "https://www.icloud.com/mail/",
-                "https://outlook.office365.com/mail/",
-                "https://www.linkedin.com/in/rpranaykumarreddy/",
-                "https://twitter.com/home",
-                "https://app.slack.com/client/T04FU1XRVJQ/C04FB1VJCUX"
-            ]
-        },
+        name: "Mails",
+        icon: "icon/mail.svg",
+        urls: [
+            "https://mail.google.com/mail/u/0/#inbox",
+            "https://mail.google.com/mail/u/1/#inbox",
+            "https://mail.google.com/mail/u/2/#inbox",
+            "https://mail.google.com/mail/u/3/#inbox",
+            "https://mail.google.com/mail/u/4/#inbox",
+            "https://www.icloud.com/mail/",
+            "https://outlook.office365.com/mail/",
+            "https://www.linkedin.com/in/rpranaykumarreddy/",
+            "https://twitter.com/home",
+            "https://app.slack.com/client/T04FU1XRVJQ/C04FB1VJCUX"
+        ]
+    },
         {
             name: "Dev",
             icon: "icon/logo-docker.svg",
@@ -240,13 +244,12 @@ var Dummy = {
     autoFocus: {
         active: false,
         block: ["www.youtube.com", "www.instagram.com"],
-        timeTill: 100,
     },
     contact: [{
-            name: "Pranay",
-            type: "icon/logo-whatsapp.svg",
-            link: "https://wa.me/917680904589"
-        },
+        name: "Pranay",
+        type: "icon/logo-whatsapp.svg",
+        link: "https://wa.me/917680904589"
+    },
         {
             name: "Varun",
             type: "icon/logo-whatsapp.svg",
@@ -271,6 +274,9 @@ chrome.storage.local.get(["DataSet"]).then((result) => {
     } else {
         console.log("I have a local data of dataset", result.DataSet);
         DataSet = result.DataSet;
+        if (DataSet.autoFocus.active) {
+            StartFocus();
+        }
     }
 });
 
@@ -333,6 +339,22 @@ function notify(tit, msg) {
         priority: 2
     });
 }
+var boolBatNoti = true;
+function notifyBat(tit, msg) {
+    if (boolBatNoti) {
+        chrome.notifications.create({
+            type: 'basic',
+            iconUrl: 'logo128.png',
+            title: tit,
+            message: msg,
+            priority: 2
+        });
+        boolBatNoti = false;
+        setTimeout(() => {
+            boolBatNoti = true;
+        }, 900 * 1000);
+    }
+}
 
 /*Opening a particular work function*/
 function workSpacesOpen(type) {
@@ -365,8 +387,10 @@ function StoreQuotation() {
 /*send new Data to pop*/
 function SendDataToNew() {
     if (DataSet == null) {
-
     } else {
+        chrome.runtime.sendMessage({ 'message': 'SendingDataSet', 'Dataset': DataSet }, function (response) {
+            //console.log('response', response);
+        });
         const d = new Date();
         if ((DataSet.quoteLastUpdate < (d.getTime() - 86400))) {
             var Tlen = DataSet.quoteCat.length;
@@ -374,16 +398,84 @@ function SendDataToNew() {
             var str = DataSet.quoteCat[Tran];
             var Qlen = Quotdata[str].length;
             var Qran = Math.floor(Math.random() * Qlen);
-            //console.log(Quotdata[str][Qran]);
             var q = Quotdata[str][Qran];
             DataSet.quote = q.Quote;
             DataSet.quoteAuthor = q.Author;
             DataSet.quoteLastUpdate = d.getTime();
             SetDateset(DataSet);
-        } else {
-            chrome.runtime.sendMessage({ 'message': 'SendingDataSet', 'Dataset': DataSet }, function(response) {
-                //console.log('response', response);
-            });
         }
     }
 }
+
+
+
+chrome.identity.getAuthToken({
+    interactive: true
+}, function (token) {
+    console.log(token);
+    if (chrome.runtime.lastError) {
+        alert(chrome.runtime.lastError.message);
+        return;
+    }
+    const userInfoUrl = `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`;
+    fetch(userInfoUrl)
+        .then(response => response.json())
+        .then(userInfo => {
+            console.log(userInfo);
+            const email = userInfo.email;
+            const id = userInfo.sub;
+            console.log(`User email: ${email}`);
+            console.log(`User ID: ${id}`);
+
+            return userInfo;
+        })
+        .then(data => {
+            //       fetch('http://localhost:3000/users/rpkr')
+            // .then(response => response.json()).then(data=>{
+            //     console.log("saved data",data);
+            // })
+
+            // const requestBody = {
+            //     token: token,
+            //     data: Dummy
+            // };
+            const dummyJson = JSON.stringify(Dummy);
+            const dates = JSON.parse(dummyJson);
+
+            console.log("data to the fetch", data);
+            fetch('http://localhost:3000/users', {
+                method: 'POST',
+                headers: {
+                    'X-User-Id': data.sub,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dates)
+            })
+                .then((response) => {
+                    console.log("fetch response success", response.statusText);
+                })
+                .catch((error) => {
+                    console.error("fetch response error", error);
+                });
+
+            // console.log("data to the fetch",data);
+            // fetch('http://localhost:3000/users', {
+            //     method: 'POST',
+            //     headers: {
+            //         'X-User-Id': 'rpkr'
+            //     },
+            //     body: Dummy
+            // })
+            //     .then((response) => {
+            //         console.log("fetch respins success",response.statusText);
+            //     })
+            //     .catch((error) => {
+            //         console.error("fetch respins erros",error);
+            //     });
+        });
+
+
+});
+
+
+

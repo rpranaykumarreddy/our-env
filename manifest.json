@@ -47,7 +47,10 @@
             ]
         }
     ],
+    "key": "MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCkDv1S1KjDXYelkauvBhLJ3oZtuzSlKVmdPyR/5SmzR3VWJI4o8nPtHEWCunPPA/PQTgn0UhBnYX5x9I/wgNEbW3+4UM2CD0ucKhX1xEzcm+BeTlotVcUXGWkQmXdHiL7+zJJQchWjCt2FVn71oigriDhabPmTge/cZkIZDQrdk5+Ymag8he1VIDFKpWjQVDEsoBo53+Yd5rwqOK6rsyu3Z4qDa6AM3pYsA3/BJCurXFGDP4nu/Gzi094I5STM1R7MH4TIHxXdhpJsbNyP7q/UH9bdcipyHoUuppX+xxxI0yIXwDy/O2fFCwY4nxb6LNKBFS+C08cl6VeEMiDD9Gs7AgMBAAECggEAAKHDzeGKreAQsqZDXlRKoea6twlzl4R9JGJ2UoWzXAkcAANdSio8bbzhjYefuitkRU1H57pfysdvbFXayNPI228lIudzAbnw3xz3e0ys5iUqoSumVbVz/2U0KQMVc0xx6J02s9pUS1a5S04ymcuR5eu8VnREFbeYBfyzgnZ4le+vnHp323k4g8JEScOSfn7Fcfp9Pxio4DzDFnmILk/uz9madndFPdkPAEryv8LsZaFFIPp+sNl7oPWY2QyTbdNXVYMAfsHCEIRdSYB/qvbQtF77qYFZtfN4pS1IQu5kVzNibZ1UBHxNg4+iPfhcNSvqunsnO+Vgrcvt3iSimqFYfQKBgQDOBBcnLSiEYg2h/xGFthpsIOXhu99QPPgO+sZ6M2iK08QjJvARH2jqHYAYMqha2MyqJ66iWX+ibQEu6abkNwXF2+QbRtmRTXtX85vscwNVGoMwKGnSF8w2/HnDR3C05Tq88o3soF8bxt/Vbs44ujH3+zgc/AOdpBcX8UEdKGWe1wKBgQDL3N78ppvWLDZ12v/4zObhoBRzDAafS8JntZ026ZlRf2BkQ87btwc/p1we2PxumgeCfJd7rF1JXDDZDPkOGM9ovHw5cimD2PNJ8JysMj1JdXvLJw2k2zgfgjsyzTRdx8vk3vQq9blJdCh6hUcncz5G5ug01TMQtl8ymDo4Lba+PQKBgQCURQ9gy7hwZp2HLKswv5oOnjK0nuEev3KMXWIBSwR/fd+YqQp4WFHKxQaO486U65mJENw3zg/1F1yVpeXOM+d8ukBWfUxSriAKcbKTn0cTtewa+csHQMdh/52mtMDiAGSg3jTUy6sHs78evgu/egpCflSpT5tOlm1kdua1FIDmqwKBgD4wKnW3/WHgKtzY6azkFKpPQu21hW+ilLM+W68co4CQ8r6jUL8Fnlh0nU1rs9WpdxD/INbBRdPTI7OSmYcLWnoAxYRgpvlpfQ3ZMHH3AWsfQ5w9VZQsq3oxKA3fO1JAWJqAyMsyGkul+5MkhQgrx5upZLx5LRK0D2ZHubrZdx2hAoGAJqLN1nyiA2FSa3hdQIg5ScRRtDw9xo345hzOognae6RmITI9Pbqk5Os+LYrW3PFZ4wzW26YLVaUaP3k6G3wZbcHfNtTjn7DOucM3D8B0cgv2EHkPlFeFQ94mjlFWkrtGcPxTGewBtQO9xvbLL693nW4FL7L3OiS7ffVL4WsmIGg=",
     "permissions": [
+        "identity.email",
+        "identity",
         "storage",
         "notifications",
         "contextMenus",
@@ -55,5 +58,14 @@
         "tabs",
         "favicon",
         "alarms"
-    ]
+    ],
+    "oauth2": {
+        "client_id": "386195024107-ok9f5bt5mhcjgt7fsdeaeddbub19ds5u.apps.googleusercontent.com",
+        "scopes": [
+            "profile",
+            "email",
+            "https://www.googleapis.com/auth/userinfo.email",
+            "https://www.googleapis.com/auth/userinfo.profile"
+        ]
+    }
 }

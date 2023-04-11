@@ -3,7 +3,7 @@ var urlist = ["https://wethinc.in/blog", "https://www.geeksforgeeks.org", "https
 
 var DataSet = null;
 chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
+    function (request, sender, sendResponse) {
         //console.log(request, sender, sendResponse) // not listened 
         switch (request.message) {
             case 'SendingDataSet':
@@ -17,31 +17,32 @@ chrome.runtime.onMessage.addListener(
 document.addEventListener('DOMContentLoaded', () => {
     startTime();
     setInterval(() => { startTime(); }, 1000);
-    chrome.runtime.sendMessage({ 'message': 'IAmReady' }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'IAmReady' }, function (response) {
         console.log('response', response);
     });
 });
 
 /*Audio settings*/
 function startPlay() {
-    chrome.runtime.sendMessage({ 'message': 'StartPlay' }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'StartPlay' }, function (response) {
         console.log('response', response);
     });
 }
 
 function stopPlay() {
-    chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function (response) {
         console.log('response', response);
     });
 }
 
 function changeVolume() {
-    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': 100 }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': 100 }, function (response) {
         console.log('response', response);
     });
 }
 
 function InitCall(data) {
+    setAutoFocusIcon(data.autoFocus.active);
     var work = document.getElementsByClassName("for-WSTG");
     for (var worki = 0; worki < 4; worki++) {
         work[worki].innerHTML = '<img class="ionIcon" data-color="#000000" src="' + data.workspaces[worki].icon + '" alt="">';
@@ -65,16 +66,16 @@ function InitCall(data) {
     qtcl.addEventListener("click", () => { window.open(str, "_self") })
     qu.innerHTML = data.quote;
     au.innerHTML = data.quoteAuthor;
-    var inpBatLow=document.getElementById("bat-low-level"),
-    inpBatHigh=document.getElementById("bat-high-level")
+    var inpBatLow = document.getElementById("bat-low-level"),
+        inpBatHigh = document.getElementById("bat-high-level")
     inpStep = document.getElementById("bat-step");
     inpAlarm = document.getElementById("bat-alarm");
-    inpBatLow.value=data.battery.lowLevel;
-    inpBatHigh.value=data.battery.highLevel;
-    inpStep.value=data.battery.step;
-    inpAlarm.checked=data.battery.boolAlarm;
+    inpBatLow.value = data.battery.lowLevel;
+    inpBatHigh.value = data.battery.highLevel;
+    inpStep.value = data.battery.step;
+    inpAlarm.value = data.battery.alarmMin;
     changeBattery();
- var volumeMeter = document.getElementById("volumeMeter");
+    var volumeMeter = document.getElementById("volumeMeter");
     var volumeRanger = document.getElementById("volumeRanger");
     volumeMeter.innerHTML = (data.sound.volume * 100);
     volumeRanger.value = (data.sound.volume * 100);
@@ -99,7 +100,7 @@ Top4.addEventListener("click", () => { TopClick(3); }, false);
 
 function TopClick(type) {
     console.log('Asking Top Icons Click', type);
-    chrome.runtime.sendMessage({ 'message': 'openTopIcon', 'type': type }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'openTopIcon', 'type': type }, function (response) {
         console.log('response', response);
     });
 }
@@ -114,7 +115,7 @@ cont3.addEventListener("click", () => { contactClick(2); }, false);
 
 function contactClick(type) {
     console.log('Asking contactClick', type);
-    chrome.runtime.sendMessage({ 'message': 'openContact', 'type': type }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'openContact', 'type': type }, function (response) {
         console.log('response', response);
     });
 }
@@ -165,7 +166,7 @@ function startTime() {
     var curYear = today.getFullYear();
     var date = curWeekDay + ", " + curDay + " " + curMonth + " " + curYear;
     document.getElementById("date").innerHTML = date;
-    var time = setTimeout(function() { startTime() }, 500);
+    var time = setTimeout(function () { startTime() }, 500);
 }
 
 function checkTime(i) {
@@ -176,31 +177,39 @@ function checkTime(i) {
 }
 /*Auto Focus*/
 var playAutoFocus = document.getElementById("autoFocusBut");
-var AutoFocusRangerMin = document.getElementById("AutoFocusRanger");
 var boolFocus = false;
 playAutoFocus.addEventListener("click", () => {
     console.log("clicked on open button");
     if (boolFocus) {
         console.log("clicked on F open button");
-        chrome.runtime.sendMessage({ 'message': 'StopFocus', 'time': 6000 }, function(response) {
+        chrome.runtime.sendMessage({ 'message': 'StopFocus' }, function (response) {
             console.log('focus open response', response);
             if (response.data == 'Success') {
                 boolFocus = false;
-                playAutoFocus.src = "icon/lock-closed.svg";
+                playAutoFocus.src = "icon/lock-open.svg";
             }
         });
     } else {
         console.log("clicked on F start button");
-        chrome.runtime.sendMessage({ 'message': 'StartFocus', 'volume': (volumeRanger.value / 100) }, function(response) {
+        chrome.runtime.sendMessage({ 'message': 'StartFocus' }, function (response) {
             console.log('focus close response', response);
             if (response.data == 'Success') {
                 boolFocus = true;
-                playAutoFocus.src = "icon/lock-open.svg";
+                playAutoFocus.src = "icon/lock-closed.svg";
             }
         });
     }
 }, false);
+function setAutoFocusIcon(inpBool) {
+    boolFocus = inpBool;
+    if (inpBool) {
+        playAutoFocus.src = "icon/lock-closed.svg";
+    } else {
+        playAutoFocus.src = "icon/lock-open.svg";
+    }
 
+
+}
 /*SoundScape Play*/
 var playSoundScape = document.getElementById("playSoundScape");
 var volumeMeter = document.getElementById("volumeMeter");
@@ -208,7 +217,7 @@ var volumeRanger = document.getElementById("volumeRanger");
 var bolSound = false;
 volumeRanger.addEventListener("change", () => {
     volumeMeter.innerHTML = volumeRanger.value;
-    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': (volumeRanger.value / 100) }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': (volumeRanger.value / 100) }, function (response) {
         //console.log('response', response);
     });
 }, false);
@@ -216,7 +225,7 @@ playSoundScape.addEventListener("click", () => {
     console.log("clicked on play button");
     if (bolSound) {
         console.log("clicked on stop button");
-        chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function(response) {
+        chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function (response) {
             console.log('audio stop response', response);
             if (response.data == "Success") {
                 bolSound = false;
@@ -225,7 +234,7 @@ playSoundScape.addEventListener("click", () => {
         });
     } else {
         console.log("clicked on play button");
-        chrome.runtime.sendMessage({ 'message': 'StartPlay', 'volume': (volumeRanger.value / 100) }, function(response) {
+        chrome.runtime.sendMessage({ 'message': 'StartPlay', 'volume': (volumeRanger.value / 100) }, function (response) {
             console.log('audio play response', response);
             if (response.data == "Success") {
                 bolSound = true;
@@ -249,7 +258,7 @@ wrks4.addEventListener("click", () => { worksclick(3); }, false);
 
 function worksclick(type) {
     console.log('Asking Workclick', type);
-    chrome.runtime.sendMessage({ 'message': 'openWorkspace', 'type': type }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'openWorkspace', 'type': type }, function (response) {
         console.log('response', response);
     });
 }
@@ -301,7 +310,7 @@ function addwebsidelist(arr, inx, mainpos) {
         div.setAttribute('class', 'listadd');
         div.innerHTML = `
         <div class="listaddtext">${arr[inp]}</div>
-        <div class="listsideaddmark" data-form-id = "${mainpos}" data-menu-id = "${inp }" data-text="${arr[inp]}">remove</div>`;
+        <div class="listsideaddmark" data-form-id = "${mainpos}" data-menu-id = "${inp}" data-text="${arr[inp]}">remove</div>`;
         websites.appendChild(div);
     }
     console.log("1 calleddddd");
@@ -318,7 +327,7 @@ function addwebworkspacelist(arr, inx, mainpos, arraypos) {
         div.setAttribute('class', 'listadd');
         div.innerHTML = `
         <div class="listaddtext">${arr[inp]}</div>
-        <div class="listworkaddmark" data-form-id = "${mainpos}" data-menu-id = "${inp }" data-text="${arr[inp]}" data-link-id="${arraypos}">remove</div>`;
+        <div class="listworkaddmark" data-form-id = "${mainpos}" data-menu-id = "${inp}" data-text="${arr[inp]}" data-link-id="${arraypos}">remove</div>`;
         websites.appendChild(div);
     }
     addremoveworkspace();
@@ -440,7 +449,7 @@ function updateworkEndForm(evt) {
 }
 
 function SetDateset(data) {
-    chrome.runtime.sendMessage({ 'message': 'updateSettings', 'data': data }, function(response) {
+    chrome.runtime.sendMessage({ 'message': 'updateSettings', 'data': data }, function (response) {
         console.log('Set Data response', response);
     });
 }
@@ -515,72 +524,72 @@ function topfun(evt) {
 navigator.getBattery().then((battery) => {
     console.log("success battery");
     var batterySupported = document.getElementById("bat-stats"),
-    batteryLevel = document.getElementById("bat-level"),
-    chargingStatus = document.getElementById("bat-sat"),
-    batteryCharged = document.getElementById("bat-full"),
-    batteryDischarged = document.getElementById("bat-dis"),
-    inpBatLow=document.getElementById("bat-low-level"),
-    inpBatHigh=document.getElementById("bat-high-level")
-    inpStep=document.getElementById("bat-step"), prevBatLevel=0,boolPlug=true;
-  function updateAllBatteryInfo() {
-    updateChargeInfo();
-    updateLevelInfo();
-    updateChargingInfo();
-    updateDischargingInfo();
-  }
+        batteryLevel = document.getElementById("bat-level"),
+        chargingStatus = document.getElementById("bat-sat"),
+        batteryCharged = document.getElementById("bat-full"),
+        batteryDischarged = document.getElementById("bat-dis"),
+        inpBatLow = document.getElementById("bat-low-level"),
+        inpBatHigh = document.getElementById("bat-high-level"),
+        inpStep = document.getElementById("bat-step"), prevBatLevel = 0, boolPlug = true;
+    function updateAllBatteryInfo() {
+        updateChargeInfo();
+        updateLevelInfo();
+        updateChargingInfo();
+        updateDischargingInfo();
+    }
 
-  updateAllBatteryInfo();
+    updateAllBatteryInfo();
 
-  battery.addEventListener("chargingchange", () => {
-    updateChargeInfo();
-  });
-  function updateChargeInfo() {
-    chargingStatus.innerHTML=battery.charging ? "Yes" : "No";
-    prevBatLevel=battery.level;
-    console.log(`Battery charging? ${battery.charging ? "Yes" : "No"}`);
-  }
+    battery.addEventListener("chargingchange", () => {
+        updateChargeInfo();
+    });
 
-  battery.addEventListener("levelchange", () => {
-    updateLevelInfo();
-  });
-  function updateLevelInfo() {
-    batteryLevel.innerHTML=Math.floor(battery.level * 100)+"%";
-    console.log(`Battery level: ${battery.level * 100}%`);
-    let bat=battery.level;
-    console.log(inpBatHigh);
-    if(bat>(inpBatHigh.value)){
- chrome.runtime.sendMessage({ 'message': 'notify' ,'tit':'Battery is high','msg':'Remove the charging for a better battery'}, function(response) {
-        console.log('response', response);
-    });}else if((bat<inpBatLow.value) && boolPlug){
- chrome.runtime.sendMessage({ 'message': 'notify' ,'tit':'Plug in the charger','msg':'Plug in the charger for a better battery'}, function(response) {
-        console.log('response', response);
-        boolPlug=false;
-        setTimeout(()=>{
-            boolPlug=true;
-        },900*1000);
-    });}else if(bat-prevBatLevel>inpStep.value ){
- chrome.runtime.sendMessage({ 'message': 'notify' ,'tit':'No single charge','msg':'Remove the charging for a better battery'}, function(response) {
-        console.log('response', response);
-    });}
-  }
+    function updateChargeInfo() {
+        chargingStatus.innerHTML = battery.charging ? "Yes" : "No";
+        prevBatLevel = battery.level;
+        console.log(`Battery charging? ${battery.charging ? "Yes" : "No"}`);
+    }
 
-  battery.addEventListener("chargingtimechange", () => {
-    updateChargingInfo();
-  });
-  function updateChargingInfo() {
-     batteryCharged.innerHTML=Math.floor((battery.chargingTime)/60) +" mins";
-    console.log(`Battery charging time: ${battery.chargingTime} seconds`);
-  }
+    battery.addEventListener("levelchange", () => {
+        updateLevelInfo();
+    });
+    function updateLevelInfo() {
+        batteryLevel.innerHTML = Math.floor(battery.level * 100) + "%";
+        console.log(`Battery level: ${battery.level * 100}%`);
+        let bat = battery.level;
+        console.log(inpBatHigh);
+        if ((bat > (inpBatHigh.value))) {
+            chrome.runtime.sendMessage({ 'message': 'notifyBat', 'tit': 'Battery is high', 'msg': 'Remove the charging for a better battery' }, function (response) {
+                console.log('response', response);
+            });
+        } else if ((bat < inpBatLow.value)) {
+            chrome.runtime.sendMessage({ 'message': 'notifyBat', 'tit': 'Plug in the charger', 'msg': 'Plug in the charger for a better battery' }, function (response) {
+                console.log('response', response);
+            });
+        } else if ((bat - prevBatLevel > inpStep.value)) {
+            chrome.runtime.sendMessage({ 'message': 'notifyBat', 'tit': 'No single charge', 'msg': 'Remove the charging for a better battery' }, function (response) {
+                console.log('response', response);
+            });
+        }
+    }
 
-  battery.addEventListener("dischargingtimechange", () => {
-    updateDischargingInfo();
-  });
-  function updateDischargingInfo() {
-    batteryDischarged.innerHTML=Math.floor(battery.dischargingTime/60) +" mins";
-    console.log(`Battery discharging time: ${battery.dischargingTime} seconds`);
-  }
+    battery.addEventListener("chargingtimechange", () => {
+        updateChargingInfo();
+    });
+    function updateChargingInfo() {
+        batteryCharged.innerHTML = Math.floor((battery.chargingTime) / 60) + " mins";
+        console.log(`Battery charging time: ${battery.chargingTime} seconds`);
+    }
+
+    battery.addEventListener("dischargingtimechange", () => {
+        updateDischargingInfo();
+    });
+    function updateDischargingInfo() {
+        batteryDischarged.innerHTML = Math.floor(battery.dischargingTime / 60) + " mins";
+        console.log(`Battery discharging time: ${battery.dischargingTime} seconds`);
+    }
 });
-    
+
 function changeBattery() {
     var cla1 = document.getElementsByClassName("bat-Inp");
     console.log("added battery change");
@@ -592,14 +601,14 @@ function changeBattery() {
 }
 
 function updateBatteryBG(evt) {
-    console.log("call battery change",evt);
-    var inpBatLow=document.getElementById("bat-low-level"),
-    inpBatHigh=document.getElementById("bat-high-level")
+    console.log("call battery change", evt);
+    var inpBatLow = document.getElementById("bat-low-level"),
+        inpBatHigh = document.getElementById("bat-high-level")
     inpStep = document.getElementById("bat-step");
     inpAlarm = document.getElementById("bat-alarm");
-    DataSet.battery.lowLevel=inpBatLow.value;
-    DataSet.battery.highLevel=inpBatHigh.value;
-    DataSet.battery.step=inpStep.value;
-    DataSet.battery.boolAlarm=inpAlarm.checked;
+    DataSet.battery.lowLevel = inpBatLow.value;
+    DataSet.battery.highLevel = inpBatHigh.value;
+    DataSet.battery.step = inpStep.value;
+    DataSet.battery.alarmMin = inpAlarm.value;
     SetDateset(DataSet);
 }
