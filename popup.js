@@ -1,9 +1,43 @@
 var urlist = ["https://wethinc.in/blog", "https://www.geeksforgeeks.org", "https://youtube.com", "https://wethinc.in", "https://www.geeksforgeeks.org", "https://youtube.com"];
 
+var userdata = {
+    username: "rpkr",
+    name: "Pranay Kumar R R",
+    bio: "life Is Very Short Nanba Always Be Happy!",
+    Photo: "",
+    button: [
+        { name: "portfolio", link: "https://pranay.wethinc.in" },
+        { name: "twiter", link: "https://pranay.wethinc.in" },
+        { name: "portfolio", link: "https://pranay.wethinc.in" },
+        { name: "portfolio", link: "https://pranay.wethinc.in" },
+        { name: "portfolio", link: "https://pranay.wethinc.in" },
+    ],
+    social: [
+        // { type: "Twitter", link: "rpkr_inc" },
+        { type: "Behance", link: "rpkr_inc" },
+        { type: "Bitbucket", link: "rpkr_inc" },
+        { type: "Codepen", link: "rpkr_inc" },
+        { type: "Css3", link: "rpkr_inc" },
+        { type: "Discord", link: "rpkr_inc" },
+        { type: "Dribbble", link: "rpkr_inc" },
+        { type: "Facebook", link: "rpkr_inc" },
+        { type: "Figma", link: "rpkr_inc" },
+        { type: "Github", link: "rpkr_inc" },
+        { type: "Instagram", link: "rpkr_inc" },
+        { type: "Linkedin", link: "rpkr_inc" },
+        { type: "Medium", link: "rpkr_inc" },
+        { type: "Skype", link: "rpkr_inc" },
+        { type: "Twitter", link: "rpkr_inc" },
+        { type: "Snapchat", link: "rpkr_inc" },
+        { type: "Whatsapp", link: "rpkr_inc" },
+        { type: "Youtube", link: "rpkr_inc" }
+    ]
+}
+
 
 var DataSet = null;
 chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
+    function(request, sender, sendResponse) {
         //console.log(request, sender, sendResponse) // not listened 
         switch (request.message) {
             case 'SendingDataSet':
@@ -17,26 +51,26 @@ chrome.runtime.onMessage.addListener(
 document.addEventListener('DOMContentLoaded', () => {
     startTime();
     setInterval(() => { startTime(); }, 1000);
-    chrome.runtime.sendMessage({ 'message': 'IAmReady' }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'IAmReady' }, function(response) {
         console.log('response', response);
     });
 });
 
 /*Audio settings*/
 function startPlay() {
-    chrome.runtime.sendMessage({ 'message': 'StartPlay' }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'StartPlay' }, function(response) {
         console.log('response', response);
     });
 }
 
 function stopPlay() {
-    chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function(response) {
         console.log('response', response);
     });
 }
 
 function changeVolume() {
-    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': 100 }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': 100 }, function(response) {
         console.log('response', response);
     });
 }
@@ -95,6 +129,9 @@ function InitCall(data) {
     contactdisp(data);
     top4fetch(data);
     sounddisable(data);
+    vcardfetch();
+    addvcard1();
+    addvcard2();
 }
 
 /*Top-4 icons Click*/
@@ -109,7 +146,7 @@ Top4.addEventListener("click", () => { TopClick(3); }, false);
 
 function TopClick(type) {
     console.log('Asking Top Icons Click', type);
-    chrome.runtime.sendMessage({ 'message': 'openTopIcon', 'type': type }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'openTopIcon', 'type': type }, function(response) {
         console.log('response', response);
     });
 }
@@ -124,7 +161,7 @@ cont3.addEventListener("click", () => { contactClick(2); }, false);
 
 function contactClick(type) {
     console.log('Asking contactClick', type);
-    chrome.runtime.sendMessage({ 'message': 'openContact', 'type': type }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'openContact', 'type': type }, function(response) {
         console.log('response', response);
     });
 }
@@ -175,7 +212,7 @@ function startTime() {
     var curYear = today.getFullYear();
     var date = curWeekDay + ", " + curDay + " " + curMonth + " " + curYear;
     document.getElementById("date").innerHTML = date;
-    var time = setTimeout(function () { startTime() }, 500);
+    var time = setTimeout(function() { startTime() }, 500);
 }
 
 function checkTime(i) {
@@ -191,7 +228,7 @@ playAutoFocus.addEventListener("click", () => {
     console.log("clicked on open button");
     if (boolFocus) {
         console.log("clicked on F open button");
-        chrome.runtime.sendMessage({ 'message': 'StopFocus' }, function (response) {
+        chrome.runtime.sendMessage({ 'message': 'StopFocus' }, function(response) {
             console.log('focus open response', response);
             if (response.data == 'Success') {
                 boolFocus = false;
@@ -200,7 +237,7 @@ playAutoFocus.addEventListener("click", () => {
         });
     } else {
         console.log("clicked on F start button");
-        chrome.runtime.sendMessage({ 'message': 'StartFocus' }, function (response) {
+        chrome.runtime.sendMessage({ 'message': 'StartFocus' }, function(response) {
             console.log('focus close response', response);
             if (response.data == 'Success') {
                 boolFocus = true;
@@ -209,6 +246,7 @@ playAutoFocus.addEventListener("click", () => {
         });
     }
 }, false);
+
 function setAutoFocusIcon(inpBool) {
     boolFocus = inpBool;
     if (inpBool) {
@@ -226,7 +264,7 @@ var volumeRanger = document.getElementById("volumeRanger");
 var bolSound = false;
 volumeRanger.addEventListener("change", () => {
     volumeMeter.innerHTML = volumeRanger.value;
-    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': (volumeRanger.value / 100) }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'ChangeVolume', 'volume': (volumeRanger.value / 100) }, function(response) {
         //console.log('response', response);
     });
 }, false);
@@ -234,7 +272,7 @@ playSoundScape.addEventListener("click", () => {
     console.log("clicked on play button");
     if (bolSound) {
         console.log("clicked on stop button");
-        chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function (response) {
+        chrome.runtime.sendMessage({ 'message': 'StopPlay' }, function(response) {
             console.log('audio stop response', response);
             if (response.data == "Success") {
                 bolSound = false;
@@ -243,7 +281,7 @@ playSoundScape.addEventListener("click", () => {
         });
     } else {
         console.log("clicked on play button");
-        chrome.runtime.sendMessage({ 'message': 'StartPlay', 'volume': (volumeRanger.value / 100) }, function (response) {
+        chrome.runtime.sendMessage({ 'message': 'StartPlay', 'volume': (volumeRanger.value / 100) }, function(response) {
             console.log('audio play response', response);
             if (response.data == "Success") {
                 bolSound = true;
@@ -267,7 +305,7 @@ wrks4.addEventListener("click", () => { worksclick(3); }, false);
 
 function worksclick(type) {
     console.log('Asking Workclick', type);
-    chrome.runtime.sendMessage({ 'message': 'openWorkspace', 'type': type }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'openWorkspace', 'type': type }, function(response) {
         console.log('response', response);
     });
 }
@@ -309,6 +347,77 @@ function displayfun(input) {
     //     displayquick[0].classList.add("dispnone");
     // }
 }
+
+function addvcard1() {
+    var vcardele = document.getElementById("displist-vcard1");
+    vcardele.innerHTML = "";
+    for (inp = 0; inp < userdata.button.length; inp++) {
+        var div = document.createElement('div');
+        div.setAttribute('class', 'listadd');
+        div.innerHTML = `
+        <div class="listaddtext">${userdata.button[inp].name}</div>
+        <div class="listvcard1mark" data-menu-id = "${inp}" >remove</div>`;
+        vcardele.appendChild(div);
+    }
+    addremovevcard1();
+}
+
+function addremovevcard1() {
+    var cla1 = document.getElementsByClassName("listvcard1mark");
+    // console.log(cla1[0]);
+    // console.log("2 remove sidebar calleddddd");
+    for (inp = 0; inp < cla1.length; inp++) {
+        // console.log("for loop remove");
+        cla1[inp].addEventListener("click", (evt) => {
+            removevcard1(evt.target.dataset.menuId)
+        }, false);
+    }
+}
+
+function removevcard1(arrindex) {
+    // console.log(arrname);
+    // console.log("3 remove Sidebar added");
+    //if (text == DataSet[arrname][arrindex]) { DataSet[arrname].splice(arrindex, 1); }
+    userdata.button.splice(arrindex, 1);
+    addvcard1();
+}
+
+function addvcard2() {
+    var vcardele = document.getElementById("displist-vcard2");
+    vcardele.innerHTML = "";
+    for (inp = 0; inp < userdata.social.length; inp++) {
+        var div = document.createElement('div');
+        div.setAttribute('class', 'listadd');
+        div.innerHTML = `
+        <div class="listaddtext">${userdata.social[inp].type}</div>
+        <div class="listvcard2mark"  data-menu-id = "${inp}">remove</div>`;
+        vcardele.appendChild(div);
+    }
+    addremovevcard2();
+}
+
+function addremovevcard2() {
+    var cla1 = document.getElementsByClassName("listvcard2mark");
+    // console.log(cla1[0]);
+    // console.log("2 remove sidebar calleddddd");
+    for (inp = 0; inp < cla1.length; inp++) {
+        // console.log("for loop remove");
+        cla1[inp].addEventListener("click", (evt) => {
+            removevcard2(evt.target.dataset.menuId)
+        }, false);
+    }
+}
+
+function removevcard2(arrindex) {
+    // console.log(arrname);
+    // console.log("3 remove Sidebar added");
+    //if (text == DataSet[arrname][arrindex]) { DataSet[arrname].splice(arrindex, 1); }
+    userdata.social.splice(arrindex, 1);
+    addvcard2();
+}
+
+
+
 
 function addwebsidelist(arr, inx, mainpos) {
     var websites = document.getElementById("displist-" + inx);
@@ -366,6 +475,8 @@ function addremoveSidebar() {
     }
 }
 
+
+
 function removeworkspace(arrname, arrindex, text, arrlink) {
     // console.log(arrname, arrindex, text, arrlink);
     // console.log("3 remove workspace added");
@@ -419,11 +530,39 @@ buttonworkclick.addEventListener("click", (evt) => { updateworkEndForm(evt.targe
 var buttonworkclick = document.getElementById("workbutton-3");
 buttonworkclick.addEventListener("click", (evt) => { updateworkEndForm(evt.target.dataset.inputId) }, false);
 
+var vcardclick = document.getElementById("vcardbutton-1");
+vcardclick.addEventListener("click", updatevcardform1, false)
 
-// for (i = 0; i < 4; i++) {
-//     var buttonworkclick = document.getElementById("workbutton-" + i);
-//     buttonworkclick.addEventListener("click", (evt) => { updateworkEndForm(evt.target.dataset.inputId) }, false);
-// }
+
+var vcardclick = document.getElementById("vcardbutton-2");
+vcardclick.addEventListener("click", updatevcardform2, false)
+    // for (i = 0; i < 4; i++) {
+    //     var buttonworkclick = document.getElementById("workbutton-" + i);
+    //     buttonworkclick.addEventListener("click", (evt) => { updateworkEndForm(evt.target.dataset.inputId) }, false);
+    // }
+
+function updatevcardform1() {
+    input1 = document.getElementById("vcard1Input1").value;
+    input2 = document.getElementById("vcard1Input2").value;
+    console.log(userdata.button);
+    console.log(userdata.button[0].link);
+    leng = userdata.button.length;
+    var array = { name: input1, link: input2 };
+    userdata.button[leng] = array;
+    addvcard1();
+}
+
+
+function updatevcardform2() {
+    input1 = document.getElementById("vcard2Input1").value;
+    input2 = document.getElementById("vcard2Input2").value;
+    console.log(userdata.social);
+    console.log(userdata.social[0].link);
+    leng = userdata.social.length;
+    var array = { type: input2, link: input1 };
+    userdata.social[leng] = array;
+    addvcard2();
+}
 
 function updateEndForm(evt) {
     // console.log(evt)
@@ -458,7 +597,7 @@ function updateworkEndForm(evt) {
 }
 
 function SetDateset(data) {
-    chrome.runtime.sendMessage({ 'message': 'updateSettings', 'data': data }, function (response) {
+    chrome.runtime.sendMessage({ 'message': 'updateSettings', 'data': data }, function(response) {
         // console.log('Set Data response', response);
     });
 }
@@ -502,7 +641,13 @@ searchdrop[0].addEventListener("change", searchlist);
 function selectinner(data) {
     searchtext = document.getElementById("searchselect");
     if (data.search == "http://www.google.com/search") {
-        searchtext.innerHTML = "google";
+        searchtext.innerHTML = "Google Search";
+    } else if (data.search == "http://www.bing.com/") {
+        searchtext.innerHTML = "Bing Search";
+    } else if (data.search == "http://DuckDuckGo.com/") {
+        searchtext.innerHTML = "DuckDuckGo Search";
+    } else if (data.search == "http://in.search.yahoo.com/") {
+        searchtext.innerHTML = "Yahoo! Search";
     }
 }
 
@@ -516,7 +661,11 @@ function searchlist() {
     if (searchdrop[0].value == 1) {
         DataSet.search = "http://www.google.com/search";
     } else if (searchdrop[0].value == 2) {
-        // console.log("not google");
+        DataSet.search = "http://www.bing.com/";
+    } else if (searchdrop[0].value == 3) {
+        DataSet.search = "http://DuckDuckGo.com/";
+    } else if (searchdrop[0].value == 4) {
+        DataSet.search = "http://in.search.yahoo.com/";
     }
     SetDateset(DataSet);
     // console.log("called google");
@@ -660,7 +809,7 @@ for (i = 0; i < myNodelist.length; i++) {
 var close = document.getElementsByClassName("close");
 var i;
 for (i = 0; i < close.length; i++) {
-    close[i].onclick = function () {
+    close[i].onclick = function() {
         var div = this.parentElement;
         div.style.display = "none";
     }
@@ -668,7 +817,7 @@ for (i = 0; i < close.length; i++) {
 
 // Add a "checked" symbol when clicking on a list item
 var list = document.querySelector('ul');
-list.addEventListener('click', function (ev) {
+list.addEventListener('click', function(ev) {
     if (ev.target.tagName === 'LI') {
         ev.target.classList.toggle('checked');
     }
@@ -689,6 +838,7 @@ function newElement(evt) {
             DataSet.todo[DataSet.todo.length] = valueinp;
             tododisp(DataSet);
             SetDateset(DataSet);
+            document.getElementById("myInput").value = null;
         }
 
     }
@@ -831,6 +981,13 @@ for (i = 0; i < sideIconEle.length; i++) {
     sideIconEle[i].addEventListener("change", (evt) => { iconfun(evt.target.dataset.formId) }, false);
 }
 
+var topIconEle = document.getElementsByClassName("topiconselect");
+for (i = 0; i < topIconEle.length; i++) {
+    for (ii = 0; ii < IconListObject.length; ii++) {
+        topIconEle[i].innerHTML += '<option value="' + IconListObject[ii].filePath + '">' + IconListObject[ii].fileName + '</option>'
+    }
+    topIconEle[i].addEventListener("change", (evt) => { topiconfun(evt.target.dataset.formId) }, false);
+}
 
 function iconfun(evt) {
     // console.log("icon called");
@@ -839,6 +996,12 @@ function iconfun(evt) {
     SetDateset(DataSet);
 }
 
+
+
+function topiconfun(evt) {
+    DataSet.topApps[evt].icon = topIconEle[evt].value;
+    SetDateset(DataSet);
+}
 /*Battery Level*/
 
 
@@ -852,7 +1015,10 @@ navigator.getBattery().then((battery) => {
         batteryDischarged = document.getElementById("bat-dis"),
         inpBatLow = document.getElementById("bat-low-level"),
         inpBatHigh = document.getElementById("bat-high-level"),
-        inpStep = document.getElementById("bat-step"), prevBatLevel = 0, boolPlug = true;
+        inpStep = document.getElementById("bat-step"),
+        prevBatLevel = 0,
+        boolPlug = true;
+
     function updateAllBatteryInfo() {
         updateChargeInfo();
         updateLevelInfo();
@@ -875,21 +1041,22 @@ navigator.getBattery().then((battery) => {
     battery.addEventListener("levelchange", () => {
         updateLevelInfo();
     });
+
     function updateLevelInfo() {
         batteryLevel.innerHTML = Math.floor(battery.level * 100) + "%";
         console.log(`Battery level: ${battery.level * 100}%`);
         let bat = Math.floor(battery.level * 100);
         console.log(bat + "%");
         if ((bat > (inpBatHigh.value)) && (battery.charging)) {
-            chrome.runtime.sendMessage({ 'message': 'notifyBat', 'tit': 'Battery is high', 'msg': 'Remove the charging for a better battery' }, function (response) {
+            chrome.runtime.sendMessage({ 'message': 'notifyBat', 'tit': 'Battery is high', 'msg': 'Remove the charging for a better battery' }, function(response) {
                 console.log('response', response);
             });
         } else if ((bat < inpBatLow.value)) {
-            chrome.runtime.sendMessage({ 'message': 'notifyBat', 'tit': 'Plug in the charger', 'msg': 'Plug in the charger for a better battery' }, function (response) {
+            chrome.runtime.sendMessage({ 'message': 'notifyBat', 'tit': 'Plug in the charger', 'msg': 'Plug in the charger for a better battery' }, function(response) {
                 console.log('response', response);
             });
         } else if ((bat - prevBatLevel > inpStep.value) && (battery.charging)) {
-            chrome.runtime.sendMessage({ 'message': 'notifyBat', 'tit': 'No single charge', 'msg': 'Remove the charging for a better battery' }, function (response) {
+            chrome.runtime.sendMessage({ 'message': 'notifyBat', 'tit': 'No single charge', 'msg': 'Remove the charging for a better battery' }, function(response) {
                 console.log('response', response);
             });
         }
@@ -898,6 +1065,7 @@ navigator.getBattery().then((battery) => {
     battery.addEventListener("chargingtimechange", () => {
         updateChargingInfo();
     });
+
     function updateChargingInfo() {
         batteryCharged.innerHTML = Math.floor((battery.chargingTime) / 60) + " mins";
         console.log(`Battery charging time: ${battery.chargingTime} seconds`);
@@ -906,6 +1074,7 @@ navigator.getBattery().then((battery) => {
     battery.addEventListener("dischargingtimechange", () => {
         updateDischargingInfo();
     });
+
     function updateDischargingInfo() {
         batteryDischarged.innerHTML = Math.floor(battery.dischargingTime / 60) + " mins";
         console.log(`Battery discharging time: ${battery.dischargingTime} seconds`);
@@ -940,13 +1109,13 @@ var countOptDis = document.getElementById("count-opt");
 var countDispDis = document.getElementById("count-disp");
 var countButton = document.getElementById("countButCl");
 var CountInpDat = document.getElementById("meeting-time");
-countButton.addEventListener("click", function (event) {
+countButton.addEventListener("click", function(event) {
     console.log("countDown set", CountInpDat.value);
     DataSet.countDown.date = CountInpDat.value;
     SetDateset(DataSet);
-}
-);
+});
 var setIntCountDown;
+
 function checkCountdown(date) {
     if (date == null) {
         countOptDis.classList.remove("dispnone");
@@ -959,6 +1128,7 @@ function checkCountdown(date) {
     }
 
 }
+
 function startCountdown(date) {
     var today = new Date();
     const dateTarget = new Date(date);
@@ -990,4 +1160,37 @@ function startCountdown(date) {
         EleCountTextMin.innerHTML = diffmins > 1 ? "Mins" : "Min";
     }
     // var time = setTimeout(function () { startTime() }, 500);
+}
+
+var vcardcont = document.getElementsByClassName("vcard");
+for (i = 0; i < vcardcont.length; i++) {
+    vcardcont[i].addEventListener("change", (evt) => { vcardfun(evt.target.dataset.formId) }, false);
+}
+
+function vcardfetch() {
+    var vcardcont = document.getElementsByClassName("vcard");
+    vcardcont[0].value = userdata.username;
+    vcardcont[1].value = userdata.name;
+    vcardcont[2].value = userdata.bio;
+}
+
+function vcardfun(evt) {
+    console.log("vcardfun called")
+    if (evt == 0) {
+        userdata.username = vcardcont[evt].value;
+    } else if (evt == 1) {
+        userdata.name = vcardcont[evt].value;
+    } else if (evt == 2) {
+        userdata.bio = vcardcont[evt].value;
+    }
+    console.log(userdata.username, userdata.name, userdata.bio);
+
+}
+
+var countdownbutt = document.getElementById("countdownbut");
+countdownbutt.addEventListener("click", countdownfun, false);
+
+function countdownfun() {
+    DataSet.countDown.date = null;
+    SetDateset(DataSet);
 }

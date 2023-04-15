@@ -14,8 +14,8 @@
             background-repeat: no-repeat;
             background-size: 110%;
         }
-
-        :root {
+        
+         :root {
             --c1: #7A87F8;
             --c2: #E8F4FE;
             --c3: #FBF4C9;
@@ -25,7 +25,7 @@
             --cd: #000000;
             --cd2: #474747;
         }
-
+        
         * {
             -webkit-user-select: none;
             /* Safari */
@@ -37,15 +37,14 @@
             margin: 0px;
             padding: 0px;
         }
-
+        
         html,
         body {
             height: max-content;
             padding: 10px;
         }
-
         /* For presentation only, no need to copy the code below */
-
+        
         .container .comp-grid {
             border-radius: 20px;
             transition: all ease-in-out 2s;
@@ -67,7 +66,7 @@
             -webkit-backdrop-filter: blur(11.3px);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
-
+        
         .container {
             top: 10px;
             bottom: 10px;
@@ -81,41 +80,41 @@
             grid-auto-flow: row;
             grid-template-areas: "VCG VCG VCG Notifi Notifi Notifi Notifi T1Icon CouDG CouDG" "NewsG NewsG NewsG WS1TG WS2TG WS3TG WS4TG T2Icon SouScG SouScG" "NewsG NewsG NewsG TimG TimG TimG TimG T3Icon AuFoG AuFoG" "NewsG NewsG NewsG TimG TimG TimG TimG T4Icon TODO TODO" "Con2 Con1 SBarG SBarG SBarG SBarG SBarG SBarG TODO TODO" "SetGrid Con3 QTG QTG QTG QTG QTG QTG TODO TODO";
         }
-
+        
         .TODO {
             grid-area: TODO;
         }
-
+        
         .QTG {
             grid-area: QTG;
         }
-
+        
         #sett {
             grid-area: SetGrid;
         }
-
+        
         .SBarG {
             grid-area: SBarG;
         }
-
+        
         .TimG {
             grid-area: TimG;
         }
-
+        
         .CouDG {
             grid-area: CouDG;
         }
-
+        
         .Notifi {
             grid-area: Notifi;
             font-weight: bolder;
             font-size: 20px;
         }
-
+        
         .SouScG {
             grid-area: SouScG;
         }
-
+        
         .SouScG .parFlex {
             height: calc(90vh / 6);
             width: calc(90vw / 5);
@@ -124,7 +123,7 @@
             justify-content: space-evenly;
             align-items: center;
         }
-
+        
         .SouScG .parFlex div {
             display: flex;
             flex-direction: column;
@@ -133,19 +132,19 @@
             height: calc(90vh / 6);
             display: flex;
         }
-
+        
         .SouScG img {
             height: 80%;
         }
-
+        
         .SouScG input {
             margin-top: 10px;
         }
-
+        
         .AuFoG {
             grid-area: AuFoG;
         }
-
+        
         .AuFoG .parFlex {
             height: calc(90vh / 6);
             width: calc(90vw / 5);
@@ -154,7 +153,7 @@
             justify-content: space-evenly;
             align-items: center;
         }
-
+        
         .AuFoG .parFlex div {
             display: flex;
             flex-direction: column;
@@ -163,77 +162,76 @@
             height: calc(90vh / 6);
             display: flex;
         }
-
+        
         .AuFoG img {
             height: 80%;
         }
-
+        
         .AuFoG input {
             margin-top: 10px;
         }
-
+        
         .VCG {
             grid-area: VCG;
         }
-
+        
         .NewsG {
             grid-area: NewsG;
         }
-
+        
         #Con1 {
             grid-area: Con1;
         }
-
+        
         #Con2 {
             grid-area: Con2;
         }
-
+        
         #Con3 {
             grid-area: Con3;
         }
-
+        
         #T1Icon {
             grid-area: T1Icon;
         }
-
+        
         #T2Icon {
             grid-area: T2Icon;
         }
-
+        
         #T3Icon {
             grid-area: T3Icon;
         }
-
+        
         #T4Icon {
             grid-area: T4Icon;
         }
-
+        
         #WS1 {
             grid-area: WS1TG;
             cursor: pointer;
             padding: 10px;
         }
-
+        
         #WS2 {
             grid-area: WS2TG;
             cursor: pointer;
             padding: 10px;
         }
-
+        
         #WS3 {
             grid-area: WS3TG;
             cursor: pointer;
             padding: 10px;
         }
-
+        
         #WS4 {
             grid-area: WS4TG;
             cursor: pointer;
             padding: 10px;
         }
-
         /* workSpace css*/
-
+        
         .workSpace-desi {
             display: flex;
             flex-direction: column;
@@ -242,13 +240,12 @@
             font-weight: bold;
             height: inherit;
         }
-
+        
         .workSpace-desi img {
             width: 4vw;
         }
-
         /*Time settings*/
-
+        
         .Time-View {
             width: 100%;
             height: 100%;
@@ -263,13 +260,13 @@
             left: 0;
             bottom: 0;
         }
-
+        
         #clock {
             font-family: sans-serif;
             font-size: 8vw;
             color: #000;
         }
-
+        
         #clock span {
             color: #000;
             font-size: 3vw;
@@ -278,7 +275,7 @@
             top: -4vw;
             left: 10px;
         }
-
+        
         #date {
             margin-top: 15px;
             letter-spacing: 3px;
@@ -286,13 +283,12 @@
             font-family: arial, sans-serif;
             color: #000;
         }
-
         /*Quotation*/
-
+        
         #QTG {
             cursor: pointer;
         }
-
+        
         .QTG {
             font-size: 1.5vh;
             font-family: 'Courier New', Courier, monospace;
@@ -310,11 +306,11 @@
             left: 0;
             bottom: 0;
         }
-
+        
         .QTG div {
             position: relative;
         }
-
+        
         .QTG #Author {
             font-size: 1.5vh;
             text-align: right;
@@ -322,13 +318,12 @@
             right: 0px;
             position: absolute;
         }
-
         /*Search bar*/
-
+        
         .SBarG {
             overflow: hidden;
         }
-
+        
         .SBarG form {
             width: 100%;
             height: 100%;
@@ -339,7 +334,7 @@
             left: 0;
             bottom: 0;
         }
-
+        
         .SBarG form input,
         button {
             background: transparent;
@@ -347,7 +342,7 @@
             border: 0;
             font-size: 4vh;
         }
-
+        
         .SBarG form input[type="text"] {
             outline: 0;
             width: 100%;
@@ -358,7 +353,7 @@
             z-index: 1;
             position: relative;
         }
-
+        
         .SBarG form button {
             transition: all 0.3s ease-in-out;
             display: block;
@@ -369,15 +364,15 @@
             font-weight: bold;
             background: #57bd84 !important;
         }
-
+        
         .SBarG form input:not(:placeholder-shown) {
             width: calc(100% - 10vw);
         }
-
+        
         .SBarG form input:not(:placeholder-shown)+button {
             right: 0vw;
         }
-
+        
         .SBarG form label {
             position: fixed;
             clip: rect(1px, 1px, 1px, 1px);
@@ -387,14 +382,13 @@
             width: 1px;
             overflow: hidden;
         }
-
+        
         .SBarG form button img {
             width: 4vw;
             height: 4vw;
             fill: white;
             /* filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(220deg) brightness(108%) contrast(104%); */
         }
-
         /* .container .comp-grid:hover {
             width: 102%;
             height: 102%;
@@ -406,7 +400,7 @@
             align-items: center;
             justify-content: center;
         } */
-
+        
         .flex-con-set {
             /* bottom: 10px;
             left: 10px; */
@@ -427,7 +421,7 @@
             background: rgb(46, 44, 44) !important;
             z-index: 20;
         }
-
+        
         .flex-con-scrll {
             background: rgb(46, 44, 44);
             padding: 10px;
@@ -440,7 +434,7 @@
             text-align: center;
             overflow: hidden;
         }
-
+        
         .flex-con-setset {
             background: rgb(46, 44, 44);
             padding: 10px;
@@ -453,7 +447,6 @@
             font-size: 3em;
             overflow: auto;
         }
-
         /* #sidebarset {
             display: block;
         }
@@ -466,7 +459,7 @@
             display: none;
         }
          */
-
+        
         .scrll-item {
             height: 40px;
             width: 170px;
@@ -475,11 +468,11 @@
             text-align: center;
             font-family: 'Times New Roman', Times, serif;
         }
-
+        
         .formleb {
             font-size: 20px;
         }
-
+        
         input[type=text],
         select {
             width: 100%;
@@ -491,7 +484,7 @@
             border: 0px solid #ccc;
             font-size: 20px;
         }
-
+        
         #consettng {
             width: 200px;
             display: block;
@@ -502,7 +495,7 @@
             border: 0px solid #ccc;
             font-size: 20px;
         }
-
+        
         #contactsettng1 {
             width: 200px;
             display: block;
@@ -513,7 +506,7 @@
             border: 0px solid #ccc;
             font-size: 20px;
         }
-
+        
         #contactsettng2 {
             width: 200px;
             display: block;
@@ -524,7 +517,7 @@
             border: 0px solid #ccc;
             font-size: 20px;
         }
-
+        
         #contactsettng3 {
             width: 200px;
             display: block;
@@ -535,7 +528,7 @@
             border: 0px solid #ccc;
             font-size: 20px;
         }
-
+        
         #soundsettng {
             width: 200px;
             display: block;
@@ -546,7 +539,7 @@
             border: 0px solid #ccc;
             font-size: 20px;
         }
-
+        
         #consite1 {
             width: 500px;
             display: block;
@@ -557,7 +550,7 @@
             border: 0px solid #ccc;
             font-size: 20px;
         }
-
+        
         #contactsite {
             width: 500px;
             display: block;
@@ -568,10 +561,10 @@
             border: 0px solid #ccc;
             font-size: 20px;
         }
-
+        
         .top4 {
-            width: 40%;
-            margin: 20px;
+            width: 60% !important;
+            margin: 20px !important;
             display: block;
             text-align: center;
             height: 100%;
@@ -580,7 +573,7 @@
             border: 0px solid #ccc;
             font-size: 20px;
         }
-
+        
         .profile {
             width: 30% !important;
             display: block;
@@ -591,7 +584,18 @@
             border: 0px solid #ccc;
             font-size: 20px;
         }
-
+        
+        .vcard {
+            width: 30% !important;
+            display: block;
+            text-align: center;
+            height: 100%;
+            color: #f3f3f3;
+            background-color: #313131;
+            border: 0px solid #ccc;
+            font-size: 20px;
+        }
+        
         input[type=submit],
         #conbtn {
             width: 200px;
@@ -604,7 +608,7 @@
             border-radius: 4px;
             cursor: pointer;
         }
-
+        
         .contflex {
             display: flex;
             flex-direction: row;
@@ -613,7 +617,7 @@
             height: 40px;
             flex-wrap: wrap;
         }
-
+        
         #websitelink1 {
             width: 77%;
             display: block;
@@ -624,7 +628,7 @@
             border: 0px solid #ccc;
             font-size: 20px;
         }
-
+        
         input[type=submit],
         #sidebtn {
             width: 20%;
@@ -637,7 +641,7 @@
             border-radius: 4px;
             cursor: pointer;
         }
-
+        
         .websiteflex {
             display: flex;
             flex-direction: row;
@@ -645,21 +649,42 @@
             margin: 10px;
             height: 40px;
         }
-
+        
         .form-main {
             width: 50% !important;
             height: 100% !important;
         }
-
+        
+        .vcard-form-main {
+            width: 20% !important;
+            height: 100% !important;
+        }
+        
+        .vcard-form-sub {
+            width: 40% !important;
+            height: 100% !important;
+        }
+        
         .button-main {
             width: 20% !important;
             height: 100% !important;
         }
-
+        
+        .vcard-button-main {
+            width: 20% !important;
+            height: 100% !important;
+        }
+        
         .iconselect {
             width: 20% !important;
         }
-
+        
+        .topiconselect {
+            width: 20% !important;
+            height: 80% !important;
+            margin: 20px !important;
+        }
+        
         input[type=submit] {
             width: 100%;
             background-color: #414941;
@@ -670,58 +695,58 @@
             border-radius: 4px;
             cursor: pointer;
         }
-
+        
         input[type=submit]:hover {
             background-color: #262b27;
         }
-
+        
         .dispset {
             height: fit-content;
             width: 100%;
         }
-
+        
         .disphead {
             height: auto;
             width: auto;
         }
-
+        
         #displist {
             height: auto;
             width: auto;
         }
-
+        
         .listadd {
             display: flex;
             justify-content: space-between;
             font-size: 20px;
         }
-
+        
         .listaddtext {
             position: left;
         }
-
+        
         .listsideaddmark {
             position: right;
         }
-
+        
         .listworkaddmark {
             position: right;
         }
-
+        
         .listaddmark {
             position: right;
         }
-
+        
         .close-but {
             position: absolute;
             top: 10px;
             right: 40px;
         }
-
+        
         .close-but img {
             width: 4vw;
         }
-
+        
         .sett-open {
             /* height: 90vh !important;
             width: 90vw !important; */
@@ -733,9 +758,8 @@
             z-index: 20 !important;
             display: flex;
         }
-
         /*Battery*/
-
+        
         .battery-main {
             font-size: 1.5vh;
             display: flex;
@@ -747,7 +771,7 @@
             overflow: hidden;
             padding: 2vh;
         }
-
+        
         .bat-opts {
             display: flex;
             justify-content: center;
@@ -756,7 +780,7 @@
             height: fit-content;
             width: 100%;
         }
-
+        
         .bat-opts .right {
             display: flex;
             justify-content: center;
@@ -766,7 +790,7 @@
             width: 100%;
             margin-bottom: 3vh;
         }
-
+        
         .bat-opts .left {
             display: flex;
             justify-content: center;
@@ -776,7 +800,7 @@
             margin-bottom: 3vh;
             width: 100%;
         }
-
+        
         .bat-opts .left div,
         .bat-opts .right div {
             display: flex;
@@ -786,7 +810,7 @@
             height: 100%;
             width: 50%;
         }
-
+        
         .bat-stats {
             margin-left: 1vw;
             display: flex;
@@ -796,22 +820,22 @@
             height: 100%;
             width: 100%;
         }
-
+        
         .dispnone {
             display: none !important;
         }
-
+        
         .disblock {
             display: block !important;
         }
-
+        
         .count-opt {
             display: flex;
             justify-content: space-evenly;
             align-items: center;
             flex-direction: column;
         }
-
+        
         .count-disp {
             width: 18vw;
             height: inherit;
@@ -820,42 +844,39 @@
             align-items: center;
             flex-direction: row;
         }
-
+        
         .cou-fle {
             display: flex;
             justify-content: space-evenly;
             align-items: center;
             flex-direction: column;
         }
-
+        
         #count-day,
         #count-hour,
         #count-mins {
             font-size: 5vh;
             font-weight: bold;
         }
-
+        
         #count-text-day,
         #count-text-hour,
         #count-text-mins {
             font-size: 2vh;
         }
-
         /* Remove margins and padding from the list */
-
+        
         ul {
             margin: 0;
             padding: 0;
         }
-
         /* Style the list items */
-
+        
         ul li {
             cursor: pointer;
             position: relative;
             padding: 0px 8px 0px 40px;
             list-style-type: none;
-            background: #eee;
             font-size: 18px;
             transition: 0.2s;
             /* make the list items unselectable */
@@ -863,30 +884,17 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+            overflow-x: hidden;
         }
-
         /* Set all odd list items to a different color (zebra-stripes) */
-
-        ul li:nth-child(odd) {
-            background: #f9f9f9;
-        }
-
         /* Darker background-color on hover */
-
-        ul li:hover {
-            background: #ddd;
-        }
-
         /* When clicked on, add a background color and strike out text */
-
+        
         ul li.checked {
-            background: #888;
-            color: #fff;
             text-decoration: line-through;
         }
-
         /* Add a "checked" mark when clicked on */
-
+        
         ul li.checked::before {
             content: '';
             position: absolute;
@@ -899,64 +907,65 @@
             height: 8px;
             width: 4px;
         }
-
         /* Style the close button */
-
+        
         .close {
             position: absolute;
             right: 0;
             top: 0;
             padding: 0px 16px 0px 16px;
         }
-
+        
         .close:hover {
             background-color: #f44336;
             color: white;
         }
-
         /* Style the header */
-
+        
         .todomain {
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            width: inherit;
+            height: inherit;
+            overflow: auto;
         }
-
+        
         .header {
-            background-color: transparent;
+            z-index: 10000;
+            position: sticky;
             top: 0px;
             padding: 10px;
             color: rgb(10, 8, 8);
             text-align: center;
+            backdrop-filter: blur(5px);
         }
-
         /* Clear floats after the header */
-
+        
         .header:after {
             top: 0px;
             content: "";
             display: table;
             clear: both;
         }
-
         /* Style the input */
-
+        
         .checkbox {
             width: 2%;
         }
-
+        
         input[type=text],
         .todoform {
             width: 100%;
             display: block;
             text-align: center;
-            height: 80%;
+            height: 60%;
             color: #f3f3f3;
             background-color: #313131;
             border: 0px solid #ccc;
             font-size: 20px;
         }
-
+        
         input {
             margin: 0;
             border: none;
@@ -966,9 +975,8 @@
             float: left;
             font-size: 16px;
         }
-
         /* Style the "Add" button */
-
+        
         .addBtn {
             padding: 10px;
             width: 20%;
@@ -981,21 +989,20 @@
             transition: 0.3s;
             border-radius: 0;
         }
-
+        
         .addBtn:hover {
             background-color: #bbb;
         }
-
+        
         .form-control {
             font-size: 20px !important;
             display: grid !important;
             grid-template-columns: 30px auto;
             gap: 5px;
         }
-
         /*V Card style*/
         
-         .fle-vcard {
+        .fle-vcard {
             height: calc(90vh / 6);
             width: calc(27vw);
             display: flex;
@@ -1003,8 +1010,8 @@
             justify-content: space-evenly;
             align-items: center;
         }
-
-         .fle-vcard div {
+        
+        .fle-vcard div {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -1012,16 +1019,28 @@
             height: calc(90vh / 6);
             display: flex;
         }
-        .fle-vcard img{
+        
+        .fle-vcard img {
             height: 60%;
         }
-.fle-vcard .right{
-    width:18vw;
-    height: inherit;
-}
-.fle-vcard .left{
-    width:6vw;
-}
+        
+        .fle-vcard .right {
+            width: 18vw;
+            height: inherit;
+        }
+        
+        .fle-vcard .left {
+            width: 6vw;
+        }
+        
+        .firstcard {
+            width: 20% !important;
+        }
+        
+        .secondcard {
+            width: 40% !important;
+            float: right !important;
+        }
     </style>
 </head>
 
@@ -1048,10 +1067,8 @@
                     <label for="fname" class="formleb">Add a Website to Side Bar</label>
 
                     <div class="websiteflex">
-                        <input type="text" data-form-link="sidebar" id="SideBarInput" name="website"
-                            placeholder="Website Link.." class="form-main">
-                        <input type="button" data-input-id="SideBarInput" value="Add Website"
-                            class="button-main sub-form-div-side" id="sidebutton">
+                        <input type="text" data-form-link="sidebar" id="SideBarInput" name="website" placeholder="Website Link.." class="form-main">
+                        <input type="button" data-input-id="SideBarInput" value="Add Website" class="button-main sub-form-div-side" id="sidebutton">
                     </div>
                 </form>
                 <div class="dispset">
@@ -1068,10 +1085,8 @@
                 <form id="myform1" class="form-div-side">
                     <label for="fname" class="formleb">Add a Website to workSpace 1</label>
                     <div class="websiteflex">
-                        <input type="text" data-form-link="0" id="work1Input" name="website"
-                            placeholder="Website Link.." class="form-main">
-                        <input type="button" data-input-id="work1Input" value="Add Website"
-                            class="button-main sub-form-div-side" id="workbutton-0">
+                        <input type="text" data-form-link="0" id="work1Input" name="website" placeholder="Website Link.." class="form-main">
+                        <input type="button" data-input-id="work1Input" value="Add Website" class="button-main sub-form-div-side" id="workbutton-0">
 
                         <select name="iconSidebar" class="iconselect" data-form-id="0"></select>
                     </div>
@@ -1091,10 +1106,8 @@
                 <form id="myform1" class="form-div-side">
                     <label for="fname" class="formleb">Add a Website to workSpace 2</label>
                     <div class="websiteflex">
-                        <input type="text" data-form-link="1" id="work2Input" name="website"
-                            placeholder="Website Link.." class="form-main">
-                        <input type="button" data-input-id="work2Input" value="Add Website"
-                            class="button-main sub-form-div-side" id="workbutton-1">
+                        <input type="text" data-form-link="1" id="work2Input" name="website" placeholder="Website Link.." class="form-main">
+                        <input type="button" data-input-id="work2Input" value="Add Website" class="button-main sub-form-div-side" id="workbutton-1">
                         <select name="iconSidebar" class="iconselect" data-form-id="1"></select>
                     </div>
                 </form>
@@ -1116,10 +1129,8 @@
                 <form id="myform1" class="form-div-side">
                     <label for="fname" class="formleb">Add a Website to workSpace 3</label>
                     <div class="websiteflex">
-                        <input type="text" data-form-link="2" id="work3Input" name="website"
-                            placeholder="Website Link.." class="form-main">
-                        <input type="button" data-input-id="work3Input" value="Add Website"
-                            class="button-main sub-form-div-side" id="workbutton-2">
+                        <input type="text" data-form-link="2" id="work3Input" name="website" placeholder="Website Link.." class="form-main">
+                        <input type="button" data-input-id="work3Input" value="Add Website" class="button-main sub-form-div-side" id="workbutton-2">
                         <select name="iconSidebar" class="iconselect" data-form-id="2"></select>
                     </div>
                 </form>
@@ -1138,10 +1149,8 @@
                 <form id="myform1" class="form-div-side">
                     <label for="fname" class="formleb">Add a Website to workSpace 4</label>
                     <div class="websiteflex">
-                        <input type="text" data-form-link="3" id="work4Input" name="website"
-                            placeholder="Website Link.." class="form-main">
-                        <input type="button" data-input-id="work4Input" value="Add Website"
-                            class="button-main sub-form-div-side" id="workbutton-3">
+                        <input type="text" data-form-link="3" id="work4Input" name="website" placeholder="Website Link.." class="form-main">
+                        <input type="button" data-input-id="work4Input" value="Add Website" class="button-main sub-form-div-side" id="workbutton-3">
                         <select name="iconSidebar" class="iconselect" data-form-id=></select>
                     </div>
                 </form>
@@ -1169,9 +1178,12 @@
                 <div class="contflex">
                     <select name="consiteset" class="searchType" id="contactsettng1">
                         <option value="0" id="searchselect" disabled></option>
-                        <option value="1">Whatsapp Chat</option>
-                        <option value="2">Mail to </option>
+                        <option value="1">Google Search</option>
+                        <option value="2">Bing Search</option>
+                        <option value="3">DuckDuckGo Search</option>
+                        <option value="4">Yahoo! Search</option>
                     </select>
+                    <input type="button" value="Reset CountDown" class="button-main" id="countdownbut">
                 </div>
 
 
@@ -1226,8 +1238,7 @@
                         <option value="2">Mail to </option>
                     </select>
 
-                    <input type="text" data-form-id="0" class="contactInput" id="consite1" name="Contact"
-                        placeholder="">
+                    <input type="text" data-form-id="0" class="contactInput" id="consite1" name="Contact" placeholder="">
 
                 </div>
 
@@ -1237,8 +1248,7 @@
                         <option value="2">Mail to </option>
                     </select>
 
-                    <input type="text" data-form-id="1" class="contactInput" id="consite1" name="Contact"
-                        placeholder="">
+                    <input type="text" data-form-id="1" class="contactInput" id="consite1" name="Contact" placeholder="">
 
                 </div>
 
@@ -1248,8 +1258,7 @@
                         <option value="2">Mail to </option>
                     </select>
 
-                    <input type="text" data-form-id="2" class="contactInput" id="consite1" name="Contact"
-                        placeholder="">
+                    <input type="text" data-form-id="2" class="contactInput" id="consite1" name="Contact" placeholder="">
 
                 </div>
             </form>
@@ -1279,10 +1288,10 @@
                 <label for="fname" class="formleb">Top 4 Settings</label>
 
                 <div class="contflex">
-                    <input type="text" class="top4" data-form-id="0" name="top1icon" placeholder="Top 1 Icon">
-                    <input type="text" class="top4" data-form-id="1" name="top2icon" placeholder="Top 2 Icon">
-                    <input type="text" class="top4" data-form-id="2" name="top3icon" placeholder="Top 3 Icon">
-                    <input type="text" class="top4" data-form-id="3" name="top4icon" placeholder="Top 4 Icon">
+                    <input type="text" class="top4" data-form-id="0" name="top1icon" placeholder="Top 1 Icon"> <select name="iconSidebar" class="topiconselect" data-form-id="0"></select>
+                    <input type="text" class="top4" data-form-id="1" name="top2icon" placeholder="Top 2 Icon"> <select name="iconSidebar" class="topiconselect" data-form-id="1"></select>
+                    <input type="text" class="top4" data-form-id="2" name="top3icon" placeholder="Top 3 Icon"> <select name="iconSidebar" class="topiconselect" data-form-id="2"></select>
+                    <input type="text" class="top4" data-form-id="3" name="top4icon" placeholder="Top 4 Icon"> <select name="iconSidebar" class="topiconselect" data-form-id="3"></select>
                 </div>
 
             </form>
@@ -1294,10 +1303,8 @@
                 <label for="fname" class="formleb">Blocked Websites</label>
                 <div class="websiteflex">
 
-                    <input type="text" data-form-link="autoFocus.block" id="blockInput" name="website"
-                        placeholder="Website Link..">
-                    <input type="button" data-input-id="blockInput" value="Add Website" class="sub-form-div-side"
-                        id="blockbutton">
+                    <input type="text" data-form-link="autoFocus.block" id="blockInput" name="website" placeholder="Website Link..">
+                    <input type="button" data-input-id="blockInput" value="Add Website" class="sub-form-div-side" id="blockbutton">
 
                 </div>
             </form>
@@ -1321,11 +1328,50 @@
             </form>
 
             <div class="dispset">
-
-                <div class="disphead">
-                    List of Blocked Websites:
+                <div class="contflex">
+                    <input type="text" class="vcard" data-form-id="0" name="username" placeholder="UserName">
+                    <input type="text" class="vcard" data-form-id="1" name="name" placeholder="Name">
+                    <input type="text" class="vcard" data-form-id="2" name="bio" placeholder="Bio">
                 </div>
-                <div id="displist">
+
+                <form id="myform1" class="form-div-side">
+                    <label for="fname" class="formleb">Add a Button to Vcard</label>
+                    <div class="websiteflex">
+                        <input type="text" id="vcard1Input1" name="website" placeholder="Website name" class="vcard-form-main">
+                        <input type="text" id="vcard1Input2" name="website" placeholder="Website Link" class="vcard-form-sub">
+                        <input type="button" value="Add Website" class="vcard-button-main sub-form-div-side" id="vcardbutton-1">
+
+                    </div>
+                </form>
+                <div class="dispset">
+                    <div class="disphead">
+                        List of Buttons:
+                    </div>
+
+                    <div id="displist-vcard1">
+                    </div>
+
+
+
+                </div>
+                <form id="myform1" class="form-div-side">
+                    <label for="fname" class="formleb">Add a Socialmedia to Vcard</label>
+                    <div class="websiteflex">
+                        <input type="text" id="vcard2Input1" name="website" placeholder="Website Link.." class="vcard-form-main">
+                        <select name="iconSidebar" id="vcard2Input2" class="iconselect" data-form-id="1"></select>
+                        <input type="button" data-input-id="work2Input" value="Add Website" class="vcard-button-main sub-form-div-side" id="vcardbutton-2">
+                    </div>
+                </form>
+                <div class="dispset">
+                    <div class="disphead">
+                        List of Social Media:
+                    </div>
+
+                    <div id="displist-vcard2">
+                    </div>
+
+
+
                 </div>
             </div>
         </div>
@@ -1345,9 +1391,11 @@
             <div class="todomain">
                 <div id="myDIV" class="header">
                     <h2 style="margin:5px">My To Do List</h2>
-                    <input type="text" id="myInput" placeholder="Title..." class="todoform">
+                    <input type="text" id="myInput" placeholder="Add to TO-DO" class="todoform">
                     <!-- <span onclick="newElement()" class="addBtn">Add</span> -->
                 </div>
+
+
                 <ul id="myUL"></ul>
             </div>
         </div>
@@ -1371,7 +1419,7 @@
             <form action="http://www.google.com/search" method="get" role="search" autocomplete="off">
                 <label for="search">Search for stuff</label>
                 <input id="search" type="text" name="q" placeholder="Search..." autofocus required />
-                <button type="submit"><img class="ionIcon" data-color="#ffffff" src="icon/logo-google.svg"
+                <button type="submit"><img class="ionIcon" data-color="#ffffff" src="icon/search-circle.svg"
                         alt=""></button>
             </form>
         </div>
@@ -1383,8 +1431,7 @@
         </div>
         <div class="comp-grid CouDG">
             <div class="count-opt" id="count-opt">
-                <input type="datetime-local" id="meeting-time" name="meeting-time" value="2024-06-12T19:30"
-                    min="2020-06-07T00:00" max="">
+                <input type="datetime-local" id="meeting-time" name="meeting-time" value="2024-06-12T19:30" min="2020-06-07T00:00" max="">
                 <br>
                 <input type="button" value="Submit" id="countButCl">
             </div>
@@ -1428,12 +1475,12 @@
         </div>
         <div class="comp-grid VCG">
             <div class="fle-vcard">
-               <div class="right">
+                <div class="right">
                     <h3>V Card: <span id="vCardUsername">rpranaykumarreddy</span></h3>
                 </div>
                 <div class="left">
                     <img id="vCardCopy" class="ionIcon" data-color="#000000" src="icon/clipboard.svg" alt="">
-                </div>                
+                </div>
             </div>
         </div>
         <div class="comp-grid NewsG">
@@ -1442,25 +1489,21 @@
                     <div class="right">
                         <div>
                             <h2>Low Level</h2>
-                            <input type="number" max="50" min="10" value="30" step="5" class="bat-Inp"
-                                name="bat-low-level" id="bat-low-level">
+                            <input type="number" max="50" min="10" value="30" step="5" class="bat-Inp" name="bat-low-level" id="bat-low-level">
                         </div>
                         <div>
                             <h2>high Level</h2>
-                            <input type="number" max="90" min="50" value="80" step="5" class="bat-Inp"
-                                name="bat-high-level" id="bat-high-level">
+                            <input type="number" max="90" min="50" value="80" step="5" class="bat-Inp" name="bat-high-level" id="bat-high-level">
                         </div>
                     </div>
                     <div class="left">
                         <div>
                             <h2>Charge Steps</h2>
-                            <input type="number" max="50" min="20" value="25" step="5" class="bat-Inp" name="bat-step"
-                                id="bat-step">
+                            <input type="number" max="50" min="20" value="25" step="5" class="bat-Inp" name="bat-step" id="bat-step">
                         </div>
                         <div>
                             <h2>Notify Interval</h2>
-                            <input type="number" max="50" min="5" value="15" step="5" class="bat-Inp" name="bat-alarm"
-                                id="bat-alarm">
+                            <input type="number" max="50" min="5" value="15" step="5" class="bat-Inp" name="bat-alarm" id="bat-alarm">
                         </div>
                     </div>
                 </div>

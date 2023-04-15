@@ -1,9 +1,9 @@
 chrome.runtime.onMessage.addListener(
-    function (request, sender, sendResponse) {
+    function(request, sender, sendResponse) {
         console.log('req', request.message) // not listened 
         switch (request.message) {
             case "loginBackend":
-                chrome.identity.getAuthToken({ 'interactive': true }, function (token) {
+                chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
                     console.log("token:", token);
                 });
                 break;
@@ -35,7 +35,7 @@ chrome.runtime.onMessage.addListener(
             case 'notify':
                 sendResponse({ data: 'Success' });
                 notify(request.tit, request.msg);
-                break; 
+                break;
             case 'notifyBat':
                 sendResponse({ data: 'Success' });
                 notifyBat(request.tit, request.msg);
@@ -177,21 +177,21 @@ var Dummy = {
         alarmMin: 15
     },
     workspaces: [{
-        name: "Mails",
-        icon: "icon/mail.svg",
-        urls: [
-            "https://mail.google.com/mail/u/0/#inbox",
-            "https://mail.google.com/mail/u/1/#inbox",
-            "https://mail.google.com/mail/u/2/#inbox",
-            "https://mail.google.com/mail/u/3/#inbox",
-            "https://mail.google.com/mail/u/4/#inbox",
-            "https://www.icloud.com/mail/",
-            "https://outlook.office365.com/mail/",
-            "https://www.linkedin.com/in/rpranaykumarreddy/",
-            "https://twitter.com/home",
-            "https://app.slack.com/client/T04FU1XRVJQ/C04FB1VJCUX"
-        ]
-    },
+            name: "Mails",
+            icon: "icon/mail.svg",
+            urls: [
+                "https://mail.google.com/mail/u/0/#inbox",
+                "https://mail.google.com/mail/u/1/#inbox",
+                "https://mail.google.com/mail/u/2/#inbox",
+                "https://mail.google.com/mail/u/3/#inbox",
+                "https://mail.google.com/mail/u/4/#inbox",
+                "https://www.icloud.com/mail/",
+                "https://outlook.office365.com/mail/",
+                "https://www.linkedin.com/in/rpranaykumarreddy/",
+                "https://twitter.com/home",
+                "https://app.slack.com/client/T04FU1XRVJQ/C04FB1VJCUX"
+            ]
+        },
         {
             name: "Dev",
             icon: "icon/logo-docker.svg",
@@ -257,10 +257,10 @@ var Dummy = {
         block: ["www.youtube.com", "www.instagram.com"],
     },
     contact: [{
-        name: "Pranay",
-        type: "icon/logo-whatsapp.svg",
-        link: "https://wa.me/917680904589"
-    },
+            name: "Pranay",
+            type: "icon/logo-whatsapp.svg",
+            link: "https://wa.me/917680904589"
+        },
         {
             name: "Varun",
             type: "icon/logo-whatsapp.svg",
@@ -351,6 +351,7 @@ function notify(tit, msg) {
     });
 }
 var boolBatNoti = true;
+
 function notifyBat(tit, msg) {
     if (boolBatNoti) {
         chrome.notifications.create({
@@ -397,9 +398,8 @@ function StoreQuotation() {
 
 /*send new Data to pop*/
 function SendDataToNew() {
-    if (DataSet == null) {
-    } else {
-        chrome.runtime.sendMessage({ 'message': 'SendingDataSet', 'Dataset': DataSet }, function (response) {
+    if (DataSet == null) {} else {
+        chrome.runtime.sendMessage({ 'message': 'SendingDataSet', 'Dataset': DataSet }, function(response) {
             //console.log('response', response);
         });
         const d = new Date();
@@ -420,49 +420,46 @@ function SendDataToNew() {
 
 
 
-// chrome.identity.getAuthToken({
-//     interactive: true
-// }, function (token) {
-//     console.log(token);
-//     if (chrome.runtime.lastError) {
-//         alert(chrome.runtime.lastError.message);
-//         return;
-//     }
-//     const userInfoUrl = `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`;
-//     fetch(userInfoUrl)
-//         .then(response => response.json())
-//         .then(userInfo => {
-//             console.log(userInfo);
-//             const email = userInfo.email;
-//             const id = userInfo.sub;
-//             console.log(`User email: ${email}`);
-//             console.log(`User ID: ${id}`);
+chrome.identity.getAuthToken({
+    interactive: true
+}, function(token) {
+    console.log(token);
+    if (chrome.runtime.lastError) {
+        alert(chrome.runtime.lastError.message);
+        return;
+    }
+    const userInfoUrl = `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`;
+    fetch(userInfoUrl)
+        .then(response => response.json())
+        .then(userInfo => {
+            console.log(userInfo);
+            const email = userInfo.email;
+            const id = userInfo.sub;
+            console.log(`User email: ${email}`);
+            console.log(`User ID: ${id}`);
 
-//             return userInfo;
-//         })
-//         .then(data => {
-//             const dummyJson = JSON.stringify(Dummy);
-//             const dates = JSON.parse(dummyJson);
+            return userInfo;
+        })
+        .then(data => {
+            const dummyJson = JSON.stringify(Dummy);
+            const dates = JSON.parse(dummyJson);
 
-//             console.log("data to the fetch", data);
-//             // fetch('http://localhost:3000/users', {
-//             //     method: 'POST',
-//             //     headers: {
-//             //         'X-User-Id': data.sub,
-//             //         'Content-Type': 'application/json'
-//             //     },
-//             //     body: JSON.stringify(dates)
-//             // })
-//             //     .then((response) => {
-//             //         console.log("fetch response success", response.statusText);
-//             //     })
-//             //     .catch((error) => {
-//             //         console.error("fetch response error", error);
-//             //     });
-//         });
-
-
-// });
+            console.log("data to the fetch", data);
+            // fetch('http://localhost:3000/users', {
+            //     method: 'POST',
+            //     headers: {
+            //         'X-User-Id': data.sub,
+            //         'Content-Type': 'application/json'
+            //     },
+            //     body: JSON.stringify(dates)
+            // })
+            //     .then((response) => {
+            //         console.log("fetch response success", response.statusText);
+            //     })
+            //     .catch((error) => {
+            //         console.error("fetch response error", error);
+            //     });
+        });
 
 
-
+});
