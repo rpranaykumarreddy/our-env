@@ -1,20 +1,21 @@
 chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
+    function (request, sender, sendResponse) {
         console.log('req', request.message) // not listened 
         switch (request.message) {
-            case "loginBackend":
-                chrome.identity.getAuthToken({ 'interactive': true }, function(token) {
-                    console.log("token:", token);
-                });
-                break;
             case "updateSettings":
                 sendResponse({ data: 'Success' });
                 SetDateset(request.data);
                 console.log("Updating setting", request.data);
                 break;
+            case "updateVcard":
+                sendResponse({ data: 'Success' });
+                SetVcard(request.data);
+                console.log("Updating Vcard", request.data);
+                break;
             case 'IAmReady':
                 console.log('req Replay', request.message);
                 SendDataToNew();
+                SendVcardToNew()
                 sendResponse({ data: 'Success' });
                 break;
             case 'openUrl':
@@ -93,6 +94,7 @@ var focusSet = null;
 function StartFocus() {
     DataSet.autoFocus.active = true;
     SetDateset(DataSet);
+
     focusSet = setInterval(() => {
         getCurrentTab().then((tab) => {
             if (tab != undefined) {
@@ -145,9 +147,30 @@ async function createOffscreen() {
     });
     //notify("offscreen started", "check it.");
 }
-
+var DummyVcard = {
+    username: "rpkr",
+    name: "Pranay Kumar R R",
+    bio: `As a web developer with a passion for innovation, I strive to create exceptional and distinct digital products. Currently, I am focused on developing backend-management systems, while in the past, I have successfully prototyped several commercial websites that achieved consistent high scores in Google Search Console and impressive user experience Lighthouse scores.
+<br>
+My enthusiasm and curiosity for the field drive me to seek out new opportunities to challenge myself and grow as a web developer. I am excited to explore new avenues in this ever-evolving field and contribute to creating remarkable digital experiences.
+<br>
+<b>"My work hours starts at 5:00 AM & ends at 10:00 PM. It's a long day. But I love to be so...
+I can't sit idle. so, I even search for ideas to implement."</b>`,
+    Photo: "",
+    button: [
+        { name: "Portfolio", link: "https://pranay.wethinc.in" }
+    ],
+    social: [
+        { type: "Github", link: "rpranaykumarreddy" },
+        { type: "Linkedin", link: "rpranaykumarreddy" },
+        { type: "Twitter", link: "rpkr_inc" },
+        { type: "Snapchat", link: "rpkr_inc" },
+        { type: "Whatsapp", link: "917680904589" }
+    ]
+}
 /*Dummy data for the first time request*/
 var Dummy = {
+    username: "rpkr",
     name: "Ravula Pranay Kumar Reddy",
     firstName: "Ravula Pranay Kumar",
     lastName: "Reddy",
@@ -177,21 +200,21 @@ var Dummy = {
         alarmMin: 15
     },
     workspaces: [{
-            name: "Mails",
-            icon: "icon/mail.svg",
-            urls: [
-                "https://mail.google.com/mail/u/0/#inbox",
-                "https://mail.google.com/mail/u/1/#inbox",
-                "https://mail.google.com/mail/u/2/#inbox",
-                "https://mail.google.com/mail/u/3/#inbox",
-                "https://mail.google.com/mail/u/4/#inbox",
-                "https://www.icloud.com/mail/",
-                "https://outlook.office365.com/mail/",
-                "https://www.linkedin.com/in/rpranaykumarreddy/",
-                "https://twitter.com/home",
-                "https://app.slack.com/client/T04FU1XRVJQ/C04FB1VJCUX"
-            ]
-        },
+        name: "Mails",
+        icon: "icon/mail.svg",
+        urls: [
+            "https://mail.google.com/mail/u/0/#inbox",
+            "https://mail.google.com/mail/u/1/#inbox",
+            "https://mail.google.com/mail/u/2/#inbox",
+            "https://mail.google.com/mail/u/3/#inbox",
+            "https://mail.google.com/mail/u/4/#inbox",
+            "https://www.icloud.com/mail/",
+            "https://outlook.office365.com/mail/",
+            "https://www.linkedin.com/in/rpranaykumarreddy/",
+            "https://twitter.com/home",
+            "https://app.slack.com/client/T04FU1XRVJQ/C04FB1VJCUX"
+        ]
+    },
         {
             name: "Dev",
             icon: "icon/logo-docker.svg",
@@ -257,10 +280,10 @@ var Dummy = {
         block: ["www.youtube.com", "www.instagram.com"],
     },
     contact: [{
-            name: "Pranay",
-            type: "icon/logo-whatsapp.svg",
-            link: "https://wa.me/917680904589"
-        },
+        name: "Pranay",
+        type: "icon/logo-whatsapp.svg",
+        link: "https://wa.me/917680904589"
+    },
         {
             name: "Varun",
             type: "icon/logo-whatsapp.svg",
@@ -274,6 +297,8 @@ var Dummy = {
     ]
 }
 var DataSet = null;
+var Vcard = null
+
 /*Set Dummy data*/
 chrome.storage.local.get(["DataSet"]).then((result) => {
     console.log("Checking Dataset", result);
@@ -296,6 +321,29 @@ function SetDateset(data) {
         DataSet = data;
         console.log("DataSet is set to", data);
         SendDataToNew();
+        serverSetDataset();
+    });
+}
+/*Set Vcard data*/
+chrome.storage.local.get(["Vcard"]).then((result) => {
+    console.log("Checking Vcard", result);
+    if (result.Vcard == undefined) {
+        chrome.storage.local.set({ "Vcard": DummyVcard }).then(() => {
+            console.log("Vcard is set to", DummyVcard);
+        });
+        Vcard = DummyVcard;
+    } else {
+        console.log("I have a local data of Vcard", result.Vcard);
+        Vcard = result.Vcard;
+    }
+});
+
+function SetVcard(data) {
+    chrome.storage.local.set({ "Vcard": data }).then(() => {
+        Vcard = data;
+        console.log("Vcard is set to", data);
+        SendVcardToNew()
+        serverSetVcard();
     });
 }
 
@@ -398,8 +446,8 @@ function StoreQuotation() {
 
 /*send new Data to pop*/
 function SendDataToNew() {
-    if (DataSet == null) {} else {
-        chrome.runtime.sendMessage({ 'message': 'SendingDataSet', 'Dataset': DataSet }, function(response) {
+    if (DataSet == null) { } else {
+        chrome.runtime.sendMessage({ 'message': 'SendingDataSet', 'Dataset': DataSet }, function (response) {
             //console.log('response', response);
         });
         const d = new Date();
@@ -416,13 +464,19 @@ function SendDataToNew() {
             SetDateset(DataSet);
         }
     }
+} function SendVcardToNew() {
+    if (Vcard == null) { } else {
+        chrome.runtime.sendMessage({ 'message': 'SendingVcard', 'Vcard': Vcard }, function (response) {
+            //console.log('response', response);
+        });
+    }
 }
 
 
 
 chrome.identity.getAuthToken({
     interactive: true
-}, function(token) {
+}, function (token) {
     console.log(token);
     if (chrome.runtime.lastError) {
         alert(chrome.runtime.lastError.message);
@@ -435,31 +489,157 @@ chrome.identity.getAuthToken({
             console.log(userInfo);
             const email = userInfo.email;
             const id = userInfo.sub;
+            DummyVcard.Photo = userInfo.picture;
             console.log(`User email: ${email}`);
             console.log(`User ID: ${id}`);
-
             return userInfo;
         })
         .then(data => {
-            const dummyJson = JSON.stringify(Dummy);
-            const dates = JSON.parse(dummyJson);
-
-            console.log("data to the fetch", data);
-            // fetch('http://localhost:3000/users', {
-            //     method: 'POST',
-            //     headers: {
-            //         'X-User-Id': data.sub,
-            //         'Content-Type': 'application/json'
-            //     },
-            //     body: JSON.stringify(dates)
-            // })
-            //     .then((response) => {
-            //         console.log("fetch response success", response.statusText);
-            //     })
-            //     .catch((error) => {
-            //         console.error("fetch response error", error);
-            //     });
+            putVcardByNameFor(DummyVcard.username, DummyVcard);
         });
-
-
 });
+function serverSetDataset() {
+    chrome.identity.getAuthToken({
+        interactive: true
+    }, function (token) {
+        if (chrome.runtime.lastError) {
+            alert(chrome.runtime.lastError.message);
+            return;
+        }
+        const userInfoUrl = `https://www.googleapis.com/oauth2/v3/userinfo?access_token=${token}`;
+        fetch(userInfoUrl)
+            .then(response => response.json())
+            .then(data => {
+                putDataSetFor(data.sub, DataSet);
+            });
+    });
+}
+function serverSetVcard() {
+    chrome.identity.getAuthToken({
+        interactive: true
+    }, function (token) {
+        if (chrome.runtime.lastError) {
+            alert(chrome.runtime.lastError.message);
+            return;
+        }
+        fetch('http://localhost:3000/wruser', {
+            method: 'POST',
+            headers: {
+                'X-User-Id': DataSet.username,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(Vcard)
+        }).then((response) => {
+            console.log("vcard Set response success", response.statusText);
+            return response.status;
+        }).catch((error) => {
+            console.error("vcard Set response error", error);
+            return 500;
+        });
+    });
+}
+
+/*
+    Things to handle by API
+    three collections: chrome, link, vcard.
+    s.N | Title                 | Read by       |   Status
+    1   | Read Chrome           | ID            |   Done
+    2   | Write Chrome          | ID            |   Done
+    3   | Read Vcard            | Name          |   NAN
+    4   | Write Vcard           | Name          |   
+    5   | Read Vcard            | ID            |   Done
+    6   | Check Username        | Name
+*/
+
+function getDataSetFor(passUserId) {
+    passUserId = toString(passUserId);
+    let passLink = 'http://localhost:3000/chdata/' + passUserId;
+    fetch(passLink).then((response) => {
+        console.log("getDataSetFor fetch response success", response.statusText);
+        return response;
+    }).catch((error) => {
+        console.error("getDataSetFor fetch response error", error);
+        return null;
+    });
+}
+
+function putDataSetFor(passUserId, body) {
+    fetch('http://localhost:3000/chdataid', {
+        method: 'POST',
+        headers: {
+            'X-User-Id': passUserId,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    })
+        .then((response) => {
+            console.log("putDataSetFor post response success", response.statusText);
+            return response.status;
+        })
+        .catch((error) => {
+            console.error("putDataSetFor post response error", error);
+            return 500;
+        });
+}
+
+function getVcardByNameFor(passUsername) {
+    let passLink = 'http://localhost:3000/users/' + passUsername;
+    fetch(passLink).then((response) => {
+        console.log("getDataSetFor fetch response success", response.statusText);
+        return response;
+    }).catch((error) => {
+        console.error("fetch response error", error);
+        return null;
+    });
+}
+
+function putVcardByNameFor(passUsername, body) {
+    fetch('http://localhost:3000/wruser', {
+        method: 'POST',
+        headers: {
+            'X-User-Id': passUsername,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    })
+        .then((response) => {
+            console.log("vcard Set response success", response.statusText);
+            return response.status;
+        })
+        .catch((error) => {
+            console.error("vcard Set response error", error);
+            return 500;
+        });
+}
+
+function getVcardByIDFor(passUserId) {
+    passUserId = toString(passUserId)
+    let passLink = 'http://localhost:3000/reuserid/' + passUserId;
+    fetch(passLink).then((response) => {
+        console.log("getDataSetFor fetch response success", response.statusText);
+        return response;
+    }).catch((error) => {
+        console.error("fetch response error", error);
+        return null;
+    });
+}
+
+function checkUserNameFor(passUsername, passUserId) {
+    let st = toString(passUserId);
+    let usno = { userid: st };
+    passUserId = toString(passUserId);
+    fetch('http://localhost:3000/chusername', {
+        method: 'GET',
+        headers: {
+            'X-User-Name': passUsername,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(usno)
+    }).then((response) => {
+        console.log("fetch response success", response.statusText);
+        return response.status;
+    }).catch((error) => {
+        console.error("fetch response error", error);
+        return 500;
+    });
+}
