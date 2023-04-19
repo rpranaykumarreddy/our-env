@@ -111,9 +111,8 @@ function InitVcard(data) {
     addvcard2();
     var name = document.getElementById("vCardUsername");
     name.innerHTML = data.username;
-    var link = ""
     const element = document.getElementById("vCardCopy");
-    const textToCopy = "rpranaykumarreddy.github.io/my-app/#" + data.username;
+    const textToCopy = "https://rpranaykumarreddy.github.io/user/#" + data.username;
     const newElement = element.cloneNode(true);
     element.parentNode.replaceChild(newElement, element);
     newElement.addEventListener("click", function () {
